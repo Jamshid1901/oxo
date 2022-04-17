@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "273549551952",
+    "project_id": "oxoapp-d83d5",
+    "storage_bucket": "oxoapp-d83d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273549551952:android:7c7efbdc5500d2de552455",
+        "android_client_info": {
+          "package_name": "com.netpro.oxo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273549551952-ceehsg34e4vtp7aimd12gu8on4gs4pci.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5E71r4f6IwzsNGaiX2YhyLLh8v1sRdhQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273549551952-ceehsg34e4vtp7aimd12gu8on4gs4pci.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
