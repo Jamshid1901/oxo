@@ -1,0 +1,1 @@
+enum ResendCodeType { registering, forgotPassword }

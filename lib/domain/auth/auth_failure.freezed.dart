@@ -17,22 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$AuthFailureTearOff {
   const _$AuthFailureTearOff();
 
-  InvalidCredentials invalidCredential({required String message}) {
-    return InvalidCredentials(
-      message: message,
-    );
-  }
-
-  NetworkFailure networkFailure({required String message}) {
-    return NetworkFailure(
-      message: message,
-    );
-  }
-
-  Unknown unknown({required String message}) {
-    return Unknown(
-      message: message,
-    );
+  UnAuthenticated unAuthenticated() {
+    return const UnAuthenticated();
   }
 }
 
@@ -41,55 +27,37 @@ const $AuthFailure = _$AuthFailureTearOff();
 
 /// @nodoc
 mixin _$AuthFailure {
-  String get message => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String message) invalidCredential,
-    required TResult Function(String message) networkFailure,
-    required TResult Function(String message) unknown,
+    required TResult Function() unAuthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String message)? invalidCredential,
-    TResult Function(String message)? networkFailure,
-    TResult Function(String message)? unknown,
+    TResult Function()? unAuthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? invalidCredential,
-    TResult Function(String message)? networkFailure,
-    TResult Function(String message)? unknown,
+    TResult Function()? unAuthenticated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(InvalidCredentials value) invalidCredential,
-    required TResult Function(NetworkFailure value) networkFailure,
-    required TResult Function(Unknown value) unknown,
+    required TResult Function(UnAuthenticated value) unAuthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidCredentials value)? invalidCredential,
-    TResult Function(NetworkFailure value)? networkFailure,
-    TResult Function(Unknown value)? unknown,
+    TResult Function(UnAuthenticated value)? unAuthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(InvalidCredentials value)? invalidCredential,
-    TResult Function(NetworkFailure value)? networkFailure,
-    TResult Function(Unknown value)? unknown,
+    TResult Function(UnAuthenticated value)? unAuthenticated,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $AuthFailureCopyWith<AuthFailure> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -98,7 +66,6 @@ abstract class $AuthFailureCopyWith<$Res> {
   factory $AuthFailureCopyWith(
           AuthFailure value, $Res Function(AuthFailure) then) =
       _$AuthFailureCopyWithImpl<$Res>;
-  $Res call({String message});
 }
 
 /// @nodoc
@@ -108,114 +75,70 @@ class _$AuthFailureCopyWithImpl<$Res> implements $AuthFailureCopyWith<$Res> {
   final AuthFailure _value;
   // ignore: unused_field
   final $Res Function(AuthFailure) _then;
-
-  @override
-  $Res call({
-    Object? message = freezed,
-  }) {
-    return _then(_value.copyWith(
-      message: message == freezed
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class $InvalidCredentialsCopyWith<$Res>
-    implements $AuthFailureCopyWith<$Res> {
-  factory $InvalidCredentialsCopyWith(
-          InvalidCredentials value, $Res Function(InvalidCredentials) then) =
-      _$InvalidCredentialsCopyWithImpl<$Res>;
-  @override
-  $Res call({String message});
+abstract class $UnAuthenticatedCopyWith<$Res> {
+  factory $UnAuthenticatedCopyWith(
+          UnAuthenticated value, $Res Function(UnAuthenticated) then) =
+      _$UnAuthenticatedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$InvalidCredentialsCopyWithImpl<$Res>
+class _$UnAuthenticatedCopyWithImpl<$Res>
     extends _$AuthFailureCopyWithImpl<$Res>
-    implements $InvalidCredentialsCopyWith<$Res> {
-  _$InvalidCredentialsCopyWithImpl(
-      InvalidCredentials _value, $Res Function(InvalidCredentials) _then)
-      : super(_value, (v) => _then(v as InvalidCredentials));
+    implements $UnAuthenticatedCopyWith<$Res> {
+  _$UnAuthenticatedCopyWithImpl(
+      UnAuthenticated _value, $Res Function(UnAuthenticated) _then)
+      : super(_value, (v) => _then(v as UnAuthenticated));
 
   @override
-  InvalidCredentials get _value => super._value as InvalidCredentials;
-
-  @override
-  $Res call({
-    Object? message = freezed,
-  }) {
-    return _then(InvalidCredentials(
-      message: message == freezed
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+  UnAuthenticated get _value => super._value as UnAuthenticated;
 }
 
 /// @nodoc
 
-class _$InvalidCredentials implements InvalidCredentials {
-  const _$InvalidCredentials({required this.message});
-
-  @override
-  final String message;
+class _$UnAuthenticated implements UnAuthenticated {
+  const _$UnAuthenticated();
 
   @override
   String toString() {
-    return 'AuthFailure.invalidCredential(message: $message)';
+    return 'AuthFailure.unAuthenticated()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is InvalidCredentials &&
-            (identical(other.message, message) ||
-                const DeepCollectionEquality().equals(other.message, message)));
+        (other.runtimeType == runtimeType && other is UnAuthenticated);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
-
-  @JsonKey(ignore: true)
-  @override
-  $InvalidCredentialsCopyWith<InvalidCredentials> get copyWith =>
-      _$InvalidCredentialsCopyWithImpl<InvalidCredentials>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String message) invalidCredential,
-    required TResult Function(String message) networkFailure,
-    required TResult Function(String message) unknown,
+    required TResult Function() unAuthenticated,
   }) {
-    return invalidCredential(message);
+    return unAuthenticated();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String message)? invalidCredential,
-    TResult Function(String message)? networkFailure,
-    TResult Function(String message)? unknown,
+    TResult Function()? unAuthenticated,
   }) {
-    return invalidCredential?.call(message);
+    return unAuthenticated?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? invalidCredential,
-    TResult Function(String message)? networkFailure,
-    TResult Function(String message)? unknown,
+    TResult Function()? unAuthenticated,
     required TResult orElse(),
   }) {
-    if (invalidCredential != null) {
-      return invalidCredential(message);
+    if (unAuthenticated != null) {
+      return unAuthenticated();
     }
     return orElse();
   }
@@ -223,328 +146,32 @@ class _$InvalidCredentials implements InvalidCredentials {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(InvalidCredentials value) invalidCredential,
-    required TResult Function(NetworkFailure value) networkFailure,
-    required TResult Function(Unknown value) unknown,
+    required TResult Function(UnAuthenticated value) unAuthenticated,
   }) {
-    return invalidCredential(this);
+    return unAuthenticated(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidCredentials value)? invalidCredential,
-    TResult Function(NetworkFailure value)? networkFailure,
-    TResult Function(Unknown value)? unknown,
+    TResult Function(UnAuthenticated value)? unAuthenticated,
   }) {
-    return invalidCredential?.call(this);
+    return unAuthenticated?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(InvalidCredentials value)? invalidCredential,
-    TResult Function(NetworkFailure value)? networkFailure,
-    TResult Function(Unknown value)? unknown,
+    TResult Function(UnAuthenticated value)? unAuthenticated,
     required TResult orElse(),
   }) {
-    if (invalidCredential != null) {
-      return invalidCredential(this);
+    if (unAuthenticated != null) {
+      return unAuthenticated(this);
     }
     return orElse();
   }
 }
 
-abstract class InvalidCredentials implements AuthFailure {
-  const factory InvalidCredentials({required String message}) =
-      _$InvalidCredentials;
-
-  @override
-  String get message => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  $InvalidCredentialsCopyWith<InvalidCredentials> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $NetworkFailureCopyWith<$Res>
-    implements $AuthFailureCopyWith<$Res> {
-  factory $NetworkFailureCopyWith(
-          NetworkFailure value, $Res Function(NetworkFailure) then) =
-      _$NetworkFailureCopyWithImpl<$Res>;
-  @override
-  $Res call({String message});
-}
-
-/// @nodoc
-class _$NetworkFailureCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
-    implements $NetworkFailureCopyWith<$Res> {
-  _$NetworkFailureCopyWithImpl(
-      NetworkFailure _value, $Res Function(NetworkFailure) _then)
-      : super(_value, (v) => _then(v as NetworkFailure));
-
-  @override
-  NetworkFailure get _value => super._value as NetworkFailure;
-
-  @override
-  $Res call({
-    Object? message = freezed,
-  }) {
-    return _then(NetworkFailure(
-      message: message == freezed
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$NetworkFailure implements NetworkFailure {
-  const _$NetworkFailure({required this.message});
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'AuthFailure.networkFailure(message: $message)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is NetworkFailure &&
-            (identical(other.message, message) ||
-                const DeepCollectionEquality().equals(other.message, message)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
-
-  @JsonKey(ignore: true)
-  @override
-  $NetworkFailureCopyWith<NetworkFailure> get copyWith =>
-      _$NetworkFailureCopyWithImpl<NetworkFailure>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String message) invalidCredential,
-    required TResult Function(String message) networkFailure,
-    required TResult Function(String message) unknown,
-  }) {
-    return networkFailure(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String message)? invalidCredential,
-    TResult Function(String message)? networkFailure,
-    TResult Function(String message)? unknown,
-  }) {
-    return networkFailure?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? invalidCredential,
-    TResult Function(String message)? networkFailure,
-    TResult Function(String message)? unknown,
-    required TResult orElse(),
-  }) {
-    if (networkFailure != null) {
-      return networkFailure(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(InvalidCredentials value) invalidCredential,
-    required TResult Function(NetworkFailure value) networkFailure,
-    required TResult Function(Unknown value) unknown,
-  }) {
-    return networkFailure(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidCredentials value)? invalidCredential,
-    TResult Function(NetworkFailure value)? networkFailure,
-    TResult Function(Unknown value)? unknown,
-  }) {
-    return networkFailure?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(InvalidCredentials value)? invalidCredential,
-    TResult Function(NetworkFailure value)? networkFailure,
-    TResult Function(Unknown value)? unknown,
-    required TResult orElse(),
-  }) {
-    if (networkFailure != null) {
-      return networkFailure(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class NetworkFailure implements AuthFailure {
-  const factory NetworkFailure({required String message}) = _$NetworkFailure;
-
-  @override
-  String get message => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  $NetworkFailureCopyWith<NetworkFailure> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $UnknownCopyWith<$Res> implements $AuthFailureCopyWith<$Res> {
-  factory $UnknownCopyWith(Unknown value, $Res Function(Unknown) then) =
-      _$UnknownCopyWithImpl<$Res>;
-  @override
-  $Res call({String message});
-}
-
-/// @nodoc
-class _$UnknownCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
-    implements $UnknownCopyWith<$Res> {
-  _$UnknownCopyWithImpl(Unknown _value, $Res Function(Unknown) _then)
-      : super(_value, (v) => _then(v as Unknown));
-
-  @override
-  Unknown get _value => super._value as Unknown;
-
-  @override
-  $Res call({
-    Object? message = freezed,
-  }) {
-    return _then(Unknown(
-      message: message == freezed
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$Unknown implements Unknown {
-  const _$Unknown({required this.message});
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'AuthFailure.unknown(message: $message)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is Unknown &&
-            (identical(other.message, message) ||
-                const DeepCollectionEquality().equals(other.message, message)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
-
-  @JsonKey(ignore: true)
-  @override
-  $UnknownCopyWith<Unknown> get copyWith =>
-      _$UnknownCopyWithImpl<Unknown>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String message) invalidCredential,
-    required TResult Function(String message) networkFailure,
-    required TResult Function(String message) unknown,
-  }) {
-    return unknown(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String message)? invalidCredential,
-    TResult Function(String message)? networkFailure,
-    TResult Function(String message)? unknown,
-  }) {
-    return unknown?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? invalidCredential,
-    TResult Function(String message)? networkFailure,
-    TResult Function(String message)? unknown,
-    required TResult orElse(),
-  }) {
-    if (unknown != null) {
-      return unknown(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(InvalidCredentials value) invalidCredential,
-    required TResult Function(NetworkFailure value) networkFailure,
-    required TResult Function(Unknown value) unknown,
-  }) {
-    return unknown(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidCredentials value)? invalidCredential,
-    TResult Function(NetworkFailure value)? networkFailure,
-    TResult Function(Unknown value)? unknown,
-  }) {
-    return unknown?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(InvalidCredentials value)? invalidCredential,
-    TResult Function(NetworkFailure value)? networkFailure,
-    TResult Function(Unknown value)? unknown,
-    required TResult orElse(),
-  }) {
-    if (unknown != null) {
-      return unknown(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Unknown implements AuthFailure {
-  const factory Unknown({required String message}) = _$Unknown;
-
-  @override
-  String get message => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  $UnknownCopyWith<Unknown> get copyWith => throw _privateConstructorUsedError;
+abstract class UnAuthenticated implements AuthFailure {
+  const factory UnAuthenticated() = _$UnAuthenticated;
 }

@@ -1,0 +1,4 @@
+enum ImageUploadTypes {
+  avatarPhoto,
+  backgroundPhoto,
+}
