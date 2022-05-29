@@ -64,6 +64,7 @@ class _UserSearchPageState extends State<UserSearchPage> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width - 90.w,
                           child: CustomTextField(
+                            validator: (s){},
                             controller: _textEditingController,
                             onChanged: (v) {
                               if (_timer != null) _timer!.cancel();

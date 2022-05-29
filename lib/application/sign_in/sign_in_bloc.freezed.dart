@@ -29,7 +29,6 @@ class _$SignInStateTearOff {
       bool proceedToChooseInterests = false,
       bool proceedToVerifyCode = false,
       List<int> gameList = const [],
-      List<Game> allGames = const [],
       String exception = ''}) {
     return _SignInState(
       isLoading: isLoading,
@@ -43,7 +42,6 @@ class _$SignInStateTearOff {
       proceedToChooseInterests: proceedToChooseInterests,
       proceedToVerifyCode: proceedToVerifyCode,
       gameList: gameList,
-      allGames: allGames,
       exception: exception,
     );
   }
@@ -65,7 +63,6 @@ mixin _$SignInState {
   bool get proceedToChooseInterests => throw _privateConstructorUsedError;
   bool get proceedToVerifyCode => throw _privateConstructorUsedError;
   List<int> get gameList => throw _privateConstructorUsedError;
-  List<Game> get allGames => throw _privateConstructorUsedError;
   String get exception => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -90,7 +87,6 @@ abstract class $SignInStateCopyWith<$Res> {
       bool proceedToChooseInterests,
       bool proceedToVerifyCode,
       List<int> gameList,
-      List<Game> allGames,
       String exception});
 }
 
@@ -115,7 +111,6 @@ class _$SignInStateCopyWithImpl<$Res> implements $SignInStateCopyWith<$Res> {
     Object? proceedToChooseInterests = freezed,
     Object? proceedToVerifyCode = freezed,
     Object? gameList = freezed,
-    Object? allGames = freezed,
     Object? exception = freezed,
   }) {
     return _then(_value.copyWith(
@@ -163,10 +158,6 @@ class _$SignInStateCopyWithImpl<$Res> implements $SignInStateCopyWith<$Res> {
           ? _value.gameList
           : gameList // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      allGames: allGames == freezed
-          ? _value.allGames
-          : allGames // ignore: cast_nullable_to_non_nullable
-              as List<Game>,
       exception: exception == freezed
           ? _value.exception
           : exception // ignore: cast_nullable_to_non_nullable
@@ -194,7 +185,6 @@ abstract class _$SignInStateCopyWith<$Res>
       bool proceedToChooseInterests,
       bool proceedToVerifyCode,
       List<int> gameList,
-      List<Game> allGames,
       String exception});
 }
 
@@ -221,7 +211,6 @@ class __$SignInStateCopyWithImpl<$Res> extends _$SignInStateCopyWithImpl<$Res>
     Object? proceedToChooseInterests = freezed,
     Object? proceedToVerifyCode = freezed,
     Object? gameList = freezed,
-    Object? allGames = freezed,
     Object? exception = freezed,
   }) {
     return _then(_SignInState(
@@ -266,10 +255,6 @@ class __$SignInStateCopyWithImpl<$Res> extends _$SignInStateCopyWithImpl<$Res>
           ? _value.gameList
           : gameList // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      allGames: allGames == freezed
-          ? _value.allGames
-          : allGames // ignore: cast_nullable_to_non_nullable
-              as List<Game>,
       exception: exception == freezed
           ? _value.exception
           : exception // ignore: cast_nullable_to_non_nullable
@@ -293,7 +278,6 @@ class _$_SignInState implements _SignInState {
       this.proceedToChooseInterests = false,
       this.proceedToVerifyCode = false,
       this.gameList = const [],
-      this.allGames = const [],
       this.exception = ''});
 
   @JsonKey(defaultValue: false)
@@ -329,16 +313,13 @@ class _$_SignInState implements _SignInState {
   @JsonKey(defaultValue: const [])
   @override
   final List<int> gameList;
-  @JsonKey(defaultValue: const [])
-  @override
-  final List<Game> allGames;
   @JsonKey(defaultValue: '')
   @override
   final String exception;
 
   @override
   String toString() {
-    return 'SignInState(isLoading: $isLoading, isEmailValid: $isEmailValid, isPasswordValid: $isPasswordValid, isUsernameExists: $isUsernameExists, isEmailExists: $isEmailExists, navigateToHome: $navigateToHome, proceedToGetPassword: $proceedToGetPassword, proceedToChangePassword: $proceedToChangePassword, proceedToChooseInterests: $proceedToChooseInterests, proceedToVerifyCode: $proceedToVerifyCode, gameList: $gameList, allGames: $allGames, exception: $exception)';
+    return 'SignInState(isLoading: $isLoading, isEmailValid: $isEmailValid, isPasswordValid: $isPasswordValid, isUsernameExists: $isUsernameExists, isEmailExists: $isEmailExists, navigateToHome: $navigateToHome, proceedToGetPassword: $proceedToGetPassword, proceedToChangePassword: $proceedToChangePassword, proceedToChooseInterests: $proceedToChooseInterests, proceedToVerifyCode: $proceedToVerifyCode, gameList: $gameList, exception: $exception)';
   }
 
   @override
@@ -368,7 +349,6 @@ class _$_SignInState implements _SignInState {
             (identical(other.proceedToVerifyCode, proceedToVerifyCode) ||
                 other.proceedToVerifyCode == proceedToVerifyCode) &&
             const DeepCollectionEquality().equals(other.gameList, gameList) &&
-            const DeepCollectionEquality().equals(other.allGames, allGames) &&
             (identical(other.exception, exception) ||
                 other.exception == exception));
   }
@@ -387,7 +367,6 @@ class _$_SignInState implements _SignInState {
       proceedToChooseInterests,
       proceedToVerifyCode,
       const DeepCollectionEquality().hash(gameList),
-      const DeepCollectionEquality().hash(allGames),
       exception);
 
   @JsonKey(ignore: true)
@@ -409,7 +388,6 @@ abstract class _SignInState implements SignInState {
       bool proceedToChooseInterests,
       bool proceedToVerifyCode,
       List<int> gameList,
-      List<Game> allGames,
       String exception}) = _$_SignInState;
 
   @override
@@ -434,8 +412,6 @@ abstract class _SignInState implements SignInState {
   bool get proceedToVerifyCode;
   @override
   List<int> get gameList;
-  @override
-  List<Game> get allGames;
   @override
   String get exception;
   @override
@@ -472,6 +448,12 @@ class _$SignInEventTearOff {
     );
   }
 
+  _SendCode sendCode({required SendCode number}) {
+    return _SendCode(
+      number: number,
+    );
+  }
+
   _VerifyCode verifyCode(
       {required VerifyCode code, required ResendCodeType type}) {
     return _VerifyCode(
@@ -492,16 +474,6 @@ class _$SignInEventTearOff {
       action: action,
     );
   }
-
-  _GetGameList getGameList() {
-    return _GetGameList();
-  }
-
-  _AddFavouriteGames addFavouriteGames({required FavouriteGames games}) {
-    return _AddFavouriteGames(
-      games: games,
-    );
-  }
 }
 
 /// @nodoc
@@ -515,11 +487,10 @@ mixin _$SignInEvent {
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
+    required TResult Function(SendCode number) sendCode,
     required TResult Function(VerifyCode code, ResendCodeType type) verifyCode,
     required TResult Function(NewPassword newPassword) newPassword,
     required TResult Function(int id, AddOrRemove action) addToGame,
-    required TResult Function() getGameList,
-    required TResult Function(FavouriteGames games) addFavouriteGames,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -528,11 +499,10 @@ mixin _$SignInEvent {
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
     TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
     TResult Function(NewPassword newPassword)? newPassword,
     TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -541,11 +511,10 @@ mixin _$SignInEvent {
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
     TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
     TResult Function(NewPassword newPassword)? newPassword,
     TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -555,11 +524,10 @@ mixin _$SignInEvent {
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
+    required TResult Function(_SendCode value) sendCode,
     required TResult Function(_VerifyCode value) verifyCode,
     required TResult Function(_NewPassword value) newPassword,
     required TResult Function(_AddToGame value) addToGame,
-    required TResult Function(_GetGameList value) getGameList,
-    required TResult Function(_AddFavouriteGames value) addFavouriteGames,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -568,11 +536,10 @@ mixin _$SignInEvent {
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
     TResult Function(_VerifyCode value)? verifyCode,
     TResult Function(_NewPassword value)? newPassword,
     TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -581,11 +548,10 @@ mixin _$SignInEvent {
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
     TResult Function(_VerifyCode value)? verifyCode,
     TResult Function(_NewPassword value)? newPassword,
     TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -672,11 +638,10 @@ class _$_Login implements _Login {
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
+    required TResult Function(SendCode number) sendCode,
     required TResult Function(VerifyCode code, ResendCodeType type) verifyCode,
     required TResult Function(NewPassword newPassword) newPassword,
     required TResult Function(int id, AddOrRemove action) addToGame,
-    required TResult Function() getGameList,
-    required TResult Function(FavouriteGames games) addFavouriteGames,
   }) {
     return login(this.login);
   }
@@ -688,11 +653,10 @@ class _$_Login implements _Login {
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
     TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
     TResult Function(NewPassword newPassword)? newPassword,
     TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
   }) {
     return login?.call(this.login);
   }
@@ -704,11 +668,10 @@ class _$_Login implements _Login {
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
     TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
     TResult Function(NewPassword newPassword)? newPassword,
     TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -724,11 +687,10 @@ class _$_Login implements _Login {
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
+    required TResult Function(_SendCode value) sendCode,
     required TResult Function(_VerifyCode value) verifyCode,
     required TResult Function(_NewPassword value) newPassword,
     required TResult Function(_AddToGame value) addToGame,
-    required TResult Function(_GetGameList value) getGameList,
-    required TResult Function(_AddFavouriteGames value) addFavouriteGames,
   }) {
     return login(this);
   }
@@ -740,11 +702,10 @@ class _$_Login implements _Login {
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
     TResult Function(_VerifyCode value)? verifyCode,
     TResult Function(_NewPassword value)? newPassword,
     TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
   }) {
     return login?.call(this);
   }
@@ -756,11 +717,10 @@ class _$_Login implements _Login {
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
     TResult Function(_VerifyCode value)? verifyCode,
     TResult Function(_NewPassword value)? newPassword,
     TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -843,11 +803,10 @@ class _$_SignUp implements _SignUp {
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
+    required TResult Function(SendCode number) sendCode,
     required TResult Function(VerifyCode code, ResendCodeType type) verifyCode,
     required TResult Function(NewPassword newPassword) newPassword,
     required TResult Function(int id, AddOrRemove action) addToGame,
-    required TResult Function() getGameList,
-    required TResult Function(FavouriteGames games) addFavouriteGames,
   }) {
     return signUp(this.login);
   }
@@ -859,11 +818,10 @@ class _$_SignUp implements _SignUp {
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
     TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
     TResult Function(NewPassword newPassword)? newPassword,
     TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
   }) {
     return signUp?.call(this.login);
   }
@@ -875,11 +833,10 @@ class _$_SignUp implements _SignUp {
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
     TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
     TResult Function(NewPassword newPassword)? newPassword,
     TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
     required TResult orElse(),
   }) {
     if (signUp != null) {
@@ -895,11 +852,10 @@ class _$_SignUp implements _SignUp {
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
+    required TResult Function(_SendCode value) sendCode,
     required TResult Function(_VerifyCode value) verifyCode,
     required TResult Function(_NewPassword value) newPassword,
     required TResult Function(_AddToGame value) addToGame,
-    required TResult Function(_GetGameList value) getGameList,
-    required TResult Function(_AddFavouriteGames value) addFavouriteGames,
   }) {
     return signUp(this);
   }
@@ -911,11 +867,10 @@ class _$_SignUp implements _SignUp {
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
     TResult Function(_VerifyCode value)? verifyCode,
     TResult Function(_NewPassword value)? newPassword,
     TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
   }) {
     return signUp?.call(this);
   }
@@ -927,11 +882,10 @@ class _$_SignUp implements _SignUp {
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
     TResult Function(_VerifyCode value)? verifyCode,
     TResult Function(_NewPassword value)? newPassword,
     TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
     required TResult orElse(),
   }) {
     if (signUp != null) {
@@ -1017,11 +971,10 @@ class _$_ForgotPassword implements _ForgotPassword {
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
+    required TResult Function(SendCode number) sendCode,
     required TResult Function(VerifyCode code, ResendCodeType type) verifyCode,
     required TResult Function(NewPassword newPassword) newPassword,
     required TResult Function(int id, AddOrRemove action) addToGame,
-    required TResult Function() getGameList,
-    required TResult Function(FavouriteGames games) addFavouriteGames,
   }) {
     return forgotPassword(email);
   }
@@ -1033,11 +986,10 @@ class _$_ForgotPassword implements _ForgotPassword {
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
     TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
     TResult Function(NewPassword newPassword)? newPassword,
     TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
   }) {
     return forgotPassword?.call(email);
   }
@@ -1049,11 +1001,10 @@ class _$_ForgotPassword implements _ForgotPassword {
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
     TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
     TResult Function(NewPassword newPassword)? newPassword,
     TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
     required TResult orElse(),
   }) {
     if (forgotPassword != null) {
@@ -1069,11 +1020,10 @@ class _$_ForgotPassword implements _ForgotPassword {
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
+    required TResult Function(_SendCode value) sendCode,
     required TResult Function(_VerifyCode value) verifyCode,
     required TResult Function(_NewPassword value) newPassword,
     required TResult Function(_AddToGame value) addToGame,
-    required TResult Function(_GetGameList value) getGameList,
-    required TResult Function(_AddFavouriteGames value) addFavouriteGames,
   }) {
     return forgotPassword(this);
   }
@@ -1085,11 +1035,10 @@ class _$_ForgotPassword implements _ForgotPassword {
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
     TResult Function(_VerifyCode value)? verifyCode,
     TResult Function(_NewPassword value)? newPassword,
     TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
   }) {
     return forgotPassword?.call(this);
   }
@@ -1101,11 +1050,10 @@ class _$_ForgotPassword implements _ForgotPassword {
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
     TResult Function(_VerifyCode value)? verifyCode,
     TResult Function(_NewPassword value)? newPassword,
     TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
     required TResult orElse(),
   }) {
     if (forgotPassword != null) {
@@ -1189,11 +1137,10 @@ class _$_Resend implements _Resend {
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
+    required TResult Function(SendCode number) sendCode,
     required TResult Function(VerifyCode code, ResendCodeType type) verifyCode,
     required TResult Function(NewPassword newPassword) newPassword,
     required TResult Function(int id, AddOrRemove action) addToGame,
-    required TResult Function() getGameList,
-    required TResult Function(FavouriteGames games) addFavouriteGames,
   }) {
     return resend(email);
   }
@@ -1205,11 +1152,10 @@ class _$_Resend implements _Resend {
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
     TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
     TResult Function(NewPassword newPassword)? newPassword,
     TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
   }) {
     return resend?.call(email);
   }
@@ -1221,11 +1167,10 @@ class _$_Resend implements _Resend {
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
     TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
     TResult Function(NewPassword newPassword)? newPassword,
     TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
     required TResult orElse(),
   }) {
     if (resend != null) {
@@ -1241,11 +1186,10 @@ class _$_Resend implements _Resend {
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
+    required TResult Function(_SendCode value) sendCode,
     required TResult Function(_VerifyCode value) verifyCode,
     required TResult Function(_NewPassword value) newPassword,
     required TResult Function(_AddToGame value) addToGame,
-    required TResult Function(_GetGameList value) getGameList,
-    required TResult Function(_AddFavouriteGames value) addFavouriteGames,
   }) {
     return resend(this);
   }
@@ -1257,11 +1201,10 @@ class _$_Resend implements _Resend {
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
     TResult Function(_VerifyCode value)? verifyCode,
     TResult Function(_NewPassword value)? newPassword,
     TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
   }) {
     return resend?.call(this);
   }
@@ -1273,11 +1216,10 @@ class _$_Resend implements _Resend {
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
     TResult Function(_VerifyCode value)? verifyCode,
     TResult Function(_NewPassword value)? newPassword,
     TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
     required TResult orElse(),
   }) {
     if (resend != null) {
@@ -1293,6 +1235,172 @@ abstract class _Resend implements SignInEvent {
   ForgotPassword get email;
   @JsonKey(ignore: true)
   _$ResendCopyWith<_Resend> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$SendCodeCopyWith<$Res> {
+  factory _$SendCodeCopyWith(_SendCode value, $Res Function(_SendCode) then) =
+      __$SendCodeCopyWithImpl<$Res>;
+  $Res call({SendCode number});
+}
+
+/// @nodoc
+class __$SendCodeCopyWithImpl<$Res> extends _$SignInEventCopyWithImpl<$Res>
+    implements _$SendCodeCopyWith<$Res> {
+  __$SendCodeCopyWithImpl(_SendCode _value, $Res Function(_SendCode) _then)
+      : super(_value, (v) => _then(v as _SendCode));
+
+  @override
+  _SendCode get _value => super._value as _SendCode;
+
+  @override
+  $Res call({
+    Object? number = freezed,
+  }) {
+    return _then(_SendCode(
+      number: number == freezed
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as SendCode,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SendCode implements _SendCode {
+  _$_SendCode({required this.number});
+
+  @override
+  final SendCode number;
+
+  @override
+  String toString() {
+    return 'SignInEvent.sendCode(number: $number)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _SendCode &&
+            (identical(other.number, number) || other.number == number));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, number);
+
+  @JsonKey(ignore: true)
+  @override
+  _$SendCodeCopyWith<_SendCode> get copyWith =>
+      __$SendCodeCopyWithImpl<_SendCode>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Login login) login,
+    required TResult Function(SignUp login) signUp,
+    required TResult Function(ForgotPassword email) forgotPassword,
+    required TResult Function(ForgotPassword email) resend,
+    required TResult Function(SendCode number) sendCode,
+    required TResult Function(VerifyCode code, ResendCodeType type) verifyCode,
+    required TResult Function(NewPassword newPassword) newPassword,
+    required TResult Function(int id, AddOrRemove action) addToGame,
+  }) {
+    return sendCode(number);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(Login login)? login,
+    TResult Function(SignUp login)? signUp,
+    TResult Function(ForgotPassword email)? forgotPassword,
+    TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
+    TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
+    TResult Function(NewPassword newPassword)? newPassword,
+    TResult Function(int id, AddOrRemove action)? addToGame,
+  }) {
+    return sendCode?.call(number);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Login login)? login,
+    TResult Function(SignUp login)? signUp,
+    TResult Function(ForgotPassword email)? forgotPassword,
+    TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
+    TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
+    TResult Function(NewPassword newPassword)? newPassword,
+    TResult Function(int id, AddOrRemove action)? addToGame,
+    required TResult orElse(),
+  }) {
+    if (sendCode != null) {
+      return sendCode(number);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Login value) login,
+    required TResult Function(_SignUp value) signUp,
+    required TResult Function(_ForgotPassword value) forgotPassword,
+    required TResult Function(_Resend value) resend,
+    required TResult Function(_SendCode value) sendCode,
+    required TResult Function(_VerifyCode value) verifyCode,
+    required TResult Function(_NewPassword value) newPassword,
+    required TResult Function(_AddToGame value) addToGame,
+  }) {
+    return sendCode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Login value)? login,
+    TResult Function(_SignUp value)? signUp,
+    TResult Function(_ForgotPassword value)? forgotPassword,
+    TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
+    TResult Function(_VerifyCode value)? verifyCode,
+    TResult Function(_NewPassword value)? newPassword,
+    TResult Function(_AddToGame value)? addToGame,
+  }) {
+    return sendCode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Login value)? login,
+    TResult Function(_SignUp value)? signUp,
+    TResult Function(_ForgotPassword value)? forgotPassword,
+    TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
+    TResult Function(_VerifyCode value)? verifyCode,
+    TResult Function(_NewPassword value)? newPassword,
+    TResult Function(_AddToGame value)? addToGame,
+    required TResult orElse(),
+  }) {
+    if (sendCode != null) {
+      return sendCode(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SendCode implements SignInEvent {
+  factory _SendCode({required SendCode number}) = _$_SendCode;
+
+  SendCode get number;
+  @JsonKey(ignore: true)
+  _$SendCodeCopyWith<_SendCode> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1370,11 +1478,10 @@ class _$_VerifyCode implements _VerifyCode {
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
+    required TResult Function(SendCode number) sendCode,
     required TResult Function(VerifyCode code, ResendCodeType type) verifyCode,
     required TResult Function(NewPassword newPassword) newPassword,
     required TResult Function(int id, AddOrRemove action) addToGame,
-    required TResult Function() getGameList,
-    required TResult Function(FavouriteGames games) addFavouriteGames,
   }) {
     return verifyCode(code, type);
   }
@@ -1386,11 +1493,10 @@ class _$_VerifyCode implements _VerifyCode {
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
     TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
     TResult Function(NewPassword newPassword)? newPassword,
     TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
   }) {
     return verifyCode?.call(code, type);
   }
@@ -1402,11 +1508,10 @@ class _$_VerifyCode implements _VerifyCode {
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
     TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
     TResult Function(NewPassword newPassword)? newPassword,
     TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
     required TResult orElse(),
   }) {
     if (verifyCode != null) {
@@ -1422,11 +1527,10 @@ class _$_VerifyCode implements _VerifyCode {
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
+    required TResult Function(_SendCode value) sendCode,
     required TResult Function(_VerifyCode value) verifyCode,
     required TResult Function(_NewPassword value) newPassword,
     required TResult Function(_AddToGame value) addToGame,
-    required TResult Function(_GetGameList value) getGameList,
-    required TResult Function(_AddFavouriteGames value) addFavouriteGames,
   }) {
     return verifyCode(this);
   }
@@ -1438,11 +1542,10 @@ class _$_VerifyCode implements _VerifyCode {
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
     TResult Function(_VerifyCode value)? verifyCode,
     TResult Function(_NewPassword value)? newPassword,
     TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
   }) {
     return verifyCode?.call(this);
   }
@@ -1454,11 +1557,10 @@ class _$_VerifyCode implements _VerifyCode {
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
     TResult Function(_VerifyCode value)? verifyCode,
     TResult Function(_NewPassword value)? newPassword,
     TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
     required TResult orElse(),
   }) {
     if (verifyCode != null) {
@@ -1547,11 +1649,10 @@ class _$_NewPassword implements _NewPassword {
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
+    required TResult Function(SendCode number) sendCode,
     required TResult Function(VerifyCode code, ResendCodeType type) verifyCode,
     required TResult Function(NewPassword newPassword) newPassword,
     required TResult Function(int id, AddOrRemove action) addToGame,
-    required TResult Function() getGameList,
-    required TResult Function(FavouriteGames games) addFavouriteGames,
   }) {
     return newPassword(this.newPassword);
   }
@@ -1563,11 +1664,10 @@ class _$_NewPassword implements _NewPassword {
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
     TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
     TResult Function(NewPassword newPassword)? newPassword,
     TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
   }) {
     return newPassword?.call(this.newPassword);
   }
@@ -1579,11 +1679,10 @@ class _$_NewPassword implements _NewPassword {
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
     TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
     TResult Function(NewPassword newPassword)? newPassword,
     TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
     required TResult orElse(),
   }) {
     if (newPassword != null) {
@@ -1599,11 +1698,10 @@ class _$_NewPassword implements _NewPassword {
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
+    required TResult Function(_SendCode value) sendCode,
     required TResult Function(_VerifyCode value) verifyCode,
     required TResult Function(_NewPassword value) newPassword,
     required TResult Function(_AddToGame value) addToGame,
-    required TResult Function(_GetGameList value) getGameList,
-    required TResult Function(_AddFavouriteGames value) addFavouriteGames,
   }) {
     return newPassword(this);
   }
@@ -1615,11 +1713,10 @@ class _$_NewPassword implements _NewPassword {
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
     TResult Function(_VerifyCode value)? verifyCode,
     TResult Function(_NewPassword value)? newPassword,
     TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
   }) {
     return newPassword?.call(this);
   }
@@ -1631,11 +1728,10 @@ class _$_NewPassword implements _NewPassword {
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
     TResult Function(_VerifyCode value)? verifyCode,
     TResult Function(_NewPassword value)? newPassword,
     TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
     required TResult orElse(),
   }) {
     if (newPassword != null) {
@@ -1728,11 +1824,10 @@ class _$_AddToGame implements _AddToGame {
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
+    required TResult Function(SendCode number) sendCode,
     required TResult Function(VerifyCode code, ResendCodeType type) verifyCode,
     required TResult Function(NewPassword newPassword) newPassword,
     required TResult Function(int id, AddOrRemove action) addToGame,
-    required TResult Function() getGameList,
-    required TResult Function(FavouriteGames games) addFavouriteGames,
   }) {
     return addToGame(id, action);
   }
@@ -1744,11 +1839,10 @@ class _$_AddToGame implements _AddToGame {
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
     TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
     TResult Function(NewPassword newPassword)? newPassword,
     TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
   }) {
     return addToGame?.call(id, action);
   }
@@ -1760,11 +1854,10 @@ class _$_AddToGame implements _AddToGame {
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
     TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
     TResult Function(NewPassword newPassword)? newPassword,
     TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
     required TResult orElse(),
   }) {
     if (addToGame != null) {
@@ -1780,11 +1873,10 @@ class _$_AddToGame implements _AddToGame {
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
+    required TResult Function(_SendCode value) sendCode,
     required TResult Function(_VerifyCode value) verifyCode,
     required TResult Function(_NewPassword value) newPassword,
     required TResult Function(_AddToGame value) addToGame,
-    required TResult Function(_GetGameList value) getGameList,
-    required TResult Function(_AddFavouriteGames value) addFavouriteGames,
   }) {
     return addToGame(this);
   }
@@ -1796,11 +1888,10 @@ class _$_AddToGame implements _AddToGame {
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
     TResult Function(_VerifyCode value)? verifyCode,
     TResult Function(_NewPassword value)? newPassword,
     TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
   }) {
     return addToGame?.call(this);
   }
@@ -1812,11 +1903,10 @@ class _$_AddToGame implements _AddToGame {
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
     TResult Function(_VerifyCode value)? verifyCode,
     TResult Function(_NewPassword value)? newPassword,
     TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
     required TResult orElse(),
   }) {
     if (addToGame != null) {
@@ -1834,327 +1924,5 @@ abstract class _AddToGame implements SignInEvent {
   AddOrRemove get action;
   @JsonKey(ignore: true)
   _$AddToGameCopyWith<_AddToGame> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$GetGameListCopyWith<$Res> {
-  factory _$GetGameListCopyWith(
-          _GetGameList value, $Res Function(_GetGameList) then) =
-      __$GetGameListCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$GetGameListCopyWithImpl<$Res> extends _$SignInEventCopyWithImpl<$Res>
-    implements _$GetGameListCopyWith<$Res> {
-  __$GetGameListCopyWithImpl(
-      _GetGameList _value, $Res Function(_GetGameList) _then)
-      : super(_value, (v) => _then(v as _GetGameList));
-
-  @override
-  _GetGameList get _value => super._value as _GetGameList;
-}
-
-/// @nodoc
-
-class _$_GetGameList implements _GetGameList {
-  _$_GetGameList();
-
-  @override
-  String toString() {
-    return 'SignInEvent.getGameList()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _GetGameList);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Login login) login,
-    required TResult Function(SignUp login) signUp,
-    required TResult Function(ForgotPassword email) forgotPassword,
-    required TResult Function(ForgotPassword email) resend,
-    required TResult Function(VerifyCode code, ResendCodeType type) verifyCode,
-    required TResult Function(NewPassword newPassword) newPassword,
-    required TResult Function(int id, AddOrRemove action) addToGame,
-    required TResult Function() getGameList,
-    required TResult Function(FavouriteGames games) addFavouriteGames,
-  }) {
-    return getGameList();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Login login)? login,
-    TResult Function(SignUp login)? signUp,
-    TResult Function(ForgotPassword email)? forgotPassword,
-    TResult Function(ForgotPassword email)? resend,
-    TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
-    TResult Function(NewPassword newPassword)? newPassword,
-    TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
-  }) {
-    return getGameList?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Login login)? login,
-    TResult Function(SignUp login)? signUp,
-    TResult Function(ForgotPassword email)? forgotPassword,
-    TResult Function(ForgotPassword email)? resend,
-    TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
-    TResult Function(NewPassword newPassword)? newPassword,
-    TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
-    required TResult orElse(),
-  }) {
-    if (getGameList != null) {
-      return getGameList();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Login value) login,
-    required TResult Function(_SignUp value) signUp,
-    required TResult Function(_ForgotPassword value) forgotPassword,
-    required TResult Function(_Resend value) resend,
-    required TResult Function(_VerifyCode value) verifyCode,
-    required TResult Function(_NewPassword value) newPassword,
-    required TResult Function(_AddToGame value) addToGame,
-    required TResult Function(_GetGameList value) getGameList,
-    required TResult Function(_AddFavouriteGames value) addFavouriteGames,
-  }) {
-    return getGameList(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Login value)? login,
-    TResult Function(_SignUp value)? signUp,
-    TResult Function(_ForgotPassword value)? forgotPassword,
-    TResult Function(_Resend value)? resend,
-    TResult Function(_VerifyCode value)? verifyCode,
-    TResult Function(_NewPassword value)? newPassword,
-    TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
-  }) {
-    return getGameList?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Login value)? login,
-    TResult Function(_SignUp value)? signUp,
-    TResult Function(_ForgotPassword value)? forgotPassword,
-    TResult Function(_Resend value)? resend,
-    TResult Function(_VerifyCode value)? verifyCode,
-    TResult Function(_NewPassword value)? newPassword,
-    TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
-    required TResult orElse(),
-  }) {
-    if (getGameList != null) {
-      return getGameList(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _GetGameList implements SignInEvent {
-  factory _GetGameList() = _$_GetGameList;
-}
-
-/// @nodoc
-abstract class _$AddFavouriteGamesCopyWith<$Res> {
-  factory _$AddFavouriteGamesCopyWith(
-          _AddFavouriteGames value, $Res Function(_AddFavouriteGames) then) =
-      __$AddFavouriteGamesCopyWithImpl<$Res>;
-  $Res call({FavouriteGames games});
-}
-
-/// @nodoc
-class __$AddFavouriteGamesCopyWithImpl<$Res>
-    extends _$SignInEventCopyWithImpl<$Res>
-    implements _$AddFavouriteGamesCopyWith<$Res> {
-  __$AddFavouriteGamesCopyWithImpl(
-      _AddFavouriteGames _value, $Res Function(_AddFavouriteGames) _then)
-      : super(_value, (v) => _then(v as _AddFavouriteGames));
-
-  @override
-  _AddFavouriteGames get _value => super._value as _AddFavouriteGames;
-
-  @override
-  $Res call({
-    Object? games = freezed,
-  }) {
-    return _then(_AddFavouriteGames(
-      games: games == freezed
-          ? _value.games
-          : games // ignore: cast_nullable_to_non_nullable
-              as FavouriteGames,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_AddFavouriteGames implements _AddFavouriteGames {
-  _$_AddFavouriteGames({required this.games});
-
-  @override
-  final FavouriteGames games;
-
-  @override
-  String toString() {
-    return 'SignInEvent.addFavouriteGames(games: $games)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _AddFavouriteGames &&
-            (identical(other.games, games) || other.games == games));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, games);
-
-  @JsonKey(ignore: true)
-  @override
-  _$AddFavouriteGamesCopyWith<_AddFavouriteGames> get copyWith =>
-      __$AddFavouriteGamesCopyWithImpl<_AddFavouriteGames>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Login login) login,
-    required TResult Function(SignUp login) signUp,
-    required TResult Function(ForgotPassword email) forgotPassword,
-    required TResult Function(ForgotPassword email) resend,
-    required TResult Function(VerifyCode code, ResendCodeType type) verifyCode,
-    required TResult Function(NewPassword newPassword) newPassword,
-    required TResult Function(int id, AddOrRemove action) addToGame,
-    required TResult Function() getGameList,
-    required TResult Function(FavouriteGames games) addFavouriteGames,
-  }) {
-    return addFavouriteGames(games);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Login login)? login,
-    TResult Function(SignUp login)? signUp,
-    TResult Function(ForgotPassword email)? forgotPassword,
-    TResult Function(ForgotPassword email)? resend,
-    TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
-    TResult Function(NewPassword newPassword)? newPassword,
-    TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
-  }) {
-    return addFavouriteGames?.call(games);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Login login)? login,
-    TResult Function(SignUp login)? signUp,
-    TResult Function(ForgotPassword email)? forgotPassword,
-    TResult Function(ForgotPassword email)? resend,
-    TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
-    TResult Function(NewPassword newPassword)? newPassword,
-    TResult Function(int id, AddOrRemove action)? addToGame,
-    TResult Function()? getGameList,
-    TResult Function(FavouriteGames games)? addFavouriteGames,
-    required TResult orElse(),
-  }) {
-    if (addFavouriteGames != null) {
-      return addFavouriteGames(games);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Login value) login,
-    required TResult Function(_SignUp value) signUp,
-    required TResult Function(_ForgotPassword value) forgotPassword,
-    required TResult Function(_Resend value) resend,
-    required TResult Function(_VerifyCode value) verifyCode,
-    required TResult Function(_NewPassword value) newPassword,
-    required TResult Function(_AddToGame value) addToGame,
-    required TResult Function(_GetGameList value) getGameList,
-    required TResult Function(_AddFavouriteGames value) addFavouriteGames,
-  }) {
-    return addFavouriteGames(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Login value)? login,
-    TResult Function(_SignUp value)? signUp,
-    TResult Function(_ForgotPassword value)? forgotPassword,
-    TResult Function(_Resend value)? resend,
-    TResult Function(_VerifyCode value)? verifyCode,
-    TResult Function(_NewPassword value)? newPassword,
-    TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
-  }) {
-    return addFavouriteGames?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Login value)? login,
-    TResult Function(_SignUp value)? signUp,
-    TResult Function(_ForgotPassword value)? forgotPassword,
-    TResult Function(_Resend value)? resend,
-    TResult Function(_VerifyCode value)? verifyCode,
-    TResult Function(_NewPassword value)? newPassword,
-    TResult Function(_AddToGame value)? addToGame,
-    TResult Function(_GetGameList value)? getGameList,
-    TResult Function(_AddFavouriteGames value)? addFavouriteGames,
-    required TResult orElse(),
-  }) {
-    if (addFavouriteGames != null) {
-      return addFavouriteGames(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AddFavouriteGames implements SignInEvent {
-  factory _AddFavouriteGames({required FavouriteGames games}) =
-      _$_AddFavouriteGames;
-
-  FavouriteGames get games;
-  @JsonKey(ignore: true)
-  _$AddFavouriteGamesCopyWith<_AddFavouriteGames> get copyWith =>
       throw _privateConstructorUsedError;
 }

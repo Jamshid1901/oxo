@@ -102,6 +102,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 child: Column(
                   children: [
                     CustomTextFieldPassword(
+                      validator: (s) {  },
                       controller: oldPassword,
                       title: 'current_password'.tr(),
                       isPassword: true,
@@ -111,6 +112,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: CustomTextFieldPassword(
+                        validator: (s) {  },
                         controller: newPassword,
                         title: 'new_password'.tr(),
                         isPassword: true,
@@ -119,6 +121,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       ),
                     ),
                     CustomTextFieldPassword(
+                      validator: (s) {  },
                       controller: confirmNewPassword,
                       error: state.exception.toString() == 'doesnt match' ? "passwords_doesnt_match".tr()
                           : null ,

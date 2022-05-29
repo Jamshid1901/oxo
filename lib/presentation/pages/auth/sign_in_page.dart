@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:oxo/application/sign_in/sign_in_bloc.dart';
+import 'package:oxo/domain/common/resend_code.dart';
 import 'package:oxo/domain/sign_in/social_sign_in_types.dart';
 import 'package:oxo/infrastructure/models/auth/auth.dart';
 import 'package:oxo/presentation/component/custom_button.dart';
@@ -25,20 +27,27 @@ class SignIn extends StatefulWidget {
   State<SignIn> createState() => _SignInState();
 }
 
-class _SignInState extends State<SignIn> {
-  late TextEditingController emailController;
+class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
+  late TextEditingController phoneController;
+  late TextEditingController phoneControllerOne;
   late TextEditingController passwordController;
+  TabController? tabController;
+  final _formKeyOne = GlobalKey<FormState>();
+  final _formKeySecond = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    emailController = TextEditingController();
+    tabController = TabController(length: 2, vsync: this);
+    phoneController = TextEditingController(text: "+998 ");
+    phoneControllerOne = TextEditingController(text: "+998 ");
     passwordController = TextEditingController();
   }
 
   @override
   void dispose() {
-    emailController.dispose();
+    phoneController.dispose();
+    phoneControllerOne.dispose();
     passwordController.dispose();
     super.dispose();
   }
@@ -50,32 +59,30 @@ class _SignInState extends State<SignIn> {
         return GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: BlocConsumer<SignInBloc, SignInState>(
-            listenWhen: (prev, next) =>
-                (prev.proceedToChooseInterests !=
-                        next.proceedToChooseInterests &&
-                    next.proceedToChooseInterests) ||
+            listenWhen: (prev, next) => (prev.proceedToVerifyCode != next.proceedToVerifyCode &&
+                next.proceedToVerifyCode) ||
                 (prev.navigateToHome != next.navigateToHome &&
                     next.navigateToHome) ||
                 (prev.exception != next.exception && next.exception.isNotEmpty),
             listener: (context, state) {
-              if (state.proceedToChooseInterests) {
-                Navigator.push(
-                  context,
-                  Routes.chooseInterests(context),
-                );
-              }
               if (state.navigateToHome) {
                 Navigator.push(
                   context,
                   Routes.getMainRoute(context),
                 );
               }
+              if (state.proceedToVerifyCode) {
+                Navigator.push(
+                  context,
+                  Routes.verifyCode(context,phoneController.text,ResendCodeType.registering,),
+                );
+              }
 
               if (state.exception.isNotEmpty) {
                 OxoError.openDialog(
                   context,
-                  title: state.exception,
-                  description: 'correct_credentials'.tr(),
+                  title: "Xato",
+                  description: state.exception,
                   buttonTitle: 'close'.tr(),
                 );
               }
@@ -85,120 +92,148 @@ class _SignInState extends State<SignIn> {
                   ? const Loading()
                   : Scaffold(
                       backgroundColor: colors.backgroundColor,
-                      body: Stack(
-                        children: [
-                          Positioned(
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            child: Image.asset(icons.authFacadeImage),
-                          ),
-                          Positioned(
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                            child: ListView(
-                              padding: EdgeInsets.symmetric(horizontal: 16.w),
-                              children: [
-                                SizedBox(height: 155.h),
-                                Image.asset(
-                                  controller.isDark
-                                      ? icons.logoDarkImage
-                                      : icons.logoLightImage,
-                                  height: 45.h,
-                                  width: 100.w,
-                                ),
-                                SizedBox(height: 24.h),
-                                Text(
-                                  'login'.tr(),
-                                  textAlign: TextAlign.center,
-                                  style: fonts.headline3,
-                                ),
-                                SizedBox(height: 40.h),
-                                CustomTextField(
-                                  controller: emailController,
-                                  title: 'email'.tr(),
-                                  hintText: 'enter_your_email'.tr(),
-                                  isEmail: true,
-                                  error: state.isEmailValid
-                                      ? null
-                                      : 'enter_valid_email'.tr(),
-                                ),
-                                SizedBox(height: 16.h),
-                                CustomTextFieldPassword(
-                                  controller: passwordController,
-                                  title: 'password'.tr(),
-                                  hintText: 'enter_password'.tr(),
-                                  isPassword: true,
-                                  error: state.isPasswordValid
-                                      ? null
-                                      : 'enter_valid_password'.tr(),
-                                ),
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: TextButton(
-                                    onPressed: () {
-                                      Navigator.push(context,
-                                          Routes.forgotPassword(context));
-                                    },
-                                    child: Text(
-                                      'forgot_password'.tr(),
-                                      style: Style.medium14(
-                                        size: 14.sp,
-                                        color: Style.primary,
-                                      ),
+                      body: Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: 16.w),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 90.h),
+                              SvgPicture.asset("assets/svgs/oxo.svg",height: 48,),
+                              SizedBox(height: 10.h),
+                              Text(
+                                'welcome'.tr(),
+                                textAlign: TextAlign.center,
+                                style: fonts.headline4.copyWith(fontSize: 24,color: Style.black),
+                              ),
+                              SizedBox(height: 10.h),
+                              Text(
+                                'splashDescriptionOne'.tr(),
+                                style: fonts.bodyText1,
+                              ),
+                              SizedBox(height: 30.h),
+                              SizedBox(
+                              width: double.infinity,
+                              child: TabBar(
+                                  controller: tabController,
+                                  isScrollable: false,
+                                  indicatorColor: Style.black,
+                                  // indicator: BoxDecoration(
+                                  //   borderRadius: BorderRadius.all(Radius.circular(4.r))
+                                  // ),
+                                  labelColor:  Style.black,
+                                  unselectedLabelColor: Style.subText,
+                                  unselectedLabelStyle: fonts.headline4.copyWith(fontSize: 16.sp,color: Style.black),
+                                  labelStyle:  fonts.headline4.copyWith(fontSize: 16.sp,color: Style.black),
+                                  tabs: [
+                                    Tab(text: "login".tr()),
+                                    Tab(text: "signUp".tr()),
+                                  ]),
+                            ),
+                              SizedBox(height: 24.h),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height - 340.h,
+                                child: TabBarView(
+                                  controller: tabController,
+                                    children: [
+                                  Form(
+                                    key: _formKeyOne,
+                                    child: Column(
+                                      children: [
+                                        CustomTextField(
+                                          validator: (s){},
+                                          controller: phoneControllerOne,
+                                          title: 'phone'.tr(),
+                                          hintText: '',
+                                          isEmail: true,
+                                          error: state.isEmailValid
+                                              ? null
+                                              : 'enter_valid_phone'.tr(),
+                                        ),
+                                        SizedBox(height: 24.h),
+                                        CustomTextFieldPassword(
+                                          validator: (s) {  },
+                                          controller: passwordController,
+                                          title: 'password'.tr(),
+                                          hintText: '',
+                                          isPassword: true,
+                                          error: state.isPasswordValid
+                                              ? null
+                                              : 'enter_valid_password'.tr(),
+                                        ),
+                                        SizedBox(height: 54.h),
+                                        CustomButton(
+                                          onPressed: () {
+                                            if (_formKeyOne.currentState!.validate()) {
+                                              final email = phoneControllerOne.text.trim();
+                                              final password =
+                                              passwordController.text.trim();
+
+                                              final login = Login(
+                                                    (l) => l
+                                                  ..email = email
+                                                  ..password = password,
+                                              );
+                                              context
+                                                  .read<SignInBloc>()
+                                                  .add(SignInEvent.login(login: login));
+                                            }
+                                          },
+                                          title: 'login'.tr(),
+                                        ),
+                                        SizedBox(height: 30.h),
+                                      ],
                                     ),
                                   ),
-                                ),
-                                SizedBox(height: 30.h),
-                                CustomButton(
-                                  onPressed: () {
-                                    final email = emailController.text.trim();
-                                    final password =
-                                        passwordController.text.trim();
-
-                                    final login = Login(
-                                      (l) => l
-                                        ..email = email
-                                        ..password = password,
-                                    );
-                                    context
-                                        .read<SignInBloc>()
-                                        .add(SignInEvent.login(login: login));
-                                  },
-                                  title: 'login'.tr(),
-                                ),
-                                SizedBox(height: 30.h),
-                                _liner(),
-                                SizedBox(height: 30.h),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'dont_have_an_account'.tr(),
-                                      style: fonts.subtitle1,
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context, Routes.signUp(context));
-                                      },
-                                      child: Text(
-                                        'sign_up_here'.tr(),
-                                        style: Style.medium14(
-                                          size: 14.sp,
-                                          color: Style.primary,
+                                  Form(
+                                    key: _formKeySecond,
+                                    child: Column(
+                                      children: [
+                                        CustomTextField(
+                                          formatter: [MaskTextInputFormatter(mask: "+998 ## ### ## ##")],
+                                          controller: phoneController,
+                                          title: 'phone'.tr(),
+                                          hintText: '',
+                                          isEmail: true,
+                                          validator: (ss) {
+                                            if (ss!.isEmpty || RegExp(r'[0-9],+').hasMatch(ss) || ss.length < 17 ) {
+                                              return 'enter_valid_phone'.tr();
+                                            }
+                                            return null;
+                                          },
+                                          error: state.isEmailValid
+                                              ? null
+                                              : 'enter_valid_phone'.tr(),
                                         ),
-                                      ),
+                                        SizedBox(height: 16.h),
+                                        SizedBox(height: 30.h),
+                                        CustomButton(
+                                          onPressed: () {
+                                            if (_formKeySecond.currentState!.validate()) {
+                                              final number = phoneController.text.trim();
+
+                                              final data = SendCode(
+                                                    (l) => l
+                                                  ..number = number.replaceAll(" ", "")
+                                                  ..type = "signup",
+                                              );
+                                              context
+                                                  .read<SignInBloc>()
+                                                  .add(SignInEvent.sendCode(number: data));
+                                            }
+                                          },
+                                          title: 'signUp'.tr(),
+                                        ),
+                                        SizedBox(height: 30.h),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                  ),
+                                ]),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      )
                     );
             },
           ),

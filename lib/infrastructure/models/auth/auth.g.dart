@@ -6,6 +6,7 @@ part of 'auth.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
+Serializer<SendCode> _$sendCodeSerializer = new _$SendCodeSerializer();
 Serializer<Login> _$loginSerializer = new _$LoginSerializer();
 Serializer<FirebaseToken> _$firebaseTokenSerializer =
     new _$FirebaseTokenSerializer();
@@ -15,13 +16,62 @@ Serializer<ForgotPassword> _$forgotPasswordSerializer =
     new _$ForgotPasswordSerializer();
 Serializer<VerifyCode> _$verifyCodeSerializer = new _$VerifyCodeSerializer();
 Serializer<NewPassword> _$newPasswordSerializer = new _$NewPasswordSerializer();
-Serializer<GameImage> _$gameImageSerializer = new _$GameImageSerializer();
-Serializer<Game> _$gameSerializer = new _$GameSerializer();
-Serializer<GameList> _$gameListSerializer = new _$GameListSerializer();
-Serializer<FavouriteGames> _$favouriteGamesSerializer =
-    new _$FavouriteGamesSerializer();
 Serializer<SignUp> _$signUpSerializer = new _$SignUpSerializer();
 Serializer<ResendCode> _$resendCodeSerializer = new _$ResendCodeSerializer();
+
+class _$SendCodeSerializer implements StructuredSerializer<SendCode> {
+  @override
+  final Iterable<Type> types = const [SendCode, _$SendCode];
+  @override
+  final String wireName = 'SendCode';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, SendCode object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[];
+    Object? value;
+    value = object.number;
+    if (value != null) {
+      result
+        ..add('phone_number')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.type;
+    if (value != null) {
+      result
+        ..add('type')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    return result;
+  }
+
+  @override
+  SendCode deserialize(Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new SendCodeBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'phone_number':
+          result.number = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'type':
+          result.type = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
 
 class _$LoginSerializer implements StructuredSerializer<Login> {
   @override
@@ -276,10 +326,10 @@ class _$VerifyCodeSerializer implements StructuredSerializer<VerifyCode> {
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[];
     Object? value;
-    value = object.email;
+    value = object.number;
     if (value != null) {
       result
-        ..add('email')
+        ..add('phone_number')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -318,8 +368,8 @@ class _$VerifyCodeSerializer implements StructuredSerializer<VerifyCode> {
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'email':
-          result.email = serializers.deserialize(value,
+        case 'phone_number':
+          result.number = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
         case 'code':
@@ -420,271 +470,6 @@ class _$NewPasswordSerializer implements StructuredSerializer<NewPassword> {
         case 'refresh_token':
           result.refreshToken = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
-          break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
-class _$GameImageSerializer implements StructuredSerializer<GameImage> {
-  @override
-  final Iterable<Type> types = const [GameImage, _$GameImage];
-  @override
-  final String wireName = 'GameImage';
-
-  @override
-  Iterable<Object?> serialize(Serializers serializers, GameImage object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[];
-    Object? value;
-    value = object.id;
-    if (value != null) {
-      result
-        ..add('id')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
-    value = object.file;
-    if (value != null) {
-      result
-        ..add('file')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.format;
-    if (value != null) {
-      result
-        ..add('format')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.name;
-    if (value != null) {
-      result
-        ..add('name')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    return result;
-  }
-
-  @override
-  GameImage deserialize(Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new GameImageBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current! as String;
-      iterator.moveNext();
-      final Object? value = iterator.current;
-      switch (key) {
-        case 'id':
-          result.id = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
-          break;
-        case 'file':
-          result.file = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'format':
-          result.format = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'name':
-          result.name = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
-class _$GameSerializer implements StructuredSerializer<Game> {
-  @override
-  final Iterable<Type> types = const [Game, _$Game];
-  @override
-  final String wireName = 'Game';
-
-  @override
-  Iterable<Object?> serialize(Serializers serializers, Game object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[];
-    Object? value;
-    value = object.id;
-    if (value != null) {
-      result
-        ..add('id')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
-    value = object.name;
-    if (value != null) {
-      result
-        ..add('name')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.image;
-    if (value != null) {
-      result
-        ..add('photo')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(GameImage)));
-    }
-    return result;
-  }
-
-  @override
-  Game deserialize(Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new GameBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current! as String;
-      iterator.moveNext();
-      final Object? value = iterator.current;
-      switch (key) {
-        case 'id':
-          result.id = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
-          break;
-        case 'name':
-          result.name = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'photo':
-          result.image.replace(serializers.deserialize(value,
-              specifiedType: const FullType(GameImage))! as GameImage);
-          break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
-class _$GameListSerializer implements StructuredSerializer<GameList> {
-  @override
-  final Iterable<Type> types = const [GameList, _$GameList];
-  @override
-  final String wireName = 'GameList';
-
-  @override
-  Iterable<Object?> serialize(Serializers serializers, GameList object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[];
-    Object? value;
-    value = object.count;
-    if (value != null) {
-      result
-        ..add('count')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
-    value = object.previous;
-    if (value != null) {
-      result
-        ..add('previous')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.next;
-    if (value != null) {
-      result
-        ..add('next')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.games;
-    if (value != null) {
-      result
-        ..add('results')
-        ..add(serializers.serialize(value,
-            specifiedType:
-                const FullType(BuiltList, const [const FullType(Game)])));
-    }
-    return result;
-  }
-
-  @override
-  GameList deserialize(Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new GameListBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current! as String;
-      iterator.moveNext();
-      final Object? value = iterator.current;
-      switch (key) {
-        case 'count':
-          result.count = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
-          break;
-        case 'previous':
-          result.previous = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'next':
-          result.next = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'results':
-          result.games.replace(serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(BuiltList, const [const FullType(Game)]))!
-              as BuiltList<Object?>);
-          break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
-class _$FavouriteGamesSerializer
-    implements StructuredSerializer<FavouriteGames> {
-  @override
-  final Iterable<Type> types = const [FavouriteGames, _$FavouriteGames];
-  @override
-  final String wireName = 'FavouriteGames';
-
-  @override
-  Iterable<Object?> serialize(Serializers serializers, FavouriteGames object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[];
-    Object? value;
-    value = object.games;
-    if (value != null) {
-      result
-        ..add('game_ids')
-        ..add(serializers.serialize(value,
-            specifiedType:
-                const FullType(BuiltList, const [const FullType(int)])));
-    }
-    return result;
-  }
-
-  @override
-  FavouriteGames deserialize(
-      Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new FavouriteGamesBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current! as String;
-      iterator.moveNext();
-      final Object? value = iterator.current;
-      switch (key) {
-        case 'game_ids':
-          result.games.replace(serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(BuiltList, const [const FullType(int)]))!
-              as BuiltList<Object?>);
           break;
       }
     }
@@ -820,6 +605,86 @@ class _$ResendCodeSerializer implements StructuredSerializer<ResendCode> {
     }
 
     return result.build();
+  }
+}
+
+class _$SendCode extends SendCode {
+  @override
+  final String? number;
+  @override
+  final String? type;
+
+  factory _$SendCode([void Function(SendCodeBuilder)? updates]) =>
+      (new SendCodeBuilder()..update(updates)).build();
+
+  _$SendCode._({this.number, this.type}) : super._();
+
+  @override
+  SendCode rebuild(void Function(SendCodeBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SendCodeBuilder toBuilder() => new SendCodeBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SendCode && number == other.number && type == other.type;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, number.hashCode), type.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('SendCode')
+          ..add('number', number)
+          ..add('type', type))
+        .toString();
+  }
+}
+
+class SendCodeBuilder implements Builder<SendCode, SendCodeBuilder> {
+  _$SendCode? _$v;
+
+  String? _number;
+  String? get number => _$this._number;
+  set number(String? number) => _$this._number = number;
+
+  String? _type;
+  String? get type => _$this._type;
+  set type(String? type) => _$this._type = type;
+
+  SendCodeBuilder();
+
+  SendCodeBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _number = $v.number;
+      _type = $v.type;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(SendCode other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$SendCode;
+  }
+
+  @override
+  void update(void Function(SendCodeBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SendCode build() {
+    final _$result = _$v ?? new _$SendCode._(number: number, type: type);
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -1196,7 +1061,7 @@ class ForgotPasswordBuilder
 
 class _$VerifyCode extends VerifyCode {
   @override
-  final String? email;
+  final String? number;
   @override
   final String? code;
   @override
@@ -1207,7 +1072,7 @@ class _$VerifyCode extends VerifyCode {
   factory _$VerifyCode([void Function(VerifyCodeBuilder)? updates]) =>
       (new VerifyCodeBuilder()..update(updates)).build();
 
-  _$VerifyCode._({this.email, this.code, this.accessToken, this.refreshToken})
+  _$VerifyCode._({this.number, this.code, this.accessToken, this.refreshToken})
       : super._();
 
   @override
@@ -1221,7 +1086,7 @@ class _$VerifyCode extends VerifyCode {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is VerifyCode &&
-        email == other.email &&
+        number == other.number &&
         code == other.code &&
         accessToken == other.accessToken &&
         refreshToken == other.refreshToken;
@@ -1230,14 +1095,14 @@ class _$VerifyCode extends VerifyCode {
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, email.hashCode), code.hashCode), accessToken.hashCode),
+        $jc($jc($jc(0, number.hashCode), code.hashCode), accessToken.hashCode),
         refreshToken.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('VerifyCode')
-          ..add('email', email)
+          ..add('number', number)
           ..add('code', code)
           ..add('accessToken', accessToken)
           ..add('refreshToken', refreshToken))
@@ -1248,9 +1113,9 @@ class _$VerifyCode extends VerifyCode {
 class VerifyCodeBuilder implements Builder<VerifyCode, VerifyCodeBuilder> {
   _$VerifyCode? _$v;
 
-  String? _email;
-  String? get email => _$this._email;
-  set email(String? email) => _$this._email = email;
+  String? _number;
+  String? get number => _$this._number;
+  set number(String? number) => _$this._number = number;
 
   String? _code;
   String? get code => _$this._code;
@@ -1269,7 +1134,7 @@ class VerifyCodeBuilder implements Builder<VerifyCode, VerifyCodeBuilder> {
   VerifyCodeBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _email = $v.email;
+      _number = $v.number;
       _code = $v.code;
       _accessToken = $v.accessToken;
       _refreshToken = $v.refreshToken;
@@ -1293,7 +1158,7 @@ class VerifyCodeBuilder implements Builder<VerifyCode, VerifyCodeBuilder> {
   _$VerifyCode build() {
     final _$result = _$v ??
         new _$VerifyCode._(
-            email: email,
+            number: number,
             code: code,
             accessToken: accessToken,
             refreshToken: refreshToken);
@@ -1421,420 +1286,6 @@ class NewPasswordBuilder implements Builder<NewPassword, NewPasswordBuilder> {
             password: password,
             accessToken: accessToken,
             refreshToken: refreshToken);
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$GameImage extends GameImage {
-  @override
-  final int? id;
-  @override
-  final String? file;
-  @override
-  final String? format;
-  @override
-  final String? name;
-
-  factory _$GameImage([void Function(GameImageBuilder)? updates]) =>
-      (new GameImageBuilder()..update(updates)).build();
-
-  _$GameImage._({this.id, this.file, this.format, this.name}) : super._();
-
-  @override
-  GameImage rebuild(void Function(GameImageBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  GameImageBuilder toBuilder() => new GameImageBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is GameImage &&
-        id == other.id &&
-        file == other.file &&
-        format == other.format &&
-        name == other.name;
-  }
-
-  @override
-  int get hashCode {
-    return $jf($jc(
-        $jc($jc($jc(0, id.hashCode), file.hashCode), format.hashCode),
-        name.hashCode));
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper('GameImage')
-          ..add('id', id)
-          ..add('file', file)
-          ..add('format', format)
-          ..add('name', name))
-        .toString();
-  }
-}
-
-class GameImageBuilder implements Builder<GameImage, GameImageBuilder> {
-  _$GameImage? _$v;
-
-  int? _id;
-  int? get id => _$this._id;
-  set id(int? id) => _$this._id = id;
-
-  String? _file;
-  String? get file => _$this._file;
-  set file(String? file) => _$this._file = file;
-
-  String? _format;
-  String? get format => _$this._format;
-  set format(String? format) => _$this._format = format;
-
-  String? _name;
-  String? get name => _$this._name;
-  set name(String? name) => _$this._name = name;
-
-  GameImageBuilder();
-
-  GameImageBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _id = $v.id;
-      _file = $v.file;
-      _format = $v.format;
-      _name = $v.name;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(GameImage other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GameImage;
-  }
-
-  @override
-  void update(void Function(GameImageBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  _$GameImage build() {
-    final _$result = _$v ??
-        new _$GameImage._(id: id, file: file, format: format, name: name);
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$Game extends Game {
-  @override
-  final int? id;
-  @override
-  final String? name;
-  @override
-  final GameImage? image;
-
-  factory _$Game([void Function(GameBuilder)? updates]) =>
-      (new GameBuilder()..update(updates)).build();
-
-  _$Game._({this.id, this.name, this.image}) : super._();
-
-  @override
-  Game rebuild(void Function(GameBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  GameBuilder toBuilder() => new GameBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is Game &&
-        id == other.id &&
-        name == other.name &&
-        image == other.image;
-  }
-
-  @override
-  int get hashCode {
-    return $jf($jc($jc($jc(0, id.hashCode), name.hashCode), image.hashCode));
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper('Game')
-          ..add('id', id)
-          ..add('name', name)
-          ..add('image', image))
-        .toString();
-  }
-}
-
-class GameBuilder implements Builder<Game, GameBuilder> {
-  _$Game? _$v;
-
-  int? _id;
-  int? get id => _$this._id;
-  set id(int? id) => _$this._id = id;
-
-  String? _name;
-  String? get name => _$this._name;
-  set name(String? name) => _$this._name = name;
-
-  GameImageBuilder? _image;
-  GameImageBuilder get image => _$this._image ??= new GameImageBuilder();
-  set image(GameImageBuilder? image) => _$this._image = image;
-
-  GameBuilder();
-
-  GameBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _id = $v.id;
-      _name = $v.name;
-      _image = $v.image?.toBuilder();
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(Game other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$Game;
-  }
-
-  @override
-  void update(void Function(GameBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  _$Game build() {
-    _$Game _$result;
-    try {
-      _$result =
-          _$v ?? new _$Game._(id: id, name: name, image: _image?.build());
-    } catch (_) {
-      late String _$failedField;
-      try {
-        _$failedField = 'image';
-        _image?.build();
-      } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            'Game', _$failedField, e.toString());
-      }
-      rethrow;
-    }
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$GameList extends GameList {
-  @override
-  final int? count;
-  @override
-  final String? previous;
-  @override
-  final String? next;
-  @override
-  final BuiltList<Game>? games;
-
-  factory _$GameList([void Function(GameListBuilder)? updates]) =>
-      (new GameListBuilder()..update(updates)).build();
-
-  _$GameList._({this.count, this.previous, this.next, this.games}) : super._();
-
-  @override
-  GameList rebuild(void Function(GameListBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  GameListBuilder toBuilder() => new GameListBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is GameList &&
-        count == other.count &&
-        previous == other.previous &&
-        next == other.next &&
-        games == other.games;
-  }
-
-  @override
-  int get hashCode {
-    return $jf($jc(
-        $jc($jc($jc(0, count.hashCode), previous.hashCode), next.hashCode),
-        games.hashCode));
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper('GameList')
-          ..add('count', count)
-          ..add('previous', previous)
-          ..add('next', next)
-          ..add('games', games))
-        .toString();
-  }
-}
-
-class GameListBuilder implements Builder<GameList, GameListBuilder> {
-  _$GameList? _$v;
-
-  int? _count;
-  int? get count => _$this._count;
-  set count(int? count) => _$this._count = count;
-
-  String? _previous;
-  String? get previous => _$this._previous;
-  set previous(String? previous) => _$this._previous = previous;
-
-  String? _next;
-  String? get next => _$this._next;
-  set next(String? next) => _$this._next = next;
-
-  ListBuilder<Game>? _games;
-  ListBuilder<Game> get games => _$this._games ??= new ListBuilder<Game>();
-  set games(ListBuilder<Game>? games) => _$this._games = games;
-
-  GameListBuilder();
-
-  GameListBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _count = $v.count;
-      _previous = $v.previous;
-      _next = $v.next;
-      _games = $v.games?.toBuilder();
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(GameList other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GameList;
-  }
-
-  @override
-  void update(void Function(GameListBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  _$GameList build() {
-    _$GameList _$result;
-    try {
-      _$result = _$v ??
-          new _$GameList._(
-              count: count,
-              previous: previous,
-              next: next,
-              games: _games?.build());
-    } catch (_) {
-      late String _$failedField;
-      try {
-        _$failedField = 'games';
-        _games?.build();
-      } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            'GameList', _$failedField, e.toString());
-      }
-      rethrow;
-    }
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$FavouriteGames extends FavouriteGames {
-  @override
-  final BuiltList<int>? games;
-
-  factory _$FavouriteGames([void Function(FavouriteGamesBuilder)? updates]) =>
-      (new FavouriteGamesBuilder()..update(updates)).build();
-
-  _$FavouriteGames._({this.games}) : super._();
-
-  @override
-  FavouriteGames rebuild(void Function(FavouriteGamesBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  FavouriteGamesBuilder toBuilder() =>
-      new FavouriteGamesBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is FavouriteGames && games == other.games;
-  }
-
-  @override
-  int get hashCode {
-    return $jf($jc(0, games.hashCode));
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper('FavouriteGames')..add('games', games))
-        .toString();
-  }
-}
-
-class FavouriteGamesBuilder
-    implements Builder<FavouriteGames, FavouriteGamesBuilder> {
-  _$FavouriteGames? _$v;
-
-  ListBuilder<int>? _games;
-  ListBuilder<int> get games => _$this._games ??= new ListBuilder<int>();
-  set games(ListBuilder<int>? games) => _$this._games = games;
-
-  FavouriteGamesBuilder();
-
-  FavouriteGamesBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _games = $v.games?.toBuilder();
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(FavouriteGames other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$FavouriteGames;
-  }
-
-  @override
-  void update(void Function(FavouriteGamesBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  _$FavouriteGames build() {
-    _$FavouriteGames _$result;
-    try {
-      _$result = _$v ?? new _$FavouriteGames._(games: _games?.build());
-    } catch (_) {
-      late String _$failedField;
-      try {
-        _$failedField = 'games';
-        _games?.build();
-      } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            'FavouriteGames', _$failedField, e.toString());
-      }
-      rethrow;
-    }
     replace(_$result);
     return _$result;
   }

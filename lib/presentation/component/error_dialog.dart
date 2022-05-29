@@ -23,7 +23,7 @@ class OxoError {
     VoidCallback? onTap,
     bool isFilled = false,
   }) {
-    buttonTitle ??= 'cancel'.tr();
+    buttonTitle ??= 'close'.tr();
     return showDialog(
       context: context,
       builder: (_) {
@@ -33,7 +33,7 @@ class OxoError {
               backgroundColor: Style.transparent,
               insetPadding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Container(
-                height: 220.h,
+                margin: EdgeInsets.all(24.w),
                 width: double.infinity,
                 padding: EdgeInsets.all(24.w),
                 decoration: BoxDecoration(

@@ -18,6 +18,10 @@ abstract class SignInEvent with _$SignInEvent {
     required ForgotPassword email,
   }) = _Resend;
 
+  factory SignInEvent.sendCode({
+    required SendCode number,
+  }) = _SendCode;
+
 
   factory SignInEvent.verifyCode({
     required VerifyCode code,
@@ -32,10 +36,4 @@ abstract class SignInEvent with _$SignInEvent {
     required int id,
     required AddOrRemove action,
   }) = _AddToGame;
-
-  factory SignInEvent.getGameList() = _GetGameList;
-
-  factory SignInEvent.addFavouriteGames({
-    required FavouriteGames games,
-  }) = _AddFavouriteGames;
 }

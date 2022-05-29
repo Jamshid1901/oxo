@@ -14,7 +14,6 @@ abstract class SignInState with _$SignInState {
     @Default(false) bool proceedToChooseInterests,
     @Default(false) bool proceedToVerifyCode,
     @Default([]) List<int> gameList,
-    @Default([]) List<Game> allGames,
     @Default('') String exception,
   }) = _SignInState;
 }

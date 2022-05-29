@@ -83,6 +83,7 @@ class _EnterNewPasswordState extends State<EnterNewPassword> {
                             ),
                             SizedBox(height: 24.h),
                             CustomTextField(
+                              validator: (s){},
                               controller: _passwordController,
                               title: 'new_password'.tr(),
                               hintText: 'new_password'.tr(),
@@ -90,6 +91,7 @@ class _EnterNewPasswordState extends State<EnterNewPassword> {
                             ),
                             SizedBox(height: 16.h),
                             CustomTextField(
+                              validator: (s){},
                               controller: _confirmPasswordController,
                               title: 'confirm_password'.tr(),
                               hintText: 'confirm_password'.tr(),

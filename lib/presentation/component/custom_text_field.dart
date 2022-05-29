@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oxo/presentation/styles/style.dart';
 import 'package:oxo/presentation/styles/theme_warpper.dart';
@@ -25,6 +26,7 @@ class CustomTextField extends StatefulWidget {
   final bool readOnly;
   final ValueChanged<String>? onChanged;
   final FocusNode? focusNode;
+  final Function(String?) validator;
 
   const CustomTextField(
       {Key? key,
@@ -47,7 +49,7 @@ class CustomTextField extends StatefulWidget {
       this.readOnly = false,
       this.onChanged,
       this.focusNode,
-  this.textAlign=TextAlign.start})
+  this.textAlign=TextAlign.start,required this.validator})
       : super(key: key);
 
   @override
@@ -82,6 +84,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               ? SizedBox(height: 6.h)
               : const SizedBox(),
           TextFormField(
+            validator: (str) => widget.validator(str),
             onTap: widget.onPressed,
             textInputAction: TextInputAction.done,
             focusNode: widget.focusNode,
@@ -105,20 +108,20 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   : null,
               focusColor: Style.primary,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16.r),
+                borderRadius: BorderRadius.circular(6.r),
                 borderSide: BorderSide(color: colors.stoke, width: 1),
               ),
               disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16.r),
+              borderRadius: BorderRadius.circular(6.r),
                borderSide: BorderSide(color: colors.disabled, width: 1),
              ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16.r),
+                borderRadius: BorderRadius.circular(6.r),
                 borderSide: BorderSide(color: colors.stoke, width: 1),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16.r),
-                borderSide: BorderSide(color: widget.readOnly? colors.disabled : colors.primary, width: 1),
+                borderRadius: BorderRadius.circular(6.r),
+                borderSide: BorderSide(color: widget.readOnly? colors.disabled : Style.black, width: 1),
               ),
               hintText: widget.hintText,
               hintStyle: fonts.bodyText1,

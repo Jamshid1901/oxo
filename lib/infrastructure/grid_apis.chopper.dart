@@ -33,6 +33,14 @@ class _$AuthService extends AuthService {
   }
 
   @override
+  Future<Response<SignUp>> sendCode(SendCode body) {
+    final $url = '/api/v1/register/send-code/';
+    final $body = body;
+    final $request = Request('POST', $url, client.baseUrl, body: $body);
+    return client.send<SignUp, SignUp>($request);
+  }
+
+  @override
   Future<Response<void>> firebaseToken(String header, FirebaseToken body) {
     final $url = '/api/v1/notification/firebase/add_token/';
     final $headers = {
@@ -62,11 +70,11 @@ class _$AuthService extends AuthService {
   }
 
   @override
-  Future<Response<VerifyCode>> verifyCode(VerifyCode body) {
-    final $url = '/api/v1/user/confirm_code/';
+  Future<Response<dynamic>> verifyCode(VerifyCode body) {
+    final $url = '/api/v1/register/verify/';
     final $body = body;
     final $request = Request('POST', $url, client.baseUrl, body: $body);
-    return client.send<VerifyCode, VerifyCode>($request);
+    return client.send<dynamic, dynamic>($request);
   }
 
   @override
@@ -83,42 +91,6 @@ class _$AuthService extends AuthService {
     final $body = body;
     final $request = Request('POST', $url, client.baseUrl, body: $body);
     return client.send<NewPassword, NewPassword>($request);
-  }
-
-  @override
-  Future<Response<NewPassword>> favouriteGames(
-      String header, FavouriteGames body) {
-    final $url = '/api/v1/user/favourite_game/';
-    final $headers = {
-      'Authorization': header,
-    };
-
-    final $body = body;
-    final $request =
-        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
-    return client.send<NewPassword, NewPassword>($request);
-  }
-}
-
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
-class _$GameService extends GameService {
-  _$GameService([ChopperClient? client]) {
-    if (client == null) return;
-    this.client = client;
-  }
-
-  @override
-  final definitionType = GameService;
-
-  @override
-  Future<Response<GameList>> games(String header) {
-    final $url = '/api/v1/game/';
-    final $headers = {
-      'Authorization': header,
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
-    return client.send<GameList, GameList>($request);
   }
 }
 

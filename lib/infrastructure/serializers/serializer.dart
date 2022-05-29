@@ -25,12 +25,11 @@ part 'serializer.g.dart';
 @SerializersFor([
   //Auth
   Login,
+  SendCode,
   FirebaseToken,
   ForgotPassword,
   VerifyCode,
   NewPassword,
-  GameList,
-  FavouriteGames,
   SocialSignIn,
   SignUp,
   General,

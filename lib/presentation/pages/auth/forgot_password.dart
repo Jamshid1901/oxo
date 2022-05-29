@@ -93,7 +93,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                   isEmail: true,
                                   error: state.isEmailValid
                                       ? null
-                                      : 'enter_valid_email'.tr(),
+                                      : 'enter_valid_email'.tr(), validator: (s) {  },
                                 ),
                               ],
                             ),

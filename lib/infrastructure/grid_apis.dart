@@ -32,6 +32,11 @@ abstract class AuthService extends ChopperService {
     @Body() SignUp body,
   );
 
+  @Post(path: 'register/send-code/')
+  Future<Response<SignUp>> sendCode(
+      @Body() SendCode body,
+      );
+
   @Post(path: 'notification/firebase/add_token/')
   Future<Response<void>> firebaseToken(
     @Header('Authorization') String header,
@@ -48,8 +53,8 @@ abstract class AuthService extends ChopperService {
     @Body() ForgotPassword body,
   );
 
-  @Post(path: 'user/confirm_code/')
-  Future<Response<VerifyCode>> verifyCode(
+  @Post(path: 'register/verify/')
+  Future<Response> verifyCode(
     @Body() VerifyCode body,
   );
 
@@ -63,26 +68,10 @@ abstract class AuthService extends ChopperService {
     @Body() NewPassword body,
   );
 
-  @Post(path: 'user/favourite_game/')
-  Future<Response<NewPassword>> favouriteGames(
-    @Header('Authorization') String header,
-    @Body() FavouriteGames body,
-  );
-
   static AuthService create() =>
-      _$AuthService(_Client('https://devapi.gridgamers.com', true));
+      _$AuthService(_Client('https://api.oxo.uz', true));
 }
 
-@ChopperApi(baseUrl: '/api/v1/')
-abstract class GameService extends ChopperService {
-  @Get(path: 'game/')
-  Future<Response<GameList>> games(
-    @Header('Authorization') String header,
-  );
-
-  static GameService create() =>
-      _$GameService(_Client('https://devapi.gridgamers.com', true));
-}
 
 
 
@@ -110,7 +99,7 @@ abstract class EditProfileService extends ChopperService {
 
 
   static EditProfileService create() =>
-      _$EditProfileService(_Client('https://devapi.gridgamers.com', true));
+      _$EditProfileService(_Client('https://api.oxo.uz', true));
 }
 
 @ChopperApi(baseUrl: '/api/v1/user')
@@ -160,7 +149,7 @@ abstract class FollowersService extends ChopperService {
   );
 
   static FollowersService create() =>
-      _$FollowersService(_Client('https://devapi.gridgamers.com', true));
+      _$FollowersService(_Client('https://api.oxo.uz', true));
 }
 
 @ChopperApi(baseUrl: '/api/v1')
@@ -173,7 +162,7 @@ abstract class ImageUploadService extends ChopperService {
   );
 
   static ImageUploadService create() =>
-      _$ImageUploadService(_Client('https://devapi.gridgamers.com', true));
+      _$ImageUploadService(_Client('https://api.oxo.uz', true));
 }
 
 @ChopperApi(baseUrl: '/api/v1/')
@@ -213,7 +202,7 @@ abstract class SettingsService extends ChopperService {
   );
 
   static SettingsService create() =>
-      _$SettingsService(_Client('https://devapi.gridgamers.com', true));
+      _$SettingsService(_Client('https://api.oxo.uz', true));
 }
 
 @ChopperApi(baseUrl: '/api/v1/user/')
@@ -230,7 +219,7 @@ abstract class ProfileService extends ChopperService {
   );
 
   static ProfileService create() =>
-      _$ProfileService(_Client('https://devapi.gridgamers.com', true));
+      _$ProfileService(_Client('https://api.oxo.uz', true));
 }
 
 
@@ -268,7 +257,7 @@ abstract class NotificationService extends ChopperService {
       );
 
   static NotificationService create() =>
-      _$NotificationService(_Client('https://devapi.gridgamers.com', true));
+      _$NotificationService(_Client('https://api.oxo.uz', true));
 }
 
 class _Client extends ChopperClient {

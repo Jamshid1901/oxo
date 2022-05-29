@@ -158,6 +158,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           height: 16.h,
                         ),
                         CustomTextField(
+                          validator: (s){},
                           suffixIcon:  state.isUserNameFree! ? SvgPicture.asset(icons.validated) : SvgPicture.asset(icons.notValid),
                           onChanged: (g){
                             if (_timer != null) _timer!.cancel();
@@ -178,6 +179,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           height: 16.h,
                         ),
                         CustomTextField(
+                          validator: (s){},
                           controller: bioController,
                           title: 'bio'.tr(),
                           hintText: 'bio'.tr(),
@@ -190,6 +192,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           height: 16.h,
                         ),
                         CustomTextField(
+                          validator: (s){},
                           error: isLinkTrue(webSiteController.text.toString()) ?  null : 'This is not valid url',
                           controller: webSiteController,
                           title: 'your_website'.tr(),

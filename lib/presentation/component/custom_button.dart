@@ -56,7 +56,7 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     this.isDisabled = false,
     required this.title,
-    this.verticalPadding=12,
+    this.verticalPadding=18,
   }) : super(key: key);
 
   @override
@@ -70,11 +70,10 @@ class CustomButton extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16.r),
               border: Border.all(
-                color: isDisabled ? colors.disabled : Style.primary,
+                color: isDisabled ? colors.disabledTxt : Style.black,
                 width: 0.7,
               ),
-              gradient: isDisabled ? null : Style.secondaryGrediant,
-              color: isDisabled ? colors.disabled : null,
+              color: isDisabled ? colors.disabledTxt : Style.black,
               boxShadow: isDisabled
                   ? null
                   : const [
@@ -85,7 +84,7 @@ class CustomButton extends StatelessWidget {
             textAlign: TextAlign.center,
             style: Style.medium14(
               size: 14.sp,
-              color: isDisabled ? colors.disabledTxt : Style.white,
+              color: Style.white,
             ),
           ),
         ),

@@ -30,8 +30,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       resend: _resend,
       newPassword: _newPassword,
       addToGame: _addToGame,
-      getGameList: _getGameList,
-      addFavouriteGames: _addFavouriteGames,
+      sendCode: _sendCoed,
     );
   }
 
@@ -92,47 +91,21 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     );
   }
 
-  Stream<SignInState> _addFavouriteGames(_AddFavouriteGames value) async* {
-    yield state.copyWith(
-      isLoading: true,
-      exception: '',
-      navigateToHome: false,
-    );
-
-    final res = await _repository.favouriteGames(value.games);
+  Stream<SignInState> _sendCoed(_SendCode value) async* {
+    yield state.copyWith(exception: '',isLoading: true, proceedToVerifyCode: false,);
+    final res = await _repository.sendCode(value.number);
 
     yield* res.fold(
-      () async* {
+          () async* {
         yield state.copyWith(
           isLoading: false,
-          navigateToHome: true,
+          proceedToVerifyCode: true,
         );
       },
-      (error) async* {
+          (f) async* {
         yield state.copyWith(
           isLoading: false,
-          exception: error.message,
-        );
-      },
-    );
-  }
-
-  Stream<SignInState> _getGameList(_GetGameList value) async* {
-    yield state.copyWith(isLoading: true, exception: '');
-    final res = await _repository.getGameList();
-
-    yield* res.fold(
-      (error) async* {
-        yield state.copyWith(
-          isLoading: false,
-          exception: error.message,
-        );
-      },
-      (games) async* {
-        final allGames = games.games!.toList();
-        yield state.copyWith(
-          isLoading: false,
-          allGames: allGames,
+          exception: f.message,
         );
       },
     );
@@ -304,7 +277,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     dynamic login,
     Stream<SignInState> Function(dynamic) hundle,
   ) async* {
-    if (login.login.email == null || login.login.email!.isEmpty) {
+    if (login.login.number == null || login.login.number!.isEmpty) {
       yield state.copyWith(isEmailValid: false);
       return;
     }
@@ -313,7 +286,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       return;
     }
 
-    yield* _verifyEmail(login.login.email);
+    yield* _verifyEmail(login.login.number);
     yield* _verifyPassword(login.login.password);
 
     if (state.isEmailValid && state.isPasswordValid) {

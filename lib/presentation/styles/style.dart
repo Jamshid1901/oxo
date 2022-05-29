@@ -9,7 +9,7 @@ class Style {
 
   static const Color darkBar = Color(0xFF202325);
 
-  static const Color bgBlurFill = Color(0x08FFFFFF);
+  static const Color bgBlurFill = Color(0xffF4F4F4);
 
   static const Color negative = Color(0xffE96E6E);
 
@@ -68,11 +68,11 @@ class Style {
 
   static const Color bodyText = Color(0xff494966);
 
-  static const Color subText = Color(0xffA4A4B7);
+  static const Color subText = Color(0xffC2C2C2);
 
   static const Color subTextDark = Color(0xff7A7B85);
 
-  static const Color black = Color(0x00000000);
+  static const Color black = Colors.black;
 
   static const Color black45 = Color(0x73000000);
 

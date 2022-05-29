@@ -12,13 +12,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ConfirmEmail.serializer)
       ..add(Country.serializer)
       ..add(Detail.serializer)
-      ..add(FavouriteGames.serializer)
       ..add(FirebaseToken.serializer)
       ..add(FollowersModel.serializer)
       ..add(ForgotPassword.serializer)
-      ..add(Game.serializer)
-      ..add(GameImage.serializer)
-      ..add(GameList.serializer)
       ..add(General.serializer)
       ..add(GeneralInfoEntity.serializer)
       ..add(ImageUploadModel.serializer)
@@ -39,6 +35,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ProfileBackgroundModel.serializer)
       ..add(ProfileModel.serializer)
       ..add(Results.serializer)
+      ..add(SendCode.serializer)
       ..add(SignUp.serializer)
       ..add(SocialSignIn.serializer)
       ..add(UnFollowPostModel.serializer)
@@ -47,12 +44,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(UserSearchHistoryPostModel.serializer)
       ..add(UserSearchHistoryResultModel.serializer)
       ..add(VerifyCode.serializer)
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(Game)]),
-          () => new ListBuilder<Game>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(int)]),
-          () => new ListBuilder<int>())
       ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType.nullable(NotificationResults)]),

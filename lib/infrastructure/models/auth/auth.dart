@@ -4,6 +4,23 @@ import 'package:built_collection/built_collection.dart';
 
 part 'auth.g.dart';
 
+abstract class SendCode
+    implements Built<SendCode, SendCodeBuilder> {
+  @BuiltValueField(wireName: 'phone_number')
+  String? get number;
+
+  String? get type;
+
+  SendCode._();
+  factory SendCode([Function(SendCodeBuilder b) updates]) =
+  _$SendCode;
+
+  static Serializer<SendCode> get serializer =>
+      _$sendCodeSerializer;
+}
+
+
+
 abstract class Login implements Built<Login, LoginBuilder> {
   String? get email;
 
@@ -67,7 +84,9 @@ abstract class ForgotPassword
 }
 
 abstract class VerifyCode implements Built<VerifyCode, VerifyCodeBuilder> {
-  String? get email;
+  @BuiltValueField(wireName: 'phone_number')
+  String? get number;
+
   String? get code;
 
   @BuiltValueField(wireName: 'access_token')
@@ -97,56 +116,6 @@ abstract class NewPassword implements Built<NewPassword, NewPasswordBuilder> {
   factory NewPassword([Function(NewPasswordBuilder b) updates]) = _$NewPassword;
 
   static Serializer<NewPassword> get serializer => _$newPasswordSerializer;
-}
-
-abstract class GameImage implements Built<GameImage, GameImageBuilder> {
-  int? get id;
-  String? get file;
-  String? get format;
-  String? get name;
-
-  GameImage._();
-  factory GameImage([Function(GameImageBuilder b) updates]) = _$GameImage;
-
-  static Serializer<GameImage> get serializer => _$gameImageSerializer;
-}
-
-abstract class Game implements Built<Game, GameBuilder> {
-  int? get id;
-  String? get name;
-  @BuiltValueField(wireName: 'photo')
-  GameImage? get image;
-
-  Game._();
-  factory Game([Function(GameBuilder b) updates]) = _$Game;
-
-  static Serializer<Game> get serializer => _$gameSerializer;
-}
-
-abstract class GameList implements Built<GameList, GameListBuilder> {
-  int? get count;
-  String? get previous;
-  String? get next;
-  @BuiltValueField(wireName: 'results')
-  BuiltList<Game>? get games;
-
-  GameList._();
-  factory GameList([Function(GameListBuilder b) updates]) = _$GameList;
-
-  static Serializer<GameList> get serializer => _$gameListSerializer;
-}
-
-abstract class FavouriteGames
-    implements Built<FavouriteGames, FavouriteGamesBuilder> {
-  @BuiltValueField(wireName: 'game_ids')
-  BuiltList<int>? get games;
-
-  FavouriteGames._();
-  factory FavouriteGames([Function(FavouriteGamesBuilder b) updates]) =
-      _$FavouriteGames;
-
-  static Serializer<FavouriteGames> get serializer =>
-      _$favouriteGamesSerializer;
 }
 
 abstract class SignUp implements Built<SignUp, SignUpBuilder> {

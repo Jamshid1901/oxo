@@ -16,9 +16,9 @@ abstract class ISignInFacade {
 
   Future<Option<SignInFailure>> newPassword(NewPassword data);
 
-  Future<Either<SignInFailure, GameList>> getGameList();
 
   Future<Option<SignInFailure>> signUp(SignUp signUp);
 
-  Future<Option<SignInFailure>> favouriteGames(FavouriteGames data);
+  Future<Option<SignInFailure>> sendCode(SendCode login);
+
 }

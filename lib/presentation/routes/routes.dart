@@ -11,7 +11,6 @@ import 'package:oxo/infrastructure/repositories/edit_profile_repo.dart';
 import 'package:oxo/infrastructure/repositories/image_upload_repo.dart';
 import 'package:oxo/infrastructure/repositories/profile_repo.dart';
 import 'package:oxo/infrastructure/services/prefs.dart';
-import 'package:oxo/presentation/pages/auth/choose_interests.dart';
 import 'package:oxo/presentation/pages/auth/email_sent.dart';
 import 'package:oxo/presentation/pages/auth/enter_new_password.dart';
 import 'package:oxo/presentation/pages/auth/forgot_password.dart';
@@ -21,7 +20,6 @@ import 'package:oxo/presentation/pages/edit_profile/edit_profile.dart';
 import 'package:oxo/presentation/pages/followers/followers.dart';
 import 'package:oxo/presentation/pages/home/home.dart';
 import 'package:oxo/presentation/pages/profile/profile.dart';
-import 'package:oxo/presentation/pages/settings/custom_web_view.dart';
 import 'package:oxo/presentation/pages/user_profile/user_profile.dart';
 import 'package:oxo/presentation/pages/user_profile/user_vendor_profile.dart';
 import 'package:oxo/presentation/pages/user_search/user_search.dart';
@@ -136,13 +134,6 @@ class Routes {
         ),
       );
 
-  static PageRoute chooseInterests(BuildContext context) => MaterialPageRoute(
-        builder: (_) => BlocProvider.value(
-          value: context.read<SignInBloc>()..add(SignInEvent.getGameList()),
-          child: const ChooseInterests(),
-        ),
-      );
-
 
 
   static PageRoute verifyCode(
@@ -154,7 +145,7 @@ class Routes {
         builder: (_) => BlocProvider.value(
           value: context.read<SignInBloc>(),
           child: VerifyCode(
-            email: email,
+            number: email,
             resendCodeType: type,
           ),
         ),

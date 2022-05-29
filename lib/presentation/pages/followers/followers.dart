@@ -45,6 +45,7 @@ class _FollowersState extends State<FollowersPage> {
                 Padding(
                   padding: EdgeInsets.all(16.h),
                   child: CustomTextField(
+                    validator: (s){},
                     hintText: "search".tr(),
                     suffixIcon: IconButton(
                         padding: EdgeInsets.zero,

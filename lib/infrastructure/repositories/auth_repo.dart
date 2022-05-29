@@ -18,12 +18,9 @@ import '../grid_apis.dart';
 class AuthRepository implements IAutFacade, ISignInFacade {
   final PreferenceService _preferenceService;
   final AuthService _authService;
-  final GameService _gameService;
-
   AuthRepository(
     this._preferenceService,
     this._authService,
-    this._gameService,
   );
 
   @override
@@ -46,6 +43,26 @@ class AuthRepository implements IAutFacade, ISignInFacade {
         return optionOf(null);
       } else {
         return optionOf(InvalidCredentials(message: 'invalid_credential'.tr()));
+      }
+    } catch (e) {
+      if (e is NetworkException) {
+        return optionOf(NetworkFailure(message: 'network_error'.tr()));
+      } else {
+        return optionOf(Unknown(message: 'unknown_error'.tr()));
+      }
+    }
+  }
+
+  @override
+  Future<Option<SignInFailure>> sendCode(SendCode number) async {
+    try {
+      final res = await _authService.sendCode(number);
+      if (res.isSuccessful && res.statusCode == 200) {
+        return optionOf(null);
+      } else {
+        return optionOf(
+          InvalidCredentials(message: res.bodyString),
+        );
       }
     } catch (e) {
       if (e is NetworkException) {
@@ -135,8 +152,8 @@ class AuthRepository implements IAutFacade, ISignInFacade {
   Future<Option<SignInFailure>> verifyCode(
       VerifyCode data, ResendCodeType type) async {
     try {
-      Response<VerifyCode> res;
-      if (type == ResendCodeType.forgotPassword) {
+      Response res;
+      if (type == ResendCodeType.registering) {
         res = await _authService.verifyCode(data);
       } else {
         res = await _authService.activateAccount(data);
@@ -144,14 +161,16 @@ class AuthRepository implements IAutFacade, ISignInFacade {
 
       if (res.isSuccessful) {
         if (type == ResendCodeType.registering) {
-          final tokens = Token(
-            accessToken: res.body!.accessToken,
-            refreshToken: res.body!.refreshToken,
-          );
-          _preferenceService.setToken(tokens);
-          await _uploadFirebaseToken();
+          // final tokens = Token(
+          //   accessToken: res.body!.accessToken,
+          //   refreshToken: res.body!.refreshToken,
+          // );
+          // _preferenceService.setToken(tokens);
+          // await _uploadFirebaseToken();
         }
         return none();
+      } else if(res.statusCode == 400) {
+        return some(Unknown(message: 'invalid_code'.tr()));
       } else {
         return some(Unknown(message: 'invalid_code'.tr()));
       }
@@ -159,7 +178,7 @@ class AuthRepository implements IAutFacade, ISignInFacade {
       if (e is NetworkException) {
         return optionOf(NetworkFailure(message: 'network_error'.tr()));
       } else {
-        return optionOf(Unknown(message: 'unknown_error'.tr()));
+        return optionOf(Unknown(message: 'invalid_code'.tr()));
       }
     }
   }
@@ -189,44 +208,4 @@ class AuthRepository implements IAutFacade, ISignInFacade {
     }
   }
 
-  @override
-  Future<Either<SignInFailure, GameList>> getGameList() async {
-    try {
-      final token = _preferenceService.token;
-      final res = await _gameService.games(token.toToken);
-
-      if (res.isSuccessful && res.body is GameList) {
-        assert(res.body != null);
-        return right(res.body!);
-      } else {
-        return left(Unknown(message: 'unknown_error'.tr()));
-      }
-    } catch (e) {
-      if (e is NetworkException) {
-        return left(NetworkFailure(message: 'network_error'.tr()));
-      } else {
-        return left(Unknown(message: 'unknown_error'.tr()));
-      }
-    }
-  }
-
-  @override
-  Future<Option<SignInFailure>> favouriteGames(FavouriteGames data) async {
-    try {
-      final token = _preferenceService.token;
-      final res = await _authService.favouriteGames(token.toToken, data);
-
-      if (res.isSuccessful && res.statusCode == 201) {
-        return none();
-      } else {
-        return some(Unknown(message: 'unknown_error'.tr()));
-      }
-    } catch (e) {
-      if (e is NetworkException) {
-        return some(NetworkFailure(message: 'network_error'.tr()));
-      } else {
-        return some(Unknown(message: 'unknown_error'.tr()));
-      }
-    }
-  }
 }

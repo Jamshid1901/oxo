@@ -72,6 +72,7 @@ class _ChangeEmailPageState extends State<ChangeEmailPage> {
               child: Column(
                 children: [
                   CustomTextFieldPassword(
+                    validator: (s) {  },
                     controller: _controller,
                     title: 'email'.tr(),
                     isEmail: true,

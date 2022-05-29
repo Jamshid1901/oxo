@@ -6,6 +6,7 @@ import 'package:oxo/infrastructure/models/auth/auth.dart';
 import 'package:oxo/presentation/component/counter.dart';
 import 'package:oxo/presentation/component/custom_button.dart';
 import 'package:oxo/presentation/component/loading.dart';
+import 'package:oxo/presentation/styles/style.dart';
 import 'package:oxo/presentation/styles/theme.dart';
 import 'package:oxo/presentation/styles/theme_warpper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,10 +17,10 @@ import 'package:oxo/infrastructure/models/auth/auth.dart' as model;
 import '../../routes/routes.dart';
 
 class VerifyCode extends StatefulWidget {
-  final String email;
+  final String number;
   final ResendCodeType resendCodeType;
   const VerifyCode({
-    required this.email,
+    required this.number,
     required this.resendCodeType,
     Key? key,
   }) : super(key: key);
@@ -58,33 +59,27 @@ class _VerifyCodeState extends State<VerifyCode> {
     _controller.dispose();
   }
 
-  _valueVistener(bool isDisabled) {
-    if (isDisabled == true) {
-      setState(() {
-        canSendCodeAgain = true;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return ThemeWrapper(builder: (context, colors, fonts, icons, c) {
       return BlocConsumer<SignInBloc, SignInState>(
           listener: (context, state) {
+            if (state.proceedToChooseInterests) {
+              Navigator.push(
+                context,
+                Routes.signUp(
+                  context,
+                ),
+              );
+            }
             if (state.proceedToChangePassword) {
               Navigator.push(
                 context,
                 Routes.enterNewPassword(
                   context,
-                  widget.email,
+                  widget.number,
                   _controller.text.trim(),
                 ),
-              );
-            }
-            if (state.proceedToChooseInterests) {
-              Navigator.push(
-                context,
-                Routes.chooseInterests(context),
               );
             }
           },
@@ -104,49 +99,50 @@ class _VerifyCodeState extends State<VerifyCode> {
                       appBar: AppBar(
                         backgroundColor: colors.backgroundColorVariant,
                         iconTheme: IconThemeData(color: colors.icon),
-                        title: Image.asset(
-                          c.isDark ? icons.logoDarkImage : icons.logoLightImage,
-                          height: 24.h,
-                          width: 50.w,
-                        ),
+                        title: Text("Mobil raqamni tasdiqlash",
+                          style: fonts.bodyText1.copyWith(fontSize: 20.sp,color: Style.black),),
                         centerTitle: true,
                         elevation: 0.5,
                         shadowColor: colors.stoke,
                       ),
                       body: Padding(
-                        padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 50.h),
+                        padding: EdgeInsets.fromLTRB(16.w, 32.h, 16.w, 50.h),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Image.asset(
-                                  icons.forgotPassword,
-                                  height: 155.h,
-                                  width: 165.h,
-                                ),
-                                SizedBox(height: 24.h),
                                 Text(
-                                  'password_has_been_sent'.tr(),
-                                  style: fonts.headline3,
+                                  'Maxfiy kod sizning ${widget.number} raqamingizga yuborildi iltimos maxfiy kodni kiriting.',
+                                  style: fonts.bodyText1.copyWith(color: Style.black),
                                 ),
                                 SizedBox(height: 16.h),
-                                Text(
-                                  'verification_code_sent'
-                                      .tr(args: [widget.email]),
-                                  textAlign: TextAlign.center,
-                                  style: fonts.bodyText2,
-                                ),
-                                SizedBox(height: 25.h),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 68.0.w),
+                                Container(
+                                  width: 240.w,
+                                  padding: EdgeInsets.all(10.sp),
+                                  color: Style.bgBlurFill,
                                   child: PinPut(
                                     fieldsCount: 6,
                                     textStyle: fonts.headline3,
                                     controller: _controller,
+                                    onSubmit: (ss){
+                                      final body = model.VerifyCode(
+                                            (v) => v
+                                          ..number = widget.number.replaceAll(" ", "")
+                                          ..code = ss,
+                                      );
+
+                                      context
+                                          .read<SignInBloc>()
+                                          .add(SignInEvent.verifyCode(
+                                        code: body,
+                                        type: widget.resendCodeType,
+                                      ));
+                                    },
                                     eachFieldConstraints: BoxConstraints(
-                                        minHeight: 40.0, minWidth: 16.0.w),
+                                        minHeight: 40.0, minWidth: 26.0.w),
                                     submittedFieldDecoration:
                                         _pinPutDecoration(colors),
                                     selectedFieldDecoration:
@@ -155,49 +151,58 @@ class _VerifyCodeState extends State<VerifyCode> {
                                         _pinPutDecoration(colors),
                                   ),
                                 ),
-                                SizedBox(height: 55.h),
+                                SizedBox(height: 16.h),
                                 TextButton(
                                   onPressed: () {
-                                    final email = ForgotPassword(
-                                      (f) => f.email = widget.email.trim(),
+                                    final data = SendCode(
+                                          (l) => l
+                                        ..number = widget.number.replaceAll(" ", "")
+                                        ..type = "signup",
                                     );
                                     context
                                         .read<SignInBloc>()
-                                        .add(SignInEvent.resend(email: email));
+                                        .add(SignInEvent.sendCode(number: data));
                                   },
                                   child: Text(
                                     'send_again'.tr(),
                                     style: fonts.subtitle1.copyWith(
-                                        color: canSendCodeAgain
-                                            ? colors.text
-                                            : colors.disabled),
-                                  ),
-                                ),
-                                Counter(
-                                  isDisabled: _valueVistener,
-                                  style: fonts.subtitle1.copyWith(
-                                    color: colors.subText,
+                                        color: colors.error,fontSize: 14.sp),
                                   ),
                                 ),
                               ],
                             ),
-                            CustomButton(
-                              isDisabled: !canProceed,
-                              onPressed: () {
-                                final body = model.VerifyCode(
-                                  (v) => v
-                                    ..email = widget.email
-                                    ..code = _controller.text.trim(),
-                                );
+                            Column(
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                  Navigator.pop(context);
+                                  },
+                                  child: Text(
+                                    'change_number'.tr(),
+                                    style: fonts.subtitle1.copyWith(
+                                        color: colors.disabledTxt),
+                                  ),
+                                ),
+                                SizedBox(height: 32.h,),
+                                CustomButton(
+                                  isDisabled: !canProceed,
+                                  onPressed: () {
+                                    final body = model.VerifyCode(
+                                          (v) => v
+                                        ..number = widget.number.replaceAll(" ", "")
+                                        ..code = _controller.text.trim(),
+                                    );
 
-                                context
-                                    .read<SignInBloc>()
-                                    .add(SignInEvent.verifyCode(
+                                    context
+                                        .read<SignInBloc>()
+                                        .add(SignInEvent.verifyCode(
                                       code: body,
                                       type: widget.resendCodeType,
                                     ));
-                              },
-                              title: 'verify'.tr(),
+                                  },
+                                  title: 'verify'.tr(),
+                                ),
+                              ],
                             ),
                           ],
                         ),

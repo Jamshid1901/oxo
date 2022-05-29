@@ -10,6 +10,7 @@ class CustomTextFieldPassword extends StatefulWidget {
   final bool isPassword;
   final String? error;
   final TextEditingController? controller;
+  final Function(String?) validator;
 
   const CustomTextFieldPassword(
       {Key? key,
@@ -18,7 +19,7 @@ class CustomTextFieldPassword extends StatefulWidget {
       this.title = '',
       this.isPassword = false,
       this.isEmail = false,
-      this.error})
+      this.error,required this.validator})
       : super(key: key);
 
   @override
@@ -50,8 +51,9 @@ class _CustomTextFieldPasswordState extends State<CustomTextFieldPassword> {
               : Container(),
           widget.title.isNotEmpty ? SizedBox(height: 6.h) : Container(),
           SizedBox(
-            height: widget.error != null ? null : 50.h,
+
             child: TextFormField(
+              validator: (str) => widget.validator(str),
               controller: widget.controller,
               style: fonts.bodyText2.copyWith(color: colors.text),
               obscureText: widget.isPassword && isUnVisiable,
@@ -70,15 +72,15 @@ class _CustomTextFieldPasswordState extends State<CustomTextFieldPassword> {
                     : null,
                 focusColor: Style.primary,
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(6.r),
                   borderSide: BorderSide(color: colors.stoke, width: 1),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(6.r),
                   borderSide: BorderSide(color: colors.stoke, width: 1),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(6.r),
                   borderSide: BorderSide(color: colors.primary, width: 1),
                 ),
                 hintText: widget.hintText,

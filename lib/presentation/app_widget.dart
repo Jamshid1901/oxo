@@ -55,7 +55,6 @@ class AppWidget extends StatelessWidget {
                             AuthRepository(
                               pref,
                               AuthService.create(),
-                              GameService.create(),
                             ),
                       ),
                     ],
