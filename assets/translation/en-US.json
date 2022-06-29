@@ -57,7 +57,7 @@
     "remaining_questions":"You have {} remaining questions. ",
     "write_your_question":"Enter your question",
     "no_notifications":"There is no\nnotifications yet.",
-    "continue": "Continue",
+    "continue": "Davom etish",
     "send_again": "Kodni qayta yuborish",
     "full_name": "Full name",
     "security" : "Security",
@@ -67,7 +67,7 @@
     "skip": "Skip",
     "submit": "Submit",
     "welcome": "Xush kelibsiz",
-    "enter_valid_password":"Parolda kamida 1 ta katta harf, belgi va son bo`lishi kerak",
+    "enter_valid_password":"Parolda kamida 1 ta katta harf, belgi,son va 8 tadan ko`p bo`lishi kerak",
     "enter_valid_phone":"Telefon raqam kiriting",
     "change_number":"Telefon raqamni o’zgartirish",
     "invalid_code": "Kod xato, qayta tekshirib ko'ring :)",
@@ -75,5 +75,8 @@
     "your_username_is_exists": "Ismingizni kiriting",
     "new_password": "Yangi parol",
     "confirm_password": "Parolni tasdiqlash",
-    "not_match": "Parol to'g'ri emas"
+    "not_match": "Parol to'g'ri emas",
+    "connection_is_afk": "Internet yo`q",
+    "no_connection_body": "Iltimos internetni tekshirib qayta xarakat qilib ko`ring",
+    "retry" : "Qayta urinib ko'ring"
 }

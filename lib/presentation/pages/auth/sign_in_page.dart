@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -27,7 +28,7 @@ class SignIn extends StatefulWidget {
   State<SignIn> createState() => _SignInState();
 }
 
-class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
+class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
   late TextEditingController phoneController;
   late TextEditingController phoneControllerOne;
   late TextEditingController passwordController;
@@ -59,22 +60,32 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
         return GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: BlocConsumer<SignInBloc, SignInState>(
-            listenWhen: (prev, next) => (prev.proceedToVerifyCode != next.proceedToVerifyCode &&
-                next.proceedToVerifyCode) ||
+            listenWhen: (prev, next) =>
+                (prev.proceedToVerifyCode != next.proceedToVerifyCode &&
+                    next.proceedToVerifyCode) ||
                 (prev.navigateToHome != next.navigateToHome &&
                     next.navigateToHome) ||
-                (prev.exception != next.exception && next.exception.isNotEmpty),
+                (prev.exception != next.exception && next.exception.isNotEmpty) ||
+                    (prev.proceedToChooseInterests != next.proceedToChooseInterests &&
+                        next.proceedToChooseInterests),
             listener: (context, state) {
-              if (state.navigateToHome) {
+              if (state.proceedToChooseInterests) {
                 Navigator.push(
                   context,
-                  Routes.getMainRoute(context),
+                  Routes.getMainRoute(
+                    context,
+                  ),
                 );
               }
+
               if (state.proceedToVerifyCode) {
                 Navigator.push(
                   context,
-                  Routes.verifyCode(context,phoneController.text,ResendCodeType.registering,),
+                  Routes.verifyCode(
+                    context,
+                    phoneController.text,
+                    ResendCodeType.registering,
+                  ),
                 );
               }
 
@@ -93,18 +104,22 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
                   : Scaffold(
                       backgroundColor: colors.backgroundColor,
                       body: Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: 16.w),
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
                         child: SingleChildScrollView(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(height: 90.h),
-                              SvgPicture.asset("assets/svgs/oxo.svg",height: 48,),
+                              SvgPicture.asset(
+                                "assets/svgs/oxo.svg",
+                                height: 48,
+                              ),
                               SizedBox(height: 10.h),
                               Text(
                                 'welcome'.tr(),
                                 textAlign: TextAlign.center,
-                                style: fonts.headline4.copyWith(fontSize: 24,color: Style.black),
+                                style: fonts.headline4
+                                    .copyWith(fontSize: 24, color: Style.black),
                               ),
                               SizedBox(height: 10.h),
                               Text(
@@ -113,135 +128,177 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
                               ),
                               SizedBox(height: 30.h),
                               SizedBox(
-                              width: double.infinity,
-                              child: TabBar(
-                                  controller: tabController,
-                                  isScrollable: false,
-                                  indicatorColor: Style.black,
-                                  // indicator: BoxDecoration(
-                                  //   borderRadius: BorderRadius.all(Radius.circular(4.r))
-                                  // ),
-                                  labelColor:  Style.black,
-                                  unselectedLabelColor: Style.subText,
-                                  unselectedLabelStyle: fonts.headline4.copyWith(fontSize: 16.sp,color: Style.black),
-                                  labelStyle:  fonts.headline4.copyWith(fontSize: 16.sp,color: Style.black),
-                                  tabs: [
-                                    Tab(text: "login".tr()),
-                                    Tab(text: "signUp".tr()),
-                                  ]),
-                            ),
+                                width: double.infinity,
+                                child: TabBar(
+                                    controller: tabController,
+                                    isScrollable: false,
+                                    indicatorColor: Style.black,
+                                    // indicator: BoxDecoration(
+                                    //   borderRadius: BorderRadius.all(Radius.circular(4.r))
+                                    // ),
+                                    labelColor: Style.black,
+                                    unselectedLabelColor: Style.subText,
+                                    unselectedLabelStyle: fonts.headline4
+                                        .copyWith(
+                                            fontSize: 16.sp,
+                                            color: Style.black),
+                                    labelStyle: fonts.headline4.copyWith(
+                                        fontSize: 16.sp, color: Style.black),
+                                    tabs: [
+                                      Tab(text: "login".tr()),
+                                      Tab(text: "signUp".tr()),
+                                    ]),
+                              ),
                               SizedBox(height: 24.h),
                               SizedBox(
-                                height: MediaQuery.of(context).size.height - 340.h,
+                                height:
+                                    MediaQuery.of(context).size.height - 340.h,
                                 child: TabBarView(
-                                  controller: tabController,
+                                    controller: tabController,
                                     children: [
-                                  Form(
-                                    key: _formKeyOne,
-                                    child: Column(
-                                      children: [
-                                        CustomTextField(
-                                          validator: (s){},
-                                          controller: phoneControllerOne,
-                                          title: 'phone'.tr(),
-                                          hintText: '',
-                                          isEmail: true,
-                                          error: state.isEmailValid
-                                              ? null
-                                              : 'enter_valid_phone'.tr(),
-                                        ),
-                                        SizedBox(height: 24.h),
-                                        CustomTextFieldPassword(
-                                          validator: (s) {  },
-                                          controller: passwordController,
-                                          title: 'password'.tr(),
-                                          hintText: '',
-                                          isPassword: true,
-                                          error: state.isPasswordValid
-                                              ? null
-                                              : 'enter_valid_password'.tr(),
-                                        ),
-                                        SizedBox(height: 54.h),
-                                        CustomButton(
-                                          onPressed: () {
-                                            if (_formKeyOne.currentState!.validate()) {
-                                              final email = phoneControllerOne.text.trim();
-                                              final password =
-                                              passwordController.text.trim();
-
-                                              final login = Login(
+                                      Form(
+                                        key: _formKeyOne,
+                                        child: Column(
+                                          children: [
+                                            CustomTextField(
+                                              validator: (ss) {
+                                                if (ss!.isEmpty ||
+                                                    RegExp(r'[0-9],+')
+                                                        .hasMatch(ss) ||
+                                                    ss.length < 17) {
+                                                  return 'enter_valid_phone'
+                                                      .tr();
+                                                }
+                                                return null;
+                                              },
+                                              formatter: [
+                                                MaskTextInputFormatter(
+                                                    mask: "+998 ## ### ## ##")
+                                              ],
+                                              controller: phoneControllerOne,
+                                              title: 'phone'.tr(),
+                                              hintText: '',
+                                              isEmail: true,
+                                              error: state.isEmailValid
+                                                  ? null
+                                                  : 'enter_valid_phone'.tr(),
+                                            ),
+                                            SizedBox(height: 24.h),
+                                            CustomTextFieldPassword(
+                                              validator: (s) {
+                                                if (s!.isEmpty ||
+                                                    RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                                        .hasMatch(s) ||
+                                                    s.length < 8) {
+                                                  return 'enter_valid_password'
+                                                      .tr();
+                                                }
+                                                return null;
+                                              },
+                                              controller: passwordController,
+                                              title: 'password'.tr(),
+                                              hintText: '',
+                                              isPassword: true,
+                                              error: state.isPasswordValid
+                                                  ? null
+                                                  : 'enter_valid_password'.tr(),
+                                            ),
+                                            SizedBox(height: 54.h),
+                                            CustomButton(
+                                              onPressed: () {
+                                                if (_formKeyOne.currentState!
+                                                    .validate()) {
+                                                  final login = Login(
                                                     (l) => l
-                                                  ..email = email
-                                                  ..password = password,
-                                              );
-                                              context
-                                                  .read<SignInBloc>()
-                                                  .add(SignInEvent.login(login: login));
-                                            }
-                                          },
-                                          title: 'login'.tr(),
+                                                      ..phone =
+                                                          phoneControllerOne
+                                                              .text
+                                                              .replaceAll(
+                                                                  ' ', "")
+                                                      ..fcm = ''
+                                                      ..password =
+                                                          passwordController
+                                                              .text,
+                                                  );
+                                                  context
+                                                      .read<SignInBloc>()
+                                                      .add(SignInEvent.login(
+                                                          login: login));
+                                                }
+                                              },
+                                              title: 'login'.tr(),
+                                            ),
+                                            SizedBox(height: 30.h),
+                                          ],
                                         ),
-                                        SizedBox(height: 30.h),
-                                      ],
-                                    ),
-                                  ),
-                                  Form(
-                                    key: _formKeySecond,
-                                    child: Column(
-                                      children: [
-                                        CustomTextField(
-                                          formatter: [MaskTextInputFormatter(mask: "+998 ## ### ## ##")],
-                                          controller: phoneController,
-                                          title: 'phone'.tr(),
-                                          hintText: '',
-                                          isEmail: true,
-                                          validator: (ss) {
-                                            if (ss!.isEmpty || RegExp(r'[0-9],+').hasMatch(ss) || ss.length < 17 ) {
-                                              return 'enter_valid_phone'.tr();
-                                            }
-                                            return null;
-                                          },
-                                          error: state.isEmailValid
-                                              ? null
-                                              : 'enter_valid_phone'.tr(),
-                                        ),
-                                        SizedBox(height: 16.h),
-                                        SizedBox(height: 30.h),
-                                        CustomButton(
-                                          onPressed: () {
-                                            if (_formKeySecond.currentState!.validate()) {
-                                              final number = phoneController.text.trim();
+                                      ),
+                                      Form(
+                                        key: _formKeySecond,
+                                        child: Column(
+                                          children: [
+                                            CustomTextField(
+                                              formatter: [
+                                                MaskTextInputFormatter(
+                                                    mask: "+998 ## ### ## ##")
+                                              ],
+                                              controller: phoneController,
+                                              title: 'phone'.tr(),
+                                              hintText: '',
+                                              isEmail: true,
+                                              validator: (ss) {
+                                                if (ss!.isEmpty ||
+                                                    RegExp(r'[0-9],+')
+                                                        .hasMatch(ss) ||
+                                                    ss.length < 17) {
+                                                  return 'enter_valid_phone'
+                                                      .tr();
+                                                }
+                                                return null;
+                                              },
+                                              error: state.isEmailValid
+                                                  ? null
+                                                  : 'enter_valid_phone'.tr(),
+                                            ),
+                                            SizedBox(height: 16.h),
+                                            SizedBox(height: 30.h),
+                                            CustomButton(
+                                              onPressed: () {
+                                                if (_formKeySecond.currentState!
+                                                    .validate()) {
+                                                  final number = phoneController
+                                                      .text
+                                                      .trim();
 
-                                              final data = SendCode(
+                                                  final data = SendCode(
                                                     (l) => l
-                                                  ..number = number.replaceAll(" ", "")
-                                                  ..type = "signup",
-                                              );
-                                              context
-                                                  .read<SignInBloc>()
-                                                  .add(SignInEvent.sendCode(number: data));
-                                            }
-                                          },
-                                          title: 'signUp'.tr(),
+                                                      ..number = number
+                                                          .replaceAll(" ", "")
+                                                      ..type = "signup",
+                                                  );
+                                                  context
+                                                      .read<SignInBloc>()
+                                                      .add(SignInEvent.sendCode(
+                                                          number: data));
+                                                }
+                                              },
+                                              title: 'signUp'.tr(),
+                                            ),
+                                            SizedBox(height: 30.h),
+                                          ],
                                         ),
-                                        SizedBox(height: 30.h),
-                                      ],
-                                    ),
-                                  ),
-                                ]),
+                                      ),
+                                    ]),
                               ),
                             ],
                           ),
                         ),
-                      )
-                    );
+                      ));
             },
           ),
         );
       },
     );
   }
-
 
   _liner() {
     return Row(

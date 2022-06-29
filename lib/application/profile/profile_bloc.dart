@@ -15,6 +15,7 @@ import 'package:oxo/infrastructure/models/profile/user_search_history.dart';
 import 'package:oxo/infrastructure/repositories/image_upload_repo.dart';
 import 'package:oxo/infrastructure/repositories/profile_repo.dart';
 import 'package:oxo/infrastructure/shared_variables.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'profile_event.dart';
 
@@ -42,8 +43,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       getUserSearchHistory: _getUserSearchHistoryList,
       unFollow: _unFollow,
       deleteProfilePhoto: _deleteProfilePhoto,
-      uploadProfilePhoto:_uploadProfilePhoto,
+      uploadProfilePhoto:_uploadProfilePhoto, logout: _logout,
     );
+  }
+
+
+  Stream<ProfileState> _logout(_Logout data) async* {
+    final a = await SharedPreferences.getInstance();
+    a.clear();
+     _repository.logout(data.logoutModel);
   }
 
   Stream<ProfileState> _getProfile(_GetProfile value) async* {
@@ -347,46 +355,46 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         if(croppedFile != null){
           final res = await _imageUploadRepo.imageUpload(croppedFile.path);
 
-          yield* res.fold(
-                  (error) async*{
-                yield state.copyWith(
-                  exception: error.message,
-                  isLoading: false,
-                );
-              },
-                  (result) async*{
-                ProfileM _profileM = ProfileM(userName: state.userName!, bio: state.bio, link: state.link,
-                    avatarM: value.imageUploadTypes == ImageUploadTypes.avatarPhoto ? result.id : state.avatarId,
-                    backgroundM: value.imageUploadTypes == ImageUploadTypes.backgroundPhoto ? result.id : state.backgroundId);
-
-                final res = await _repository.uploadProfilePhoto(_profileM);
-
-                yield* res.fold(
-                        (error) async*{
-                      yield state.copyWith(
-                        exception: error.message,
-                        isLoading: false,
-
-                      );
-                    },
-                        (result) async*{
-
-                      yield state.copyWith(
-                        exception: 'success',
-                        isLoading: false,
-
-                      );
-                    }
-                );
-
-                ConstVariables.avatarId = result.id!;
-                yield state.copyWith(
-                  exception: '',
-                  isLoading: false,
-
-                );
-              }
-          );
+          // yield* res.fold(
+          //         (error) async*{
+          //       yield state.copyWith(
+          //         exception: error.message,
+          //         isLoading: false,
+          //       );
+          //     },
+          //         (result) async*{
+          //       ProfileM _profileM = ProfileM(userName: state.userName!, bio: state.bio, link: state.link,
+          //           avatarM: value.imageUploadTypes == ImageUploadTypes.avatarPhoto ? result.id : state.avatarId,
+          //           backgroundM: value.imageUploadTypes == ImageUploadTypes.backgroundPhoto ? result.id : state.backgroundId);
+          //
+          //       final res = await _repository.uploadProfilePhoto(_profileM);
+          //
+          //       yield* res.fold(
+          //               (error) async*{
+          //             yield state.copyWith(
+          //               exception: error.message,
+          //               isLoading: false,
+          //
+          //             );
+          //           },
+          //               (result) async*{
+          //
+          //             yield state.copyWith(
+          //               exception: 'success',
+          //               isLoading: false,
+          //
+          //             );
+          //           }
+          //       );
+          //
+          //       ConstVariables.avatarId = result.id!;
+          //       yield state.copyWith(
+          //         exception: '',
+          //         isLoading: false,
+          //
+          //       );
+          //     }
+          // );
         }else{
           yield state.copyWith(
             isLoading: false,

@@ -56,10 +56,11 @@ dependencies:
   social_share: ^2.2.1
   lat_lng_to_timezone: ^0.2.0
   uuid: ^3.0.5
+  persistent_bottom_nav_bar: ^4.0.2
     #  enum_to_string: ^2.0.1
 
     #ui
-  flutter_screenutil: ^5.0.0+2
+  flutter_screenutil: ^5.5.3+2
   easy_localization: ^3.0.0
   flutter_svg: ^0.23.0+1
   pinput: ^1.2.2

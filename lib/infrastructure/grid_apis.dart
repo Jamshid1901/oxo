@@ -22,20 +22,20 @@ part 'grid_apis.chopper.dart';
 
 @ChopperApi(baseUrl: '/api/v1/')
 abstract class AuthService extends ChopperService {
-  @Post(path: 'user/login/')
-  Future<Response<Login>> login(
+  @Post(path: 'register/login/')
+  Future<Response> login(
     @Body() Login body,
   );
 
-  @Post(path: 'user/signup/')
-  Future<Response<SignUp>> signUp(
+  @Post(path: 'register/sign-up/')
+  Future<Response> signUp(
     @Body() SignUp body,
   );
 
   @Post(path: 'register/send-code/')
   Future<Response<SignUp>> sendCode(
-      @Body() SendCode body,
-      );
+    @Body() SendCode body,
+  );
 
   @Post(path: 'notification/firebase/add_token/')
   Future<Response<void>> firebaseToken(
@@ -72,14 +72,8 @@ abstract class AuthService extends ChopperService {
       _$AuthService(_Client('https://api.oxo.uz', true));
 }
 
-
-
-
-
-
 @ChopperApi(baseUrl: '/api/v1')
 abstract class EditProfileService extends ChopperService {
-
   /*@Put(path: 'user/edit_profile/display/')
   Future<Response<Detail>> editProfile(
 
@@ -90,13 +84,9 @@ abstract class EditProfileService extends ChopperService {
 */
   @Post(path: 'user/check_username/')
   Future<Response<Detail>> checkUserName(
-
-      @Header('Authorization') String header,
-      @Body() UserNameM body,
-
-      );
-
-
+    @Header('Authorization') String header,
+    @Body() UserNameM body,
+  );
 
   static EditProfileService create() =>
       _$EditProfileService(_Client('https://api.oxo.uz', true));
@@ -114,7 +104,13 @@ abstract class FollowersService extends ChopperService {
     @Body() UserSearchHistoryPostModel userSearchHistoryPostModel,
   );
 
-  @Get(path: 'search_history/?page_size=5')
+  @Get(path: 'logout/')
+  Future<Response<UserSearchHistoryModel>> logout(
+    @Header('Authorization') String header,
+    @Body() LogoutModel logoutModel,
+  );
+
+  @Put(path: 'search_history/?page_size=5')
   Future<Response<UserSearchHistoryModel>> userSearchHistory(
     @Header('Authorization') String header,
   );
@@ -154,10 +150,11 @@ abstract class FollowersService extends ChopperService {
 
 @ChopperApi(baseUrl: '/api/v1')
 abstract class ImageUploadService extends ChopperService {
-  @Post(path: 'file/')
+  @Post(path: 'media/upload-media/')
   @multipart
   Future<Response<ImageUploadModel>> imageUpload(
-    @Header('Authorization') String header,
+    @Header('Type') String type,
+    @Header('object-type') String typeEdit,
     @PartFile('file') String file,
   );
 
@@ -222,7 +219,6 @@ abstract class ProfileService extends ChopperService {
       _$ProfileService(_Client('https://api.oxo.uz', true));
 }
 
-
 // @ChopperApi(baseUrl: 'v1/')
 // abstract class FireBaseService extends ChopperService {
 //   @Post(path: 'shortLinks?key=AIzaSyCiEcfJWLrZtIWaF-7jNc4dvIdAo665ZaE')
@@ -235,26 +231,24 @@ abstract class ProfileService extends ChopperService {
 //       _$FireBaseService(_Client('https://firebasedynamiclinks.googleapis.com', true));
 // }
 
-
-
 @ChopperApi(baseUrl: '/api/v1/')
 abstract class NotificationService extends ChopperService {
   @Get(path: 'user/notification_settings/')
   Future<Response<NotificationSetting>> getSettingNotification(
-      @Header('Authorization') String header,
-      );
+    @Header('Authorization') String header,
+  );
 
   @Put(path: 'user/notification_settings/')
   Future<Response<NotificationSetting>> putSettingNotification(
-      @Header('Authorization') String header,
-      @Body() NotificationSetting notificationSetting,
-      );
+    @Header('Authorization') String header,
+    @Body() NotificationSetting notificationSetting,
+  );
 
   @Get(path: 'notification/my?page={page}')
   Future<Response<NotificationModel>> getNotifications(
-      @Header('Authorization') String header,
-      @Path('page') int page,
-      );
+    @Header('Authorization') String header,
+    @Path('page') int page,
+  );
 
   static NotificationService create() =>
       _$NotificationService(_Client('https://api.oxo.uz', true));
@@ -263,16 +257,15 @@ abstract class NotificationService extends ChopperService {
 class _Client extends ChopperClient {
   _Client(String baseUrl, bool useInterceptors)
       : super(
-          baseUrl: baseUrl,
-          interceptors: useInterceptors
-              ? [
-                  HttpLoggingInterceptor(),
-                  CurlInterceptor(),
-                  NetworkInterceptor(),
-                  BeckendInterceptor(),
-                ]
-              : const [],
-          converter: BuiltValueConverter(),
-    errorConverter: ErrorMyConverter()
-        );
+            baseUrl: baseUrl,
+            interceptors: useInterceptors
+                ? [
+                    HttpLoggingInterceptor(),
+                    CurlInterceptor(),
+                    NetworkInterceptor(),
+                    BeckendInterceptor(),
+                  ]
+                : const [],
+            converter: BuiltValueConverter(),
+            errorConverter: ErrorMyConverter());
 }

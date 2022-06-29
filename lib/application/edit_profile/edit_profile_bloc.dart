@@ -70,25 +70,25 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           if(croppedFile != null){
             final res = await _imageUploadRepo.imageUpload(croppedFile.path);
 
-            yield* res.fold(
-                    (error) async*{
-                      ConstVariables.avatarId = -1;
-                  yield state.copyWith(
-                    isLoadingAvatar: false,
-                    exception: error.message,
-                    imageAvatarId: null,
-                  );
-                },
-                    (result) async*{
-                      ConstVariables.avatarId = result.id!;
-                  yield state.copyWith(
-                    isLoadingAvatar: false,
-                    exception: '',
-                    imageAvatarUploadModel: result,
-                    imageAvatarId: result.id,
-                  );
-                }
-            );
+            // yield* res.fold(
+            //         (error) async*{
+            //           ConstVariables.avatarId = -1;
+            //       yield state.copyWith(
+            //         isLoadingAvatar: false,
+            //         exception: error.message,
+            //         imageAvatarId: null,
+            //       );
+            //     },
+            //         (result) async*{
+            //           ConstVariables.avatarId = result.id!;
+            //       yield state.copyWith(
+            //         isLoadingAvatar: false,
+            //         exception: '',
+            //         imageAvatarUploadModel: result,
+            //         imageAvatarId: result.id,
+            //       );
+            //     }
+            // );
           }else{
             yield state.copyWith(
               isLoadingAvatar: false,
@@ -145,25 +145,25 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           if(croppedFile != null){
             final res = await _imageUploadRepo.imageUpload(croppedFile.path);
 
-            yield* res.fold(
-                    (error) async*{
-                      ConstVariables.backgroundId = -1;
-                  yield state.copyWith(
-                    isLoadingBackground: false,
-                    exception: error.message,
-                    imageBackgroundId: null,
-                  );
-                },
-                    (result) async*{
-                      ConstVariables.backgroundId = result.id!;
-                  yield state.copyWith(
-                    exception: '',
-                    imageBackgroundUploadModel: result,
-                    isLoadingBackground: false,
-                    imageBackgroundId: result.id!,
-                  );
-                }
-            );
+            // yield* res.fold(
+            //         (error) async*{
+            //           ConstVariables.backgroundId = -1;
+            //       yield state.copyWith(
+            //         isLoadingBackground: false,
+            //         exception: error.message,
+            //         imageBackgroundId: null,
+            //       );
+            //     },
+            //         (result) async*{
+            //           ConstVariables.backgroundId = result.id!;
+            //       yield state.copyWith(
+            //         exception: '',
+            //         imageBackgroundUploadModel: result,
+            //         isLoadingBackground: false,
+            //         imageBackgroundId: result.id!,
+            //       );
+            //     }
+            // );
           }else{
             yield state.copyWith(
               isLoadingBackground: false,

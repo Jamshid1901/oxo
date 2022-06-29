@@ -11,6 +11,7 @@ import 'package:oxo/domain/common/resend_code.dart';
 import 'package:oxo/domain/sign_in/social_sign_in_types.dart';
 import 'package:oxo/infrastructure/models/auth/auth.dart';
 import 'package:oxo/infrastructure/repositories/auth_repo.dart';
+import 'package:oxo/infrastructure/repositories/image_upload_repo.dart';
 
 part 'sign_in_state.dart';
 part 'sign_in_event.dart';
@@ -18,7 +19,8 @@ part 'sign_in_bloc.freezed.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final AuthRepository _repository;
-  SignInBloc(this._repository) : super(const _SignInState());
+  final ImageUploadRepo _imageUploadRepo;
+  SignInBloc(this._repository, this._imageUploadRepo) : super(const _SignInState());
 
   @override
   Stream<SignInState> mapEventToState(SignInEvent event) async* {
@@ -31,61 +33,73 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       newPassword: _newPassword,
       addToGame: _addToGame,
       sendCode: _sendCoed,
+      uploadProfile: _upload,
+    );
+  }
+
+  Stream<SignInState> _upload(_UploadProfile value) async* {
+    yield state.copyWith(
+      exception: '',
+      isLoading: true,
+    );
+    final res = await _imageUploadRepo.imageUpload(value.path);
+
+    yield* res.fold(
+          (e) async* {
+        yield state.copyWith(
+          exception: e.message,
+          isLoading: false,
+        );
+      },
+          (r) async* {
+        yield state.copyWith(
+          isLoading: false,
+          mediaId: r.mediaId
+        );
+      },
     );
   }
 
   Stream<SignInState> _signUp(_SignUp value) async* {
     yield state.copyWith(
       exception: '',
-      proceedToVerifyCode: false,
+        isLoading: true,
+      navigateToHome: false,
     );
+    final res = await _repository.signUp(value.login);
 
-    yield* _verifySignIn(
-      value,
-      (signUp) async* {
-        yield state.copyWith(isLoading: true);
-        final res = await _repository.signUp(signUp.login);
-
-        yield* res.fold(
+    yield* res.fold(
           () async* {
-            yield state.copyWith(
-              isLoading: false,
-              proceedToVerifyCode: true,
-            );
-          },
+        yield state.copyWith(
+          navigateToHome: true,
+          isLoading: false,
+        );
+      },
           (error) async* {
-            yield state.copyWith(
-              isLoading: false,
-              isEmailExists: error.message.contains('email'),
-              isUsernameExists: error.message.contains('username'),
-            );
-          },
+        yield state.copyWith(
+          isLoading: false,
+          isEmailExists: error.message.contains('email'),
+          isUsernameExists: error.message.contains('username'),
         );
       },
     );
   }
 
   Stream<SignInState> _login(_Login value) async* {
-    yield state.copyWith(exception: '');
-    yield* _verifySignIn(
-      value,
-      (login) async* {
-        yield state.copyWith(isLoading: true);
-        final res = await _repository.login(login.login);
+    yield state.copyWith(exception: '',isLoading: true,proceedToChooseInterests: false,);
+    final res = await _repository.login(value.login);
 
-        yield* res.fold(
+    yield* res.fold(
           () async* {
-            yield state.copyWith(
-              isLoading: false,
-              navigateToHome: true,
-            );
-          },
+        yield state.copyWith(
+          isLoading: false,
+          proceedToChooseInterests: true,
+        );
+      },
           (f) async* {
-            yield state.copyWith(
-              isLoading: false,
-              exception: f.message,
-            );
-          },
+        yield state.copyWith(
+          isLoading: false,
+          exception: f.message,
         );
       },
     );
@@ -181,7 +195,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       proceedToGetPassword: false,
     );
 
-    yield* _verifyEmail(value.email.email);
     if (!state.isEmailValid) {
       return;
     }
@@ -208,8 +221,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       exception: '',
       isLoading: true,
     );
-
-    yield* _verifyEmail(value.email.email);
     if (!state.isEmailValid) {
       return;
     }
@@ -273,47 +284,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     );
   }
 
-  Stream<SignInState> _verifySignIn(
-    dynamic login,
-    Stream<SignInState> Function(dynamic) hundle,
-  ) async* {
-    if (login.login.number == null || login.login.number!.isEmpty) {
-      yield state.copyWith(isEmailValid: false);
-      return;
-    }
-    if (login.login.password == null || login.login.password!.isEmpty) {
-      yield state.copyWith(isPasswordValid: false);
-      return;
-    }
 
-    yield* _verifyEmail(login.login.number);
-    yield* _verifyPassword(login.login.password);
 
-    if (state.isEmailValid && state.isPasswordValid) {
-      yield* hundle(login);
-    }
-  }
 
-  Stream<SignInState> _verifyEmail(String? email) async* {
-    final v = RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-
-    if (!v.hasMatch(email!)) {
-      yield state.copyWith(isEmailValid: false);
-      return;
-    } else {
-      yield state.copyWith(isEmailValid: true);
-    }
-    return;
-  }
-
-  Stream<SignInState> _verifyPassword(String? password) async* {
-    if (password!.length < 8) {
-      yield state.copyWith(isPasswordValid: false);
-    } else {
-      yield state.copyWith(isPasswordValid: true);
-    }
-    return;
-  }
 }
 

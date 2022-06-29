@@ -17,6 +17,7 @@ Serializer<ForgotPassword> _$forgotPasswordSerializer =
 Serializer<VerifyCode> _$verifyCodeSerializer = new _$VerifyCodeSerializer();
 Serializer<NewPassword> _$newPasswordSerializer = new _$NewPasswordSerializer();
 Serializer<SignUp> _$signUpSerializer = new _$SignUpSerializer();
+Serializer<Location> _$locationSerializer = new _$LocationSerializer();
 Serializer<ResendCode> _$resendCodeSerializer = new _$ResendCodeSerializer();
 
 class _$SendCodeSerializer implements StructuredSerializer<SendCode> {
@@ -84,10 +85,10 @@ class _$LoginSerializer implements StructuredSerializer<Login> {
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[];
     Object? value;
-    value = object.email;
+    value = object.phone;
     if (value != null) {
       result
-        ..add('email')
+        ..add('phone_number')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -98,17 +99,10 @@ class _$LoginSerializer implements StructuredSerializer<Login> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.accessToken;
+    value = object.fcm;
     if (value != null) {
       result
-        ..add('access_token')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.refreshToken;
-    if (value != null) {
-      result
-        ..add('refresh_token')
+        ..add('fcm_token')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -126,20 +120,16 @@ class _$LoginSerializer implements StructuredSerializer<Login> {
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'email':
-          result.email = serializers.deserialize(value,
+        case 'phone_number':
+          result.phone = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
         case 'password':
           result.password = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'access_token':
-          result.accessToken = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'refresh_token':
-          result.refreshToken = serializers.deserialize(value,
+        case 'fcm_token':
+          result.fcm = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
       }
@@ -489,26 +479,54 @@ class _$SignUpSerializer implements StructuredSerializer<SignUp> {
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[];
     Object? value;
-    value = object.username;
+    value = object.profileImage;
     if (value != null) {
       result
-        ..add('username')
+        ..add('profile_photo')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.email;
+    value = object.name;
     if (value != null) {
       result
-        ..add('email')
+        ..add('full_name')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.birthday;
+    value = object.phone;
     if (value != null) {
       result
-        ..add('birthday')
+        ..add('phone_number')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
+    }
+    value = object.locationName;
+    if (value != null) {
+      result
+        ..add('location_name')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.fcmToken;
+    if (value != null) {
+      result
+        ..add('fcm_token')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.type;
+    if (value != null) {
+      result
+        ..add('user_type')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.location;
+    if (value != null) {
+      result
+        ..add('location')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(Location)));
     }
     value = object.password;
     if (value != null) {
@@ -531,21 +549,91 @@ class _$SignUpSerializer implements StructuredSerializer<SignUp> {
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'username':
-          result.username = serializers.deserialize(value,
+        case 'profile_photo':
+          result.profileImage = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'email':
-          result.email = serializers.deserialize(value,
+        case 'full_name':
+          result.name = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'birthday':
-          result.birthday = serializers.deserialize(value,
+        case 'phone_number':
+          result.phone = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
+          break;
+        case 'location_name':
+          result.locationName = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'fcm_token':
+          result.fcmToken = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'user_type':
+          result.type = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'location':
+          result.location.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Location))! as Location);
           break;
         case 'password':
           result.password = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$LocationSerializer implements StructuredSerializer<Location> {
+  @override
+  final Iterable<Type> types = const [Location, _$Location];
+  @override
+  final String wireName = 'Location';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, Location object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[];
+    Object? value;
+    value = object.lat;
+    if (value != null) {
+      result
+        ..add('lat')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
+    value = object.long;
+    if (value != null) {
+      result
+        ..add('long')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
+    return result;
+  }
+
+  @override
+  Location deserialize(Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new LocationBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'lat':
+          result.lat = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
+        case 'long':
+          result.long = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
           break;
       }
     }
@@ -690,19 +778,16 @@ class SendCodeBuilder implements Builder<SendCode, SendCodeBuilder> {
 
 class _$Login extends Login {
   @override
-  final String? email;
+  final String? phone;
   @override
   final String? password;
   @override
-  final String? accessToken;
-  @override
-  final String? refreshToken;
+  final String? fcm;
 
   factory _$Login([void Function(LoginBuilder)? updates]) =>
       (new LoginBuilder()..update(updates)).build();
 
-  _$Login._({this.email, this.password, this.accessToken, this.refreshToken})
-      : super._();
+  _$Login._({this.phone, this.password, this.fcm}) : super._();
 
   @override
   Login rebuild(void Function(LoginBuilder) updates) =>
@@ -715,27 +800,23 @@ class _$Login extends Login {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is Login &&
-        email == other.email &&
+        phone == other.phone &&
         password == other.password &&
-        accessToken == other.accessToken &&
-        refreshToken == other.refreshToken;
+        fcm == other.fcm;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc($jc($jc(0, email.hashCode), password.hashCode),
-            accessToken.hashCode),
-        refreshToken.hashCode));
+    return $jf(
+        $jc($jc($jc(0, phone.hashCode), password.hashCode), fcm.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('Login')
-          ..add('email', email)
+          ..add('phone', phone)
           ..add('password', password)
-          ..add('accessToken', accessToken)
-          ..add('refreshToken', refreshToken))
+          ..add('fcm', fcm))
         .toString();
   }
 }
@@ -743,31 +824,26 @@ class _$Login extends Login {
 class LoginBuilder implements Builder<Login, LoginBuilder> {
   _$Login? _$v;
 
-  String? _email;
-  String? get email => _$this._email;
-  set email(String? email) => _$this._email = email;
+  String? _phone;
+  String? get phone => _$this._phone;
+  set phone(String? phone) => _$this._phone = phone;
 
   String? _password;
   String? get password => _$this._password;
   set password(String? password) => _$this._password = password;
 
-  String? _accessToken;
-  String? get accessToken => _$this._accessToken;
-  set accessToken(String? accessToken) => _$this._accessToken = accessToken;
-
-  String? _refreshToken;
-  String? get refreshToken => _$this._refreshToken;
-  set refreshToken(String? refreshToken) => _$this._refreshToken = refreshToken;
+  String? _fcm;
+  String? get fcm => _$this._fcm;
+  set fcm(String? fcm) => _$this._fcm = fcm;
 
   LoginBuilder();
 
   LoginBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _email = $v.email;
+      _phone = $v.phone;
       _password = $v.password;
-      _accessToken = $v.accessToken;
-      _refreshToken = $v.refreshToken;
+      _fcm = $v.fcm;
       _$v = null;
     }
     return this;
@@ -786,12 +862,8 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
 
   @override
   _$Login build() {
-    final _$result = _$v ??
-        new _$Login._(
-            email: email,
-            password: password,
-            accessToken: accessToken,
-            refreshToken: refreshToken);
+    final _$result =
+        _$v ?? new _$Login._(phone: phone, password: password, fcm: fcm);
     replace(_$result);
     return _$result;
   }
@@ -1293,18 +1365,34 @@ class NewPasswordBuilder implements Builder<NewPassword, NewPasswordBuilder> {
 
 class _$SignUp extends SignUp {
   @override
-  final String? username;
+  final String? profileImage;
   @override
-  final String? email;
+  final String? name;
   @override
-  final String? birthday;
+  final String? phone;
+  @override
+  final String? locationName;
+  @override
+  final String? fcmToken;
+  @override
+  final String? type;
+  @override
+  final Location? location;
   @override
   final String? password;
 
   factory _$SignUp([void Function(SignUpBuilder)? updates]) =>
       (new SignUpBuilder()..update(updates)).build();
 
-  _$SignUp._({this.username, this.email, this.birthday, this.password})
+  _$SignUp._(
+      {this.profileImage,
+      this.name,
+      this.phone,
+      this.locationName,
+      this.fcmToken,
+      this.type,
+      this.location,
+      this.password})
       : super._();
 
   @override
@@ -1318,25 +1406,42 @@ class _$SignUp extends SignUp {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is SignUp &&
-        username == other.username &&
-        email == other.email &&
-        birthday == other.birthday &&
+        profileImage == other.profileImage &&
+        name == other.name &&
+        phone == other.phone &&
+        locationName == other.locationName &&
+        fcmToken == other.fcmToken &&
+        type == other.type &&
+        location == other.location &&
         password == other.password;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, username.hashCode), email.hashCode), birthday.hashCode),
+        $jc(
+            $jc(
+                $jc(
+                    $jc(
+                        $jc($jc($jc(0, profileImage.hashCode), name.hashCode),
+                            phone.hashCode),
+                        locationName.hashCode),
+                    fcmToken.hashCode),
+                type.hashCode),
+            location.hashCode),
         password.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('SignUp')
-          ..add('username', username)
-          ..add('email', email)
-          ..add('birthday', birthday)
+          ..add('profileImage', profileImage)
+          ..add('name', name)
+          ..add('phone', phone)
+          ..add('locationName', locationName)
+          ..add('fcmToken', fcmToken)
+          ..add('type', type)
+          ..add('location', location)
           ..add('password', password))
         .toString();
   }
@@ -1345,17 +1450,33 @@ class _$SignUp extends SignUp {
 class SignUpBuilder implements Builder<SignUp, SignUpBuilder> {
   _$SignUp? _$v;
 
-  String? _username;
-  String? get username => _$this._username;
-  set username(String? username) => _$this._username = username;
+  String? _profileImage;
+  String? get profileImage => _$this._profileImage;
+  set profileImage(String? profileImage) => _$this._profileImage = profileImage;
 
-  String? _email;
-  String? get email => _$this._email;
-  set email(String? email) => _$this._email = email;
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
 
-  String? _birthday;
-  String? get birthday => _$this._birthday;
-  set birthday(String? birthday) => _$this._birthday = birthday;
+  String? _phone;
+  String? get phone => _$this._phone;
+  set phone(String? phone) => _$this._phone = phone;
+
+  String? _locationName;
+  String? get locationName => _$this._locationName;
+  set locationName(String? locationName) => _$this._locationName = locationName;
+
+  String? _fcmToken;
+  String? get fcmToken => _$this._fcmToken;
+  set fcmToken(String? fcmToken) => _$this._fcmToken = fcmToken;
+
+  String? _type;
+  String? get type => _$this._type;
+  set type(String? type) => _$this._type = type;
+
+  LocationBuilder? _location;
+  LocationBuilder get location => _$this._location ??= new LocationBuilder();
+  set location(LocationBuilder? location) => _$this._location = location;
 
   String? _password;
   String? get password => _$this._password;
@@ -1366,9 +1487,13 @@ class SignUpBuilder implements Builder<SignUp, SignUpBuilder> {
   SignUpBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _username = $v.username;
-      _email = $v.email;
-      _birthday = $v.birthday;
+      _profileImage = $v.profileImage;
+      _name = $v.name;
+      _phone = $v.phone;
+      _locationName = $v.locationName;
+      _fcmToken = $v.fcmToken;
+      _type = $v.type;
+      _location = $v.location?.toBuilder();
       _password = $v.password;
       _$v = null;
     }
@@ -1388,12 +1513,109 @@ class SignUpBuilder implements Builder<SignUp, SignUpBuilder> {
 
   @override
   _$SignUp build() {
-    final _$result = _$v ??
-        new _$SignUp._(
-            username: username,
-            email: email,
-            birthday: birthday,
-            password: password);
+    _$SignUp _$result;
+    try {
+      _$result = _$v ??
+          new _$SignUp._(
+              profileImage: profileImage,
+              name: name,
+              phone: phone,
+              locationName: locationName,
+              fcmToken: fcmToken,
+              type: type,
+              location: _location?.build(),
+              password: password);
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'location';
+        _location?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'SignUp', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$Location extends Location {
+  @override
+  final double? lat;
+  @override
+  final double? long;
+
+  factory _$Location([void Function(LocationBuilder)? updates]) =>
+      (new LocationBuilder()..update(updates)).build();
+
+  _$Location._({this.lat, this.long}) : super._();
+
+  @override
+  Location rebuild(void Function(LocationBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  LocationBuilder toBuilder() => new LocationBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is Location && lat == other.lat && long == other.long;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, lat.hashCode), long.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('Location')
+          ..add('lat', lat)
+          ..add('long', long))
+        .toString();
+  }
+}
+
+class LocationBuilder implements Builder<Location, LocationBuilder> {
+  _$Location? _$v;
+
+  double? _lat;
+  double? get lat => _$this._lat;
+  set lat(double? lat) => _$this._lat = lat;
+
+  double? _long;
+  double? get long => _$this._long;
+  set long(double? long) => _$this._long = long;
+
+  LocationBuilder();
+
+  LocationBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _lat = $v.lat;
+      _long = $v.long;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(Location other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$Location;
+  }
+
+  @override
+  void update(void Function(LocationBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$Location build() {
+    final _$result = _$v ?? new _$Location._(lat: lat, long: long);
     replace(_$result);
     return _$result;
   }

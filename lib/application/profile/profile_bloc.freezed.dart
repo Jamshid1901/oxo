@@ -83,6 +83,12 @@ class _$ProfileEventTearOff {
     );
   }
 
+  _Logout logout({required LogoutModel logoutModel}) {
+    return _Logout(
+      logoutModel: logoutModel,
+    );
+  }
+
   _UploadProfilePhoto uploadProfilePhoto(ImageUploadTypes imageUploadTypes) {
     return _UploadProfilePhoto(
       imageUploadTypes,
@@ -111,6 +117,7 @@ mixin _$ProfileEvent {
             bool hasUnFollow, bool isFollowed, bool isUsersList)
         unFollow,
     required TResult Function(ProfileM profileM) deleteProfilePhoto,
+    required TResult Function(LogoutModel logoutModel) logout,
     required TResult Function(ImageUploadTypes imageUploadTypes)
         uploadProfilePhoto,
   }) =>
@@ -129,6 +136,7 @@ mixin _$ProfileEvent {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
   }) =>
       throw _privateConstructorUsedError;
@@ -146,6 +154,7 @@ mixin _$ProfileEvent {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
     required TResult orElse(),
   }) =>
@@ -165,6 +174,7 @@ mixin _$ProfileEvent {
     required TResult Function(_GetUsersList value) getUsersList,
     required TResult Function(_UnFollow value) unFollow,
     required TResult Function(_DeleteProfilePhoto value) deleteProfilePhoto,
+    required TResult Function(_Logout value) logout,
     required TResult Function(_UploadProfilePhoto value) uploadProfilePhoto,
   }) =>
       throw _privateConstructorUsedError;
@@ -180,6 +190,7 @@ mixin _$ProfileEvent {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
   }) =>
       throw _privateConstructorUsedError;
@@ -195,6 +206,7 @@ mixin _$ProfileEvent {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
     required TResult orElse(),
   }) =>
@@ -271,6 +283,7 @@ class _$_GetProfile implements _GetProfile {
             bool hasUnFollow, bool isFollowed, bool isUsersList)
         unFollow,
     required TResult Function(ProfileM profileM) deleteProfilePhoto,
+    required TResult Function(LogoutModel logoutModel) logout,
     required TResult Function(ImageUploadTypes imageUploadTypes)
         uploadProfilePhoto,
   }) {
@@ -292,6 +305,7 @@ class _$_GetProfile implements _GetProfile {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
   }) {
     return getProfile?.call();
@@ -312,6 +326,7 @@ class _$_GetProfile implements _GetProfile {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -337,6 +352,7 @@ class _$_GetProfile implements _GetProfile {
     required TResult Function(_GetUsersList value) getUsersList,
     required TResult Function(_UnFollow value) unFollow,
     required TResult Function(_DeleteProfilePhoto value) deleteProfilePhoto,
+    required TResult Function(_Logout value) logout,
     required TResult Function(_UploadProfilePhoto value) uploadProfilePhoto,
   }) {
     return getProfile(this);
@@ -355,6 +371,7 @@ class _$_GetProfile implements _GetProfile {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
   }) {
     return getProfile?.call(this);
@@ -373,6 +390,7 @@ class _$_GetProfile implements _GetProfile {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -442,6 +460,7 @@ class _$_GetUserSearchHistory implements _GetUserSearchHistory {
             bool hasUnFollow, bool isFollowed, bool isUsersList)
         unFollow,
     required TResult Function(ProfileM profileM) deleteProfilePhoto,
+    required TResult Function(LogoutModel logoutModel) logout,
     required TResult Function(ImageUploadTypes imageUploadTypes)
         uploadProfilePhoto,
   }) {
@@ -463,6 +482,7 @@ class _$_GetUserSearchHistory implements _GetUserSearchHistory {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
   }) {
     return getUserSearchHistory?.call();
@@ -483,6 +503,7 @@ class _$_GetUserSearchHistory implements _GetUserSearchHistory {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -508,6 +529,7 @@ class _$_GetUserSearchHistory implements _GetUserSearchHistory {
     required TResult Function(_GetUsersList value) getUsersList,
     required TResult Function(_UnFollow value) unFollow,
     required TResult Function(_DeleteProfilePhoto value) deleteProfilePhoto,
+    required TResult Function(_Logout value) logout,
     required TResult Function(_UploadProfilePhoto value) uploadProfilePhoto,
   }) {
     return getUserSearchHistory(this);
@@ -526,6 +548,7 @@ class _$_GetUserSearchHistory implements _GetUserSearchHistory {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
   }) {
     return getUserSearchHistory?.call(this);
@@ -544,6 +567,7 @@ class _$_GetUserSearchHistory implements _GetUserSearchHistory {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -637,6 +661,7 @@ class _$_PostUserSearchHistory implements _PostUserSearchHistory {
             bool hasUnFollow, bool isFollowed, bool isUsersList)
         unFollow,
     required TResult Function(ProfileM profileM) deleteProfilePhoto,
+    required TResult Function(LogoutModel logoutModel) logout,
     required TResult Function(ImageUploadTypes imageUploadTypes)
         uploadProfilePhoto,
   }) {
@@ -658,6 +683,7 @@ class _$_PostUserSearchHistory implements _PostUserSearchHistory {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
   }) {
     return postUserSearchHistory?.call(search);
@@ -678,6 +704,7 @@ class _$_PostUserSearchHistory implements _PostUserSearchHistory {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -703,6 +730,7 @@ class _$_PostUserSearchHistory implements _PostUserSearchHistory {
     required TResult Function(_GetUsersList value) getUsersList,
     required TResult Function(_UnFollow value) unFollow,
     required TResult Function(_DeleteProfilePhoto value) deleteProfilePhoto,
+    required TResult Function(_Logout value) logout,
     required TResult Function(_UploadProfilePhoto value) uploadProfilePhoto,
   }) {
     return postUserSearchHistory(this);
@@ -721,6 +749,7 @@ class _$_PostUserSearchHistory implements _PostUserSearchHistory {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
   }) {
     return postUserSearchHistory?.call(this);
@@ -739,6 +768,7 @@ class _$_PostUserSearchHistory implements _PostUserSearchHistory {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -839,6 +869,7 @@ class _$_DeleteUserSearchHistory implements _DeleteUserSearchHistory {
             bool hasUnFollow, bool isFollowed, bool isUsersList)
         unFollow,
     required TResult Function(ProfileM profileM) deleteProfilePhoto,
+    required TResult Function(LogoutModel logoutModel) logout,
     required TResult Function(ImageUploadTypes imageUploadTypes)
         uploadProfilePhoto,
   }) {
@@ -860,6 +891,7 @@ class _$_DeleteUserSearchHistory implements _DeleteUserSearchHistory {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
   }) {
     return deleteUserSearchHistory?.call(id);
@@ -880,6 +912,7 @@ class _$_DeleteUserSearchHistory implements _DeleteUserSearchHistory {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -905,6 +938,7 @@ class _$_DeleteUserSearchHistory implements _DeleteUserSearchHistory {
     required TResult Function(_GetUsersList value) getUsersList,
     required TResult Function(_UnFollow value) unFollow,
     required TResult Function(_DeleteProfilePhoto value) deleteProfilePhoto,
+    required TResult Function(_Logout value) logout,
     required TResult Function(_UploadProfilePhoto value) uploadProfilePhoto,
   }) {
     return deleteUserSearchHistory(this);
@@ -923,6 +957,7 @@ class _$_DeleteUserSearchHistory implements _DeleteUserSearchHistory {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
   }) {
     return deleteUserSearchHistory?.call(this);
@@ -941,6 +976,7 @@ class _$_DeleteUserSearchHistory implements _DeleteUserSearchHistory {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -1016,6 +1052,7 @@ class _$_ClearUserSearchHistory implements _ClearUserSearchHistory {
             bool hasUnFollow, bool isFollowed, bool isUsersList)
         unFollow,
     required TResult Function(ProfileM profileM) deleteProfilePhoto,
+    required TResult Function(LogoutModel logoutModel) logout,
     required TResult Function(ImageUploadTypes imageUploadTypes)
         uploadProfilePhoto,
   }) {
@@ -1037,6 +1074,7 @@ class _$_ClearUserSearchHistory implements _ClearUserSearchHistory {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
   }) {
     return clearUserSearchHistory?.call();
@@ -1057,6 +1095,7 @@ class _$_ClearUserSearchHistory implements _ClearUserSearchHistory {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -1082,6 +1121,7 @@ class _$_ClearUserSearchHistory implements _ClearUserSearchHistory {
     required TResult Function(_GetUsersList value) getUsersList,
     required TResult Function(_UnFollow value) unFollow,
     required TResult Function(_DeleteProfilePhoto value) deleteProfilePhoto,
+    required TResult Function(_Logout value) logout,
     required TResult Function(_UploadProfilePhoto value) uploadProfilePhoto,
   }) {
     return clearUserSearchHistory(this);
@@ -1100,6 +1140,7 @@ class _$_ClearUserSearchHistory implements _ClearUserSearchHistory {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
   }) {
     return clearUserSearchHistory?.call(this);
@@ -1118,6 +1159,7 @@ class _$_ClearUserSearchHistory implements _ClearUserSearchHistory {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -1210,6 +1252,7 @@ class _$_GetUserProfile implements _GetUserProfile {
             bool hasUnFollow, bool isFollowed, bool isUsersList)
         unFollow,
     required TResult Function(ProfileM profileM) deleteProfilePhoto,
+    required TResult Function(LogoutModel logoutModel) logout,
     required TResult Function(ImageUploadTypes imageUploadTypes)
         uploadProfilePhoto,
   }) {
@@ -1231,6 +1274,7 @@ class _$_GetUserProfile implements _GetUserProfile {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
   }) {
     return getUserProfile?.call(id);
@@ -1251,6 +1295,7 @@ class _$_GetUserProfile implements _GetUserProfile {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -1276,6 +1321,7 @@ class _$_GetUserProfile implements _GetUserProfile {
     required TResult Function(_GetUsersList value) getUsersList,
     required TResult Function(_UnFollow value) unFollow,
     required TResult Function(_DeleteProfilePhoto value) deleteProfilePhoto,
+    required TResult Function(_Logout value) logout,
     required TResult Function(_UploadProfilePhoto value) uploadProfilePhoto,
   }) {
     return getUserProfile(this);
@@ -1294,6 +1340,7 @@ class _$_GetUserProfile implements _GetUserProfile {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
   }) {
     return getUserProfile?.call(this);
@@ -1312,6 +1359,7 @@ class _$_GetUserProfile implements _GetUserProfile {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -1427,6 +1475,7 @@ class _$_GetFollowersList implements _GetFollowersList {
             bool hasUnFollow, bool isFollowed, bool isUsersList)
         unFollow,
     required TResult Function(ProfileM profileM) deleteProfilePhoto,
+    required TResult Function(LogoutModel logoutModel) logout,
     required TResult Function(ImageUploadTypes imageUploadTypes)
         uploadProfilePhoto,
   }) {
@@ -1448,6 +1497,7 @@ class _$_GetFollowersList implements _GetFollowersList {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
   }) {
     return getFollowersList?.call(id, page, hasFriends);
@@ -1468,6 +1518,7 @@ class _$_GetFollowersList implements _GetFollowersList {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -1493,6 +1544,7 @@ class _$_GetFollowersList implements _GetFollowersList {
     required TResult Function(_GetUsersList value) getUsersList,
     required TResult Function(_UnFollow value) unFollow,
     required TResult Function(_DeleteProfilePhoto value) deleteProfilePhoto,
+    required TResult Function(_Logout value) logout,
     required TResult Function(_UploadProfilePhoto value) uploadProfilePhoto,
   }) {
     return getFollowersList(this);
@@ -1511,6 +1563,7 @@ class _$_GetFollowersList implements _GetFollowersList {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
   }) {
     return getFollowersList?.call(this);
@@ -1529,6 +1582,7 @@ class _$_GetFollowersList implements _GetFollowersList {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -1638,6 +1692,7 @@ class _$_GetUsersList implements _GetUsersList {
             bool hasUnFollow, bool isFollowed, bool isUsersList)
         unFollow,
     required TResult Function(ProfileM profileM) deleteProfilePhoto,
+    required TResult Function(LogoutModel logoutModel) logout,
     required TResult Function(ImageUploadTypes imageUploadTypes)
         uploadProfilePhoto,
   }) {
@@ -1659,6 +1714,7 @@ class _$_GetUsersList implements _GetUsersList {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
   }) {
     return getUsersList?.call(search, page);
@@ -1679,6 +1735,7 @@ class _$_GetUsersList implements _GetUsersList {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -1704,6 +1761,7 @@ class _$_GetUsersList implements _GetUsersList {
     required TResult Function(_GetUsersList value) getUsersList,
     required TResult Function(_UnFollow value) unFollow,
     required TResult Function(_DeleteProfilePhoto value) deleteProfilePhoto,
+    required TResult Function(_Logout value) logout,
     required TResult Function(_UploadProfilePhoto value) uploadProfilePhoto,
   }) {
     return getUsersList(this);
@@ -1722,6 +1780,7 @@ class _$_GetUsersList implements _GetUsersList {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
   }) {
     return getUsersList?.call(this);
@@ -1740,6 +1799,7 @@ class _$_GetUsersList implements _GetUsersList {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -1873,6 +1933,7 @@ class _$_UnFollow implements _UnFollow {
             bool hasUnFollow, bool isFollowed, bool isUsersList)
         unFollow,
     required TResult Function(ProfileM profileM) deleteProfilePhoto,
+    required TResult Function(LogoutModel logoutModel) logout,
     required TResult Function(ImageUploadTypes imageUploadTypes)
         uploadProfilePhoto,
   }) {
@@ -1894,6 +1955,7 @@ class _$_UnFollow implements _UnFollow {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
   }) {
     return unFollow?.call(
@@ -1915,6 +1977,7 @@ class _$_UnFollow implements _UnFollow {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -1940,6 +2003,7 @@ class _$_UnFollow implements _UnFollow {
     required TResult Function(_GetUsersList value) getUsersList,
     required TResult Function(_UnFollow value) unFollow,
     required TResult Function(_DeleteProfilePhoto value) deleteProfilePhoto,
+    required TResult Function(_Logout value) logout,
     required TResult Function(_UploadProfilePhoto value) uploadProfilePhoto,
   }) {
     return unFollow(this);
@@ -1958,6 +2022,7 @@ class _$_UnFollow implements _UnFollow {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
   }) {
     return unFollow?.call(this);
@@ -1976,6 +2041,7 @@ class _$_UnFollow implements _UnFollow {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -2081,6 +2147,7 @@ class _$_DeleteProfilePhoto implements _DeleteProfilePhoto {
             bool hasUnFollow, bool isFollowed, bool isUsersList)
         unFollow,
     required TResult Function(ProfileM profileM) deleteProfilePhoto,
+    required TResult Function(LogoutModel logoutModel) logout,
     required TResult Function(ImageUploadTypes imageUploadTypes)
         uploadProfilePhoto,
   }) {
@@ -2102,6 +2169,7 @@ class _$_DeleteProfilePhoto implements _DeleteProfilePhoto {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
   }) {
     return deleteProfilePhoto?.call(profileM);
@@ -2122,6 +2190,7 @@ class _$_DeleteProfilePhoto implements _DeleteProfilePhoto {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -2147,6 +2216,7 @@ class _$_DeleteProfilePhoto implements _DeleteProfilePhoto {
     required TResult Function(_GetUsersList value) getUsersList,
     required TResult Function(_UnFollow value) unFollow,
     required TResult Function(_DeleteProfilePhoto value) deleteProfilePhoto,
+    required TResult Function(_Logout value) logout,
     required TResult Function(_UploadProfilePhoto value) uploadProfilePhoto,
   }) {
     return deleteProfilePhoto(this);
@@ -2165,6 +2235,7 @@ class _$_DeleteProfilePhoto implements _DeleteProfilePhoto {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
   }) {
     return deleteProfilePhoto?.call(this);
@@ -2183,6 +2254,7 @@ class _$_DeleteProfilePhoto implements _DeleteProfilePhoto {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -2201,6 +2273,208 @@ abstract class _DeleteProfilePhoto implements ProfileEvent {
   @JsonKey(ignore: true)
   _$DeleteProfilePhotoCopyWith<_DeleteProfilePhoto> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$LogoutCopyWith<$Res> {
+  factory _$LogoutCopyWith(_Logout value, $Res Function(_Logout) then) =
+      __$LogoutCopyWithImpl<$Res>;
+  $Res call({LogoutModel logoutModel});
+}
+
+/// @nodoc
+class __$LogoutCopyWithImpl<$Res> extends _$ProfileEventCopyWithImpl<$Res>
+    implements _$LogoutCopyWith<$Res> {
+  __$LogoutCopyWithImpl(_Logout _value, $Res Function(_Logout) _then)
+      : super(_value, (v) => _then(v as _Logout));
+
+  @override
+  _Logout get _value => super._value as _Logout;
+
+  @override
+  $Res call({
+    Object? logoutModel = freezed,
+  }) {
+    return _then(_Logout(
+      logoutModel: logoutModel == freezed
+          ? _value.logoutModel
+          : logoutModel // ignore: cast_nullable_to_non_nullable
+              as LogoutModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Logout implements _Logout {
+  const _$_Logout({required this.logoutModel});
+
+  @override
+  final LogoutModel logoutModel;
+
+  @override
+  String toString() {
+    return 'ProfileEvent.logout(logoutModel: $logoutModel)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Logout &&
+            (identical(other.logoutModel, logoutModel) ||
+                other.logoutModel == logoutModel));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, logoutModel);
+
+  @JsonKey(ignore: true)
+  @override
+  _$LogoutCopyWith<_Logout> get copyWith =>
+      __$LogoutCopyWithImpl<_Logout>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getProfile,
+    required TResult Function() getUserSearchHistory,
+    required TResult Function(UserSearchHistoryPostModel search)
+        postUserSearchHistory,
+    required TResult Function(int id) deleteUserSearchHistory,
+    required TResult Function() clearUserSearchHistory,
+    required TResult Function(int id) getUserProfile,
+    required TResult Function(int id, int page, bool hasFriends)
+        getFollowersList,
+    required TResult Function(String search, int page) getUsersList,
+    required TResult Function(UnFollowPostModel unFollowPostModel,
+            bool hasUnFollow, bool isFollowed, bool isUsersList)
+        unFollow,
+    required TResult Function(ProfileM profileM) deleteProfilePhoto,
+    required TResult Function(LogoutModel logoutModel) logout,
+    required TResult Function(ImageUploadTypes imageUploadTypes)
+        uploadProfilePhoto,
+  }) {
+    return logout(logoutModel);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? getProfile,
+    TResult Function()? getUserSearchHistory,
+    TResult Function(UserSearchHistoryPostModel search)? postUserSearchHistory,
+    TResult Function(int id)? deleteUserSearchHistory,
+    TResult Function()? clearUserSearchHistory,
+    TResult Function(int id)? getUserProfile,
+    TResult Function(int id, int page, bool hasFriends)? getFollowersList,
+    TResult Function(String search, int page)? getUsersList,
+    TResult Function(UnFollowPostModel unFollowPostModel, bool hasUnFollow,
+            bool isFollowed, bool isUsersList)?
+        unFollow,
+    TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
+    TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
+  }) {
+    return logout?.call(logoutModel);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getProfile,
+    TResult Function()? getUserSearchHistory,
+    TResult Function(UserSearchHistoryPostModel search)? postUserSearchHistory,
+    TResult Function(int id)? deleteUserSearchHistory,
+    TResult Function()? clearUserSearchHistory,
+    TResult Function(int id)? getUserProfile,
+    TResult Function(int id, int page, bool hasFriends)? getFollowersList,
+    TResult Function(String search, int page)? getUsersList,
+    TResult Function(UnFollowPostModel unFollowPostModel, bool hasUnFollow,
+            bool isFollowed, bool isUsersList)?
+        unFollow,
+    TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
+    TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
+    required TResult orElse(),
+  }) {
+    if (logout != null) {
+      return logout(logoutModel);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetProfile value) getProfile,
+    required TResult Function(_GetUserSearchHistory value) getUserSearchHistory,
+    required TResult Function(_PostUserSearchHistory value)
+        postUserSearchHistory,
+    required TResult Function(_DeleteUserSearchHistory value)
+        deleteUserSearchHistory,
+    required TResult Function(_ClearUserSearchHistory value)
+        clearUserSearchHistory,
+    required TResult Function(_GetUserProfile value) getUserProfile,
+    required TResult Function(_GetFollowersList value) getFollowersList,
+    required TResult Function(_GetUsersList value) getUsersList,
+    required TResult Function(_UnFollow value) unFollow,
+    required TResult Function(_DeleteProfilePhoto value) deleteProfilePhoto,
+    required TResult Function(_Logout value) logout,
+    required TResult Function(_UploadProfilePhoto value) uploadProfilePhoto,
+  }) {
+    return logout(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_GetProfile value)? getProfile,
+    TResult Function(_GetUserSearchHistory value)? getUserSearchHistory,
+    TResult Function(_PostUserSearchHistory value)? postUserSearchHistory,
+    TResult Function(_DeleteUserSearchHistory value)? deleteUserSearchHistory,
+    TResult Function(_ClearUserSearchHistory value)? clearUserSearchHistory,
+    TResult Function(_GetUserProfile value)? getUserProfile,
+    TResult Function(_GetFollowersList value)? getFollowersList,
+    TResult Function(_GetUsersList value)? getUsersList,
+    TResult Function(_UnFollow value)? unFollow,
+    TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
+    TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
+  }) {
+    return logout?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetProfile value)? getProfile,
+    TResult Function(_GetUserSearchHistory value)? getUserSearchHistory,
+    TResult Function(_PostUserSearchHistory value)? postUserSearchHistory,
+    TResult Function(_DeleteUserSearchHistory value)? deleteUserSearchHistory,
+    TResult Function(_ClearUserSearchHistory value)? clearUserSearchHistory,
+    TResult Function(_GetUserProfile value)? getUserProfile,
+    TResult Function(_GetFollowersList value)? getFollowersList,
+    TResult Function(_GetUsersList value)? getUsersList,
+    TResult Function(_UnFollow value)? unFollow,
+    TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
+    TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
+    required TResult orElse(),
+  }) {
+    if (logout != null) {
+      return logout(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Logout implements ProfileEvent {
+  const factory _Logout({required LogoutModel logoutModel}) = _$_Logout;
+
+  LogoutModel get logoutModel;
+  @JsonKey(ignore: true)
+  _$LogoutCopyWith<_Logout> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2282,6 +2556,7 @@ class _$_UploadProfilePhoto implements _UploadProfilePhoto {
             bool hasUnFollow, bool isFollowed, bool isUsersList)
         unFollow,
     required TResult Function(ProfileM profileM) deleteProfilePhoto,
+    required TResult Function(LogoutModel logoutModel) logout,
     required TResult Function(ImageUploadTypes imageUploadTypes)
         uploadProfilePhoto,
   }) {
@@ -2303,6 +2578,7 @@ class _$_UploadProfilePhoto implements _UploadProfilePhoto {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
   }) {
     return uploadProfilePhoto?.call(imageUploadTypes);
@@ -2323,6 +2599,7 @@ class _$_UploadProfilePhoto implements _UploadProfilePhoto {
             bool isFollowed, bool isUsersList)?
         unFollow,
     TResult Function(ProfileM profileM)? deleteProfilePhoto,
+    TResult Function(LogoutModel logoutModel)? logout,
     TResult Function(ImageUploadTypes imageUploadTypes)? uploadProfilePhoto,
     required TResult orElse(),
   }) {
@@ -2348,6 +2625,7 @@ class _$_UploadProfilePhoto implements _UploadProfilePhoto {
     required TResult Function(_GetUsersList value) getUsersList,
     required TResult Function(_UnFollow value) unFollow,
     required TResult Function(_DeleteProfilePhoto value) deleteProfilePhoto,
+    required TResult Function(_Logout value) logout,
     required TResult Function(_UploadProfilePhoto value) uploadProfilePhoto,
   }) {
     return uploadProfilePhoto(this);
@@ -2366,6 +2644,7 @@ class _$_UploadProfilePhoto implements _UploadProfilePhoto {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
   }) {
     return uploadProfilePhoto?.call(this);
@@ -2384,6 +2663,7 @@ class _$_UploadProfilePhoto implements _UploadProfilePhoto {
     TResult Function(_GetUsersList value)? getUsersList,
     TResult Function(_UnFollow value)? unFollow,
     TResult Function(_DeleteProfilePhoto value)? deleteProfilePhoto,
+    TResult Function(_Logout value)? logout,
     TResult Function(_UploadProfilePhoto value)? uploadProfilePhoto,
     required TResult orElse(),
   }) {

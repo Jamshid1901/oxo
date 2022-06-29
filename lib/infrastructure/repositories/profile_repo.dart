@@ -188,6 +188,29 @@ class ProfileRepository implements IProfileFacade{
     }
   }
 
+  Future<Either<ResponseFailure, UserSearchHistoryModel>> logout(LogoutModel data) async {
+    final Token token = _preferenceService.token;
+    try {
+      final res = await _followersService.logout(token.toToken,data);
+      if (res.isSuccessful && res.body is UserSearchHistoryModel) {
+        assert(res.body != null);
+        return right(res.body!);
+      } else {
+        print(res.statusCode);
+        return left(Unknown(message: 'unknown_error'.tr()));
+      }
+    } catch (e) {
+      print(e);
+      if (e is NetworkException) {
+        return left(NetworkFailure(message: 'network_error'.tr()));
+      } else if (e is UnimplementedError){
+        return left(Unknown(message: e.message??'unknown_error'.tr()));
+      } else {
+        return left(Unknown(message: 'unknown_error'.tr()));
+      }
+    }
+  }
+
   Future<Either<ResponseFailure, UserSearchHistoryModel>> userSearchHistoryGet() async {
     final Token token = _preferenceService.token;
     try {

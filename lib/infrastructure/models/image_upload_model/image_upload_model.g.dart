@@ -20,16 +20,11 @@ class _$ImageUploadModelSerializer
   Iterable<Object?> serialize(Serializers serializers, ImageUploadModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'file',
-      serializers.serialize(object.file, specifiedType: const FullType(String)),
+      'media_id',
+      serializers.serialize(object.mediaId,
+          specifiedType: const FullType(String)),
     ];
-    Object? value;
-    value = object.id;
-    if (value != null) {
-      result
-        ..add('id')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
+
     return result;
   }
 
@@ -45,12 +40,8 @@ class _$ImageUploadModelSerializer
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'id':
-          result.id = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
-          break;
-        case 'file':
-          result.file = serializers.deserialize(value,
+        case 'media_id':
+          result.mediaId = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
       }
@@ -62,16 +53,15 @@ class _$ImageUploadModelSerializer
 
 class _$ImageUploadModel extends ImageUploadModel {
   @override
-  final int? id;
-  @override
-  final String file;
+  final String mediaId;
 
   factory _$ImageUploadModel(
           [void Function(ImageUploadModelBuilder)? updates]) =>
       (new ImageUploadModelBuilder()..update(updates)).build();
 
-  _$ImageUploadModel._({this.id, required this.file}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(file, 'ImageUploadModel', 'file');
+  _$ImageUploadModel._({required this.mediaId}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        mediaId, 'ImageUploadModel', 'mediaId');
   }
 
   @override
@@ -85,19 +75,18 @@ class _$ImageUploadModel extends ImageUploadModel {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ImageUploadModel && id == other.id && file == other.file;
+    return other is ImageUploadModel && mediaId == other.mediaId;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, id.hashCode), file.hashCode));
+    return $jf($jc(0, mediaId.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('ImageUploadModel')
-          ..add('id', id)
-          ..add('file', file))
+          ..add('mediaId', mediaId))
         .toString();
   }
 }
@@ -106,21 +95,16 @@ class ImageUploadModelBuilder
     implements Builder<ImageUploadModel, ImageUploadModelBuilder> {
   _$ImageUploadModel? _$v;
 
-  int? _id;
-  int? get id => _$this._id;
-  set id(int? id) => _$this._id = id;
-
-  String? _file;
-  String? get file => _$this._file;
-  set file(String? file) => _$this._file = file;
+  String? _mediaId;
+  String? get mediaId => _$this._mediaId;
+  set mediaId(String? mediaId) => _$this._mediaId = mediaId;
 
   ImageUploadModelBuilder();
 
   ImageUploadModelBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _id = $v.id;
-      _file = $v.file;
+      _mediaId = $v.mediaId;
       _$v = null;
     }
     return this;
@@ -141,9 +125,8 @@ class ImageUploadModelBuilder
   _$ImageUploadModel build() {
     final _$result = _$v ??
         new _$ImageUploadModel._(
-            id: id,
-            file: BuiltValueNullFieldError.checkNotNull(
-                file, 'ImageUploadModel', 'file'));
+            mediaId: BuiltValueNullFieldError.checkNotNull(
+                mediaId, 'ImageUploadModel', 'mediaId'));
     replace(_$result);
     return _$result;
   }

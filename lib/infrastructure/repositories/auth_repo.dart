@@ -33,13 +33,13 @@ class AuthRepository implements IAutFacade, ISignInFacade {
   Future<Option<SignInFailure>> login(Login login) async {
     try {
       final res = await _authService.login(login);
-      if (res.isSuccessful && res.statusCode == 200 && res.body != null) {
+      if (res.isSuccessful && res.statusCode == 200) {
         final tokens = Token(
-          accessToken: res.body!.accessToken,
-          refreshToken: res.body!.refreshToken,
+          accessToken: res.body["access_token"],
+          refreshToken: res.body["refresh_token"],
         );
         _preferenceService.setToken(tokens);
-        await _uploadFirebaseToken();
+        // await _uploadFirebaseToken();
         return optionOf(null);
       } else {
         return optionOf(InvalidCredentials(message: 'invalid_credential'.tr()));
@@ -48,7 +48,7 @@ class AuthRepository implements IAutFacade, ISignInFacade {
       if (e is NetworkException) {
         return optionOf(NetworkFailure(message: 'network_error'.tr()));
       } else {
-        return optionOf(Unknown(message: 'unknown_error'.tr()));
+        return optionOf(const Unknown(message: 'Parol yoki telefon nomer xatto bo`lishi mukin'));
       }
     }
   }
@@ -68,7 +68,7 @@ class AuthRepository implements IAutFacade, ISignInFacade {
       if (e is NetworkException) {
         return optionOf(NetworkFailure(message: 'network_error'.tr()));
       } else {
-        return optionOf(Unknown(message: 'unknown_error'.tr()));
+        return optionOf(const Unknown(message: 'Bu raqam allaqachon ishlatilgan'));
       }
     }
   }
@@ -77,7 +77,14 @@ class AuthRepository implements IAutFacade, ISignInFacade {
   Future<Option<SignInFailure>> signUp(SignUp signUp) async {
     try {
       final res = await _authService.signUp(signUp);
-      if (res.isSuccessful && res.statusCode == 201 && res.body is SignUp) {
+      if (res.isSuccessful && res.statusCode == 200) {
+        print("res.body[]");
+        print(res.body["access_token"]);
+        final tokens = Token(
+          accessToken: res.body["access_token"],
+          refreshToken: res.body["refresh_token"],
+        );
+        _preferenceService.setToken(tokens);
         return optionOf(null);
       } else {
         return optionOf(

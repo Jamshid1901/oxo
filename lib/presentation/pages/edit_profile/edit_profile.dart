@@ -115,8 +115,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           fit: BoxFit.cover,
                           height: 72,
                           width: 72,
-                          avatarFile: state.imageAvatarUploadModel?.file,
-                          imageUrl: state.imageAvatarId == null ? '${widget.info.profileAvatarModel?.file}' : '${state.imageAvatarUploadModel?.file}',
+                          avatarFile: state.imageAvatarUploadModel?.mediaId,
+                          imageUrl: state.imageAvatarId == null ? '${widget.info.profileAvatarModel?.file}' : '${state.imageAvatarUploadModel?.mediaId}',
                         ),
                         SizedBox(
                           height: 22.h,
@@ -147,8 +147,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           height: 12.h,
                         ),
                         AddPhotoDottedBorder(
-                          imageUrl:  state.imageBackgroundId == null ? '${widget.info.profileBackgroundModel?.file}' : '${state.imageBackgroundUploadModel?.file}',
-                          backgroundImage: state.imageBackgroundUploadModel?.file,
+                          imageUrl:  state.imageBackgroundId == null ? '${widget.info.profileBackgroundModel?.file}' : '${state.imageBackgroundUploadModel?.mediaId}',
+                          backgroundImage: state.imageBackgroundUploadModel?.mediaId,
                           isLoading: state.isLoadingBackground!,
                           onTap: (){
                             context.read<EditProfileBloc>().add(const EditProfileEvent.uploadBackgroundPhoto());

@@ -17,19 +17,19 @@ class _$AuthService extends AuthService {
   final definitionType = AuthService;
 
   @override
-  Future<Response<Login>> login(Login body) {
-    final $url = '/api/v1/user/login/';
+  Future<Response<dynamic>> login(Login body) {
+    final $url = '/api/v1/register/login/';
     final $body = body;
     final $request = Request('POST', $url, client.baseUrl, body: $body);
-    return client.send<Login, Login>($request);
+    return client.send<dynamic, dynamic>($request);
   }
 
   @override
-  Future<Response<SignUp>> signUp(SignUp body) {
-    final $url = '/api/v1/user/signup/';
+  Future<Response<dynamic>> signUp(SignUp body) {
+    final $url = '/api/v1/register/sign-up/';
     final $body = body;
     final $request = Request('POST', $url, client.baseUrl, body: $body);
-    return client.send<SignUp, SignUp>($request);
+    return client.send<dynamic, dynamic>($request);
   }
 
   @override
@@ -156,13 +156,28 @@ class _$FollowersService extends FollowersService {
   }
 
   @override
+  Future<Response<UserSearchHistoryModel>> logout(
+      String header, LogoutModel logoutModel) {
+    final $url = '/api/v1/user/logout/';
+    final $headers = {
+      'Authorization': header,
+    };
+
+    final $body = logoutModel;
+    final $request =
+        Request('GET', $url, client.baseUrl, body: $body, headers: $headers);
+    return client
+        .send<UserSearchHistoryModel, UserSearchHistoryModel>($request);
+  }
+
+  @override
   Future<Response<UserSearchHistoryModel>> userSearchHistory(String header) {
     final $url = '/api/v1/user/search_history/?page_size=5';
     final $headers = {
       'Authorization': header,
     };
 
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    final $request = Request('PUT', $url, client.baseUrl, headers: $headers);
     return client
         .send<UserSearchHistoryModel, UserSearchHistoryModel>($request);
   }
@@ -241,10 +256,12 @@ class _$ImageUploadService extends ImageUploadService {
   final definitionType = ImageUploadService;
 
   @override
-  Future<Response<ImageUploadModel>> imageUpload(String header, String file) {
-    final $url = '/api/v1/file/';
+  Future<Response<ImageUploadModel>> imageUpload(
+      String type, String typeEdit, String file) {
+    final $url = '/api/v1/media/upload-media/';
     final $headers = {
-      'Authorization': header,
+      'Type': type,
+      'object-type': typeEdit,
     };
 
     final $parts = <PartValue>[PartValueFile<String>('file', file)];

@@ -30,7 +30,7 @@ class CustomOutlinedButton extends StatelessWidget {
               ),
             ),
             side: MaterialStateProperty.all<BorderSide>(
-              const BorderSide(color: Style.primary, width: 1),
+              const BorderSide(color: Style.black, width: 1),
             ),
           ),
           child: Padding(

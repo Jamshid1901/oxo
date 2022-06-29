@@ -33,11 +33,11 @@ class ImageUploadRepo implements ImageUploadFacade {
     }
   }
 
-  Future<Either<ImageUploadFailure, ImageUploadModel>> imageUpload(String file,) async {
-    var token = await PreferenceService.create.then((value) => value.token);
+  Future<Either<ImageUploadFailure, ImageUploadModel>> imageUpload(String file) async {
+
 
     try {
-      final res = await _imageUploadService.imageUpload(token.toToken, file);
+      final res = await _imageUploadService.imageUpload("image/jpeg","avatar", file);
 
       if (res.isSuccessful) {
         assert(res.body != null);

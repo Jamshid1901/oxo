@@ -15,6 +15,17 @@ abstract class UserNameM implements Built<UserNameM, UserNameMBuilder> {
   static Serializer<UserNameM> get serializer => _$userNameMSerializer;
 }
 
+abstract class LogoutModel implements Built<LogoutModel, LogoutModelBuilder> {
+
+  @BuiltValueField(wireName: 'fcm_token')
+  String get fcm;
+
+  LogoutModel._();
+  factory LogoutModel([Function(LogoutModelBuilder b) updates]) = _$LogoutModel;
+
+  static Serializer<LogoutModel> get serializer => _$logoutModelSerializer;
+}
+
 
 class ProfileM{
   final String userName;

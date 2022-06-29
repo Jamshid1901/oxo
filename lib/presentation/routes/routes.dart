@@ -16,6 +16,7 @@ import 'package:oxo/presentation/pages/auth/enter_new_password.dart';
 import 'package:oxo/presentation/pages/auth/forgot_password.dart';
 import 'package:oxo/presentation/pages/auth/sign_in_page.dart';
 import 'package:oxo/presentation/pages/auth/sign_up_page.dart';
+import 'package:oxo/presentation/pages/auth/success_screen.dart';
 import 'package:oxo/presentation/pages/edit_profile/edit_profile.dart';
 import 'package:oxo/presentation/pages/followers/followers.dart';
 import 'package:oxo/presentation/pages/home/home.dart';
@@ -67,6 +68,9 @@ class Routes {
         builder: (_) => BlocProvider(
           create: (_) => SignInBloc(
             context.read<AuthRepository>(),
+            ImageUploadRepo(
+              ImageUploadService.create(),
+            ),
           ),
           child: const SignIn(),
         ),
@@ -77,6 +81,11 @@ class Routes {
         builder: (_) => HomePage(
           index: index ?? 0,
         ),
+      );
+
+  static PageRoute getSuccessPage(BuildContext context) =>
+      MaterialPageRoute(
+        builder: (_) => const SuccessPage(),
       );
 
   static PageRoute getEditProfileRoute(BuildContext context, ProfileModel info) => MaterialPageRoute(
@@ -127,10 +136,10 @@ class Routes {
         ),
       );
 
-  static PageRoute signUp(BuildContext context) => MaterialPageRoute(
+  static PageRoute signUp(BuildContext context,String phone) => MaterialPageRoute(
         builder: (_) => BlocProvider.value(
           value: context.read<SignInBloc>(),
-          child: const SignUp(),
+          child:  SignUp(phoneNumber: phone,),
         ),
       );
 

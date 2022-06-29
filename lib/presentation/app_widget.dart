@@ -24,7 +24,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
         designSize: const Size(375, 812),
-        builder: (context) {
+        builder: (context , child) {
           return FutureBuilder(
             future: Future.wait([
               PreferenceService.create,

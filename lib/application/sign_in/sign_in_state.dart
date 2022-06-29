@@ -15,5 +15,6 @@ abstract class SignInState with _$SignInState {
     @Default(false) bool proceedToVerifyCode,
     @Default([]) List<int> gameList,
     @Default('') String exception,
+    @Default('') String mediaId,
   }) = _SignInState;
 }

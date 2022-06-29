@@ -24,6 +24,9 @@ abstract class ProfileEvent with _$ProfileEvent {
 
   const factory ProfileEvent.deleteProfilePhoto({required ProfileM profileM}) = _DeleteProfilePhoto;
 
+  const factory ProfileEvent.logout({required LogoutModel logoutModel}) = _Logout;
+
+
   const factory ProfileEvent.uploadProfilePhoto(ImageUploadTypes imageUploadTypes) = _UploadProfilePhoto;
 
 }

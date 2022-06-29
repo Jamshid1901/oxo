@@ -7,6 +7,7 @@ part of 'edit_profile.dart';
 // **************************************************************************
 
 Serializer<UserNameM> _$userNameMSerializer = new _$UserNameMSerializer();
+Serializer<LogoutModel> _$logoutModelSerializer = new _$LogoutModelSerializer();
 
 class _$UserNameMSerializer implements StructuredSerializer<UserNameM> {
   @override
@@ -39,6 +40,45 @@ class _$UserNameMSerializer implements StructuredSerializer<UserNameM> {
       switch (key) {
         case 'username':
           result.userName = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$LogoutModelSerializer implements StructuredSerializer<LogoutModel> {
+  @override
+  final Iterable<Type> types = const [LogoutModel, _$LogoutModel];
+  @override
+  final String wireName = 'LogoutModel';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, LogoutModel object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'fcm_token',
+      serializers.serialize(object.fcm, specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  LogoutModel deserialize(Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new LogoutModelBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'fcm_token':
+          result.fcm = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
       }
@@ -119,6 +159,82 @@ class UserNameMBuilder implements Builder<UserNameM, UserNameMBuilder> {
         new _$UserNameM._(
             userName: BuiltValueNullFieldError.checkNotNull(
                 userName, 'UserNameM', 'userName'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$LogoutModel extends LogoutModel {
+  @override
+  final String fcm;
+
+  factory _$LogoutModel([void Function(LogoutModelBuilder)? updates]) =>
+      (new LogoutModelBuilder()..update(updates)).build();
+
+  _$LogoutModel._({required this.fcm}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(fcm, 'LogoutModel', 'fcm');
+  }
+
+  @override
+  LogoutModel rebuild(void Function(LogoutModelBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  LogoutModelBuilder toBuilder() => new LogoutModelBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is LogoutModel && fcm == other.fcm;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, fcm.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('LogoutModel')..add('fcm', fcm))
+        .toString();
+  }
+}
+
+class LogoutModelBuilder implements Builder<LogoutModel, LogoutModelBuilder> {
+  _$LogoutModel? _$v;
+
+  String? _fcm;
+  String? get fcm => _$this._fcm;
+  set fcm(String? fcm) => _$this._fcm = fcm;
+
+  LogoutModelBuilder();
+
+  LogoutModelBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _fcm = $v.fcm;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(LogoutModel other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$LogoutModel;
+  }
+
+  @override
+  void update(void Function(LogoutModelBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$LogoutModel build() {
+    final _$result = _$v ??
+        new _$LogoutModel._(
+            fcm: BuiltValueNullFieldError.checkNotNull(
+                fcm, 'LogoutModel', 'fcm'));
     replace(_$result);
     return _$result;
   }

@@ -2,6 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>NSAppleMusicUsageDescription</key>
+    <string>Using Media upload</string>
+    <key>NSCameraUsageDescription</key>
+    <string>For people to hear and see you during videoconferencing, OXO needs to access your camera and microphone.</string>
+    <key>NSContactsUsageDescription</key>
+    <string>Please allow OXO access to your phonebook to invite your friends</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>For people to hear and see you during videoconferencing, OXO needs to access your camera and microphone.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This is needed so you can upload and share photos and videos from your library</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

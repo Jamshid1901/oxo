@@ -6,6 +6,10 @@ abstract class SignInEvent with _$SignInEvent {
     required Login login,
   }) = _Login;
 
+  factory SignInEvent.uploadProfile({
+    required String path,
+  }) = _UploadProfile;
+
   factory SignInEvent.signUp({
     required SignUp login,
   }) = _SignUp;

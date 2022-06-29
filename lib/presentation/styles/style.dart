@@ -15,7 +15,7 @@ class Style {
 
   static const Color informationText = Color(0xff07AEB9);
 
-  static const Color primary = Color(0xff19BAEE);
+  static const Color primary = Color(0xff010101);
 
   static const Color primaryVariant = Color(0xff298BE2);
 
@@ -40,6 +40,8 @@ class Style {
   static const Color white = Color(0xffffffff);
 
   static const Color icon = Color(0xff86869D);
+
+  static const Color bgCategory = Color(0xffF6F6F6);
 
   /// is it stoke or stroke ?
   static const Color stoke = Color(0xffECF1F4);

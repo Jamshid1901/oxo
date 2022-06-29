@@ -38,9 +38,11 @@ class IconSet {
   final String addProfileImage;
   final String settings;
   final String rateStar;
-  final String gridHome;
-  final String gridEvents;
-  final String gridProfile;
+  final String oxoHome;
+  final String oxoChat;
+  final String oxoEvent;
+  final String oxoLike;
+  final String oxoProfile;
   final String draftEvents;
   final String general;
   final String info;
@@ -81,15 +83,19 @@ class IconSet {
   final String americanExpress;
   final String jcb;
   final String unionPay;
-  final String  dinnersClub;
+  final String dinnersClub;
+  final String categoryHome;
 
   IconSet._({
+    required this.oxoChat,
+    required this.oxoLike,
     required this.dinnersClub,
     required this.unionPay,
-required this.jcb,
+    required this.jcb,
     required this.americanExpress,
     required this.discover,
-    required this.visa, required this.masterCard,
+    required this.visa,
+    required this.masterCard,
     required this.menuIcon,
     required this.filter,
     required this.eventBag,
@@ -100,9 +106,9 @@ required this.jcb,
     required this.check,
     required this.plus,
     required this.liner,
-    required this.gridHome,
-    required this.gridEvents,
-    required this.gridProfile,
+    required this.oxoHome,
+    required this.oxoEvent,
+    required this.oxoProfile,
     required this.enterNewPassword,
     required this.verifyEmail,
     required this.forgotPassword,
@@ -164,10 +170,12 @@ required this.jcb,
     required this.delete,
     required this.arrowDown,
     required this.arrowUp,
+    required this.categoryHome,
   });
 
   static IconSet get create {
     return IconSet._(
+      categoryHome: 'assets/svgs/categoryhome.svg',
       dinnersClub: 'assets/svgs/dc.svg',
       unionPay: 'assets/svgs/up.svg',
       jcb: 'assets/svgs/jcb.svg',
@@ -191,9 +199,9 @@ required this.jcb,
       payment: 'assets/svgs/payment.svg',
       plus: 'assets/svgs/plus.svg',
       check: 'assets/svgs/check.svg',
-      gridHome: 'assets/svgs/grid_home.svg',
-      gridEvents: 'assets/svgs/grid_events.svg',
-      gridProfile: 'assets/svgs/grid_profile.svg',
+      oxoHome: 'assets/svgs/home.svg',
+      oxoEvent: 'assets/svgs/add.svg',
+      oxoProfile: 'assets/svgs/profile.svg',
       facebookLightSvg: 'assets/svgs/facebook_light.svg',
       googleLightSvg: 'assets/svgs/google_light.svg',
       steamLightSvg: 'assets/svgs/steam.svg',
@@ -250,6 +258,8 @@ required this.jcb,
       delete: 'assets/svgs/delete.svg',
       arrowDown: 'assets/svgs/arrow_down.svg',
       arrowUp: 'assets/svgs/arrow_up.svg',
+      oxoChat: 'assets/svgs/chat.svg',
+      oxoLike: 'assets/svgs/like.svg',
     );
   }
 }

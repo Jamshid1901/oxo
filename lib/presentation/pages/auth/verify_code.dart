@@ -68,7 +68,7 @@ class _VerifyCodeState extends State<VerifyCode> {
               Navigator.push(
                 context,
                 Routes.signUp(
-                  context,
+                  context, widget.number
                 ),
               );
             }
@@ -124,6 +124,7 @@ class _VerifyCodeState extends State<VerifyCode> {
                                   padding: EdgeInsets.all(10.sp),
                                   color: Style.bgBlurFill,
                                   child: PinPut(
+                                    withCursor: true,
                                     fieldsCount: 6,
                                     textStyle: fonts.headline3,
                                     controller: _controller,

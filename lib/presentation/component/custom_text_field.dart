@@ -27,6 +27,7 @@ class CustomTextField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final FocusNode? focusNode;
   final Function(String?) validator;
+  final Color bgColor;
 
   const CustomTextField(
       {Key? key,
@@ -49,7 +50,8 @@ class CustomTextField extends StatefulWidget {
       this.readOnly = false,
       this.onChanged,
       this.focusNode,
-  this.textAlign=TextAlign.start,required this.validator})
+  this.textAlign=TextAlign.start,required this.validator,
+        this.bgColor = Style.transparent})
       : super(key: key);
 
   @override
@@ -100,6 +102,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
             obscureText: widget.obscureText,
             keyboardType: widget.keyboardType,
             decoration: InputDecoration(
+              filled: true,
+              fillColor: widget.bgColor,
               counterText: widget.maxLength == 500 ? null : '',
               suffixIcon: widget.suffixIcon != null
                   ? IconButton(

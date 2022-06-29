@@ -22,15 +22,13 @@ abstract class SendCode
 
 
 abstract class Login implements Built<Login, LoginBuilder> {
-  String? get email;
+  @BuiltValueField(wireName: 'phone_number')
+  String? get phone;
 
   String? get password;
 
-  @BuiltValueField(wireName: 'access_token')
-  String? get accessToken;
-
-  @BuiltValueField(wireName: 'refresh_token')
-  String? get refreshToken;
+  @BuiltValueField(wireName: 'fcm_token')
+  String? get fcm;
 
   Login._();
   factory Login([Function(LoginBuilder b) updates]) = _$Login;
@@ -119,15 +117,36 @@ abstract class NewPassword implements Built<NewPassword, NewPasswordBuilder> {
 }
 
 abstract class SignUp implements Built<SignUp, SignUpBuilder> {
-  String? get username;
-  String? get email;
-  String? get birthday;
+  @BuiltValueField(wireName: 'profile_photo')
+  String? get profileImage;
+  @BuiltValueField(wireName: 'full_name')
+  String? get name;
+  @BuiltValueField(wireName: 'phone_number')
+  String? get phone;
+  @BuiltValueField(wireName: 'location_name')
+  String? get locationName;
+  @BuiltValueField(wireName: 'fcm_token')
+  String? get fcmToken;
+  @BuiltValueField(wireName: 'user_type')
+  String? get type;
+  Location? get location;
   String? get password;
 
   SignUp._();
   factory SignUp([Function(SignUpBuilder b) updates]) = _$SignUp;
 
   static Serializer<SignUp> get serializer => _$signUpSerializer;
+}
+
+abstract class Location implements Built<Location, LocationBuilder> {
+  double? get lat;
+
+  double? get long;
+
+  Location._();
+  factory Location([Function(LocationBuilder b) updates]) = _$Location;
+
+  static Serializer<Location> get serializer => _$locationSerializer;
 }
 
 abstract class ResendCode implements Built<ResendCode, ResendCodeBuilder> {

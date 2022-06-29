@@ -59,6 +59,7 @@ class _CustomTextFieldPasswordState extends State<CustomTextFieldPassword> {
               obscureText: widget.isPassword && isUnVisiable,
               keyboardType: _getKeyboartType(),
               decoration: InputDecoration(
+                errorMaxLines: 2,
                 suffixIcon: widget.isPassword
                     ? IconButton(
                         onPressed: _changeVisibility,
@@ -70,7 +71,7 @@ class _CustomTextFieldPasswordState extends State<CustomTextFieldPassword> {
                         ),
                       )
                     : null,
-                focusColor: Style.primary,
+                focusColor: Style.black,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6.r),
                   borderSide: BorderSide(color: colors.stoke, width: 1),
@@ -81,7 +82,7 @@ class _CustomTextFieldPasswordState extends State<CustomTextFieldPassword> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6.r),
-                  borderSide: BorderSide(color: colors.primary, width: 1),
+                  borderSide: const BorderSide(color: Style.black, width: 1),
                 ),
                 hintText: widget.hintText,
                 hintStyle: fonts.bodyText1,

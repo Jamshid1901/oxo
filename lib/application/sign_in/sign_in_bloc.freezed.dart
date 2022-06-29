@@ -29,7 +29,8 @@ class _$SignInStateTearOff {
       bool proceedToChooseInterests = false,
       bool proceedToVerifyCode = false,
       List<int> gameList = const [],
-      String exception = ''}) {
+      String exception = '',
+      String mediaId = ''}) {
     return _SignInState(
       isLoading: isLoading,
       isEmailValid: isEmailValid,
@@ -43,6 +44,7 @@ class _$SignInStateTearOff {
       proceedToVerifyCode: proceedToVerifyCode,
       gameList: gameList,
       exception: exception,
+      mediaId: mediaId,
     );
   }
 }
@@ -64,6 +66,7 @@ mixin _$SignInState {
   bool get proceedToVerifyCode => throw _privateConstructorUsedError;
   List<int> get gameList => throw _privateConstructorUsedError;
   String get exception => throw _privateConstructorUsedError;
+  String get mediaId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignInStateCopyWith<SignInState> get copyWith =>
@@ -87,7 +90,8 @@ abstract class $SignInStateCopyWith<$Res> {
       bool proceedToChooseInterests,
       bool proceedToVerifyCode,
       List<int> gameList,
-      String exception});
+      String exception,
+      String mediaId});
 }
 
 /// @nodoc
@@ -112,6 +116,7 @@ class _$SignInStateCopyWithImpl<$Res> implements $SignInStateCopyWith<$Res> {
     Object? proceedToVerifyCode = freezed,
     Object? gameList = freezed,
     Object? exception = freezed,
+    Object? mediaId = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed
@@ -162,6 +167,10 @@ class _$SignInStateCopyWithImpl<$Res> implements $SignInStateCopyWith<$Res> {
           ? _value.exception
           : exception // ignore: cast_nullable_to_non_nullable
               as String,
+      mediaId: mediaId == freezed
+          ? _value.mediaId
+          : mediaId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -185,7 +194,8 @@ abstract class _$SignInStateCopyWith<$Res>
       bool proceedToChooseInterests,
       bool proceedToVerifyCode,
       List<int> gameList,
-      String exception});
+      String exception,
+      String mediaId});
 }
 
 /// @nodoc
@@ -212,6 +222,7 @@ class __$SignInStateCopyWithImpl<$Res> extends _$SignInStateCopyWithImpl<$Res>
     Object? proceedToVerifyCode = freezed,
     Object? gameList = freezed,
     Object? exception = freezed,
+    Object? mediaId = freezed,
   }) {
     return _then(_SignInState(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading,
@@ -259,6 +270,10 @@ class __$SignInStateCopyWithImpl<$Res> extends _$SignInStateCopyWithImpl<$Res>
           ? _value.exception
           : exception // ignore: cast_nullable_to_non_nullable
               as String,
+      mediaId: mediaId == freezed
+          ? _value.mediaId
+          : mediaId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -278,7 +293,8 @@ class _$_SignInState implements _SignInState {
       this.proceedToChooseInterests = false,
       this.proceedToVerifyCode = false,
       this.gameList = const [],
-      this.exception = ''});
+      this.exception = '',
+      this.mediaId = ''});
 
   @JsonKey(defaultValue: false)
   @override
@@ -316,10 +332,13 @@ class _$_SignInState implements _SignInState {
   @JsonKey(defaultValue: '')
   @override
   final String exception;
+  @JsonKey(defaultValue: '')
+  @override
+  final String mediaId;
 
   @override
   String toString() {
-    return 'SignInState(isLoading: $isLoading, isEmailValid: $isEmailValid, isPasswordValid: $isPasswordValid, isUsernameExists: $isUsernameExists, isEmailExists: $isEmailExists, navigateToHome: $navigateToHome, proceedToGetPassword: $proceedToGetPassword, proceedToChangePassword: $proceedToChangePassword, proceedToChooseInterests: $proceedToChooseInterests, proceedToVerifyCode: $proceedToVerifyCode, gameList: $gameList, exception: $exception)';
+    return 'SignInState(isLoading: $isLoading, isEmailValid: $isEmailValid, isPasswordValid: $isPasswordValid, isUsernameExists: $isUsernameExists, isEmailExists: $isEmailExists, navigateToHome: $navigateToHome, proceedToGetPassword: $proceedToGetPassword, proceedToChangePassword: $proceedToChangePassword, proceedToChooseInterests: $proceedToChooseInterests, proceedToVerifyCode: $proceedToVerifyCode, gameList: $gameList, exception: $exception, mediaId: $mediaId)';
   }
 
   @override
@@ -350,7 +369,8 @@ class _$_SignInState implements _SignInState {
                 other.proceedToVerifyCode == proceedToVerifyCode) &&
             const DeepCollectionEquality().equals(other.gameList, gameList) &&
             (identical(other.exception, exception) ||
-                other.exception == exception));
+                other.exception == exception) &&
+            (identical(other.mediaId, mediaId) || other.mediaId == mediaId));
   }
 
   @override
@@ -367,7 +387,8 @@ class _$_SignInState implements _SignInState {
       proceedToChooseInterests,
       proceedToVerifyCode,
       const DeepCollectionEquality().hash(gameList),
-      exception);
+      exception,
+      mediaId);
 
   @JsonKey(ignore: true)
   @override
@@ -388,7 +409,8 @@ abstract class _SignInState implements SignInState {
       bool proceedToChooseInterests,
       bool proceedToVerifyCode,
       List<int> gameList,
-      String exception}) = _$_SignInState;
+      String exception,
+      String mediaId}) = _$_SignInState;
 
   @override
   dynamic get isLoading;
@@ -415,6 +437,8 @@ abstract class _SignInState implements SignInState {
   @override
   String get exception;
   @override
+  String get mediaId;
+  @override
   @JsonKey(ignore: true)
   _$SignInStateCopyWith<_SignInState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -427,6 +451,12 @@ class _$SignInEventTearOff {
   _Login login({required Login login}) {
     return _Login(
       login: login,
+    );
+  }
+
+  _UploadProfile uploadProfile({required String path}) {
+    return _UploadProfile(
+      path: path,
     );
   }
 
@@ -484,6 +514,7 @@ mixin _$SignInEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Login login) login,
+    required TResult Function(String path) uploadProfile,
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
@@ -496,6 +527,7 @@ mixin _$SignInEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -508,6 +540,7 @@ mixin _$SignInEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -521,6 +554,7 @@ mixin _$SignInEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
+    required TResult Function(_UploadProfile value) uploadProfile,
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
@@ -533,6 +567,7 @@ mixin _$SignInEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -545,6 +580,7 @@ mixin _$SignInEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -635,6 +671,7 @@ class _$_Login implements _Login {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Login login) login,
+    required TResult Function(String path) uploadProfile,
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
@@ -650,6 +687,7 @@ class _$_Login implements _Login {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -665,6 +703,7 @@ class _$_Login implements _Login {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -684,6 +723,7 @@ class _$_Login implements _Login {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
+    required TResult Function(_UploadProfile value) uploadProfile,
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
@@ -699,6 +739,7 @@ class _$_Login implements _Login {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -714,6 +755,7 @@ class _$_Login implements _Login {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -736,6 +778,180 @@ abstract class _Login implements SignInEvent {
   Login get login;
   @JsonKey(ignore: true)
   _$LoginCopyWith<_Login> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$UploadProfileCopyWith<$Res> {
+  factory _$UploadProfileCopyWith(
+          _UploadProfile value, $Res Function(_UploadProfile) then) =
+      __$UploadProfileCopyWithImpl<$Res>;
+  $Res call({String path});
+}
+
+/// @nodoc
+class __$UploadProfileCopyWithImpl<$Res> extends _$SignInEventCopyWithImpl<$Res>
+    implements _$UploadProfileCopyWith<$Res> {
+  __$UploadProfileCopyWithImpl(
+      _UploadProfile _value, $Res Function(_UploadProfile) _then)
+      : super(_value, (v) => _then(v as _UploadProfile));
+
+  @override
+  _UploadProfile get _value => super._value as _UploadProfile;
+
+  @override
+  $Res call({
+    Object? path = freezed,
+  }) {
+    return _then(_UploadProfile(
+      path: path == freezed
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UploadProfile implements _UploadProfile {
+  _$_UploadProfile({required this.path});
+
+  @override
+  final String path;
+
+  @override
+  String toString() {
+    return 'SignInEvent.uploadProfile(path: $path)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _UploadProfile &&
+            (identical(other.path, path) || other.path == path));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, path);
+
+  @JsonKey(ignore: true)
+  @override
+  _$UploadProfileCopyWith<_UploadProfile> get copyWith =>
+      __$UploadProfileCopyWithImpl<_UploadProfile>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Login login) login,
+    required TResult Function(String path) uploadProfile,
+    required TResult Function(SignUp login) signUp,
+    required TResult Function(ForgotPassword email) forgotPassword,
+    required TResult Function(ForgotPassword email) resend,
+    required TResult Function(SendCode number) sendCode,
+    required TResult Function(VerifyCode code, ResendCodeType type) verifyCode,
+    required TResult Function(NewPassword newPassword) newPassword,
+    required TResult Function(int id, AddOrRemove action) addToGame,
+  }) {
+    return uploadProfile(path);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
+    TResult Function(SignUp login)? signUp,
+    TResult Function(ForgotPassword email)? forgotPassword,
+    TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
+    TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
+    TResult Function(NewPassword newPassword)? newPassword,
+    TResult Function(int id, AddOrRemove action)? addToGame,
+  }) {
+    return uploadProfile?.call(path);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
+    TResult Function(SignUp login)? signUp,
+    TResult Function(ForgotPassword email)? forgotPassword,
+    TResult Function(ForgotPassword email)? resend,
+    TResult Function(SendCode number)? sendCode,
+    TResult Function(VerifyCode code, ResendCodeType type)? verifyCode,
+    TResult Function(NewPassword newPassword)? newPassword,
+    TResult Function(int id, AddOrRemove action)? addToGame,
+    required TResult orElse(),
+  }) {
+    if (uploadProfile != null) {
+      return uploadProfile(path);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Login value) login,
+    required TResult Function(_UploadProfile value) uploadProfile,
+    required TResult Function(_SignUp value) signUp,
+    required TResult Function(_ForgotPassword value) forgotPassword,
+    required TResult Function(_Resend value) resend,
+    required TResult Function(_SendCode value) sendCode,
+    required TResult Function(_VerifyCode value) verifyCode,
+    required TResult Function(_NewPassword value) newPassword,
+    required TResult Function(_AddToGame value) addToGame,
+  }) {
+    return uploadProfile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
+    TResult Function(_SignUp value)? signUp,
+    TResult Function(_ForgotPassword value)? forgotPassword,
+    TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
+    TResult Function(_VerifyCode value)? verifyCode,
+    TResult Function(_NewPassword value)? newPassword,
+    TResult Function(_AddToGame value)? addToGame,
+  }) {
+    return uploadProfile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
+    TResult Function(_SignUp value)? signUp,
+    TResult Function(_ForgotPassword value)? forgotPassword,
+    TResult Function(_Resend value)? resend,
+    TResult Function(_SendCode value)? sendCode,
+    TResult Function(_VerifyCode value)? verifyCode,
+    TResult Function(_NewPassword value)? newPassword,
+    TResult Function(_AddToGame value)? addToGame,
+    required TResult orElse(),
+  }) {
+    if (uploadProfile != null) {
+      return uploadProfile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UploadProfile implements SignInEvent {
+  factory _UploadProfile({required String path}) = _$_UploadProfile;
+
+  String get path;
+  @JsonKey(ignore: true)
+  _$UploadProfileCopyWith<_UploadProfile> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -800,6 +1016,7 @@ class _$_SignUp implements _SignUp {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Login login) login,
+    required TResult Function(String path) uploadProfile,
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
@@ -815,6 +1032,7 @@ class _$_SignUp implements _SignUp {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -830,6 +1048,7 @@ class _$_SignUp implements _SignUp {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -849,6 +1068,7 @@ class _$_SignUp implements _SignUp {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
+    required TResult Function(_UploadProfile value) uploadProfile,
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
@@ -864,6 +1084,7 @@ class _$_SignUp implements _SignUp {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -879,6 +1100,7 @@ class _$_SignUp implements _SignUp {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -968,6 +1190,7 @@ class _$_ForgotPassword implements _ForgotPassword {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Login login) login,
+    required TResult Function(String path) uploadProfile,
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
@@ -983,6 +1206,7 @@ class _$_ForgotPassword implements _ForgotPassword {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -998,6 +1222,7 @@ class _$_ForgotPassword implements _ForgotPassword {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -1017,6 +1242,7 @@ class _$_ForgotPassword implements _ForgotPassword {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
+    required TResult Function(_UploadProfile value) uploadProfile,
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
@@ -1032,6 +1258,7 @@ class _$_ForgotPassword implements _ForgotPassword {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -1047,6 +1274,7 @@ class _$_ForgotPassword implements _ForgotPassword {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -1134,6 +1362,7 @@ class _$_Resend implements _Resend {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Login login) login,
+    required TResult Function(String path) uploadProfile,
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
@@ -1149,6 +1378,7 @@ class _$_Resend implements _Resend {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -1164,6 +1394,7 @@ class _$_Resend implements _Resend {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -1183,6 +1414,7 @@ class _$_Resend implements _Resend {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
+    required TResult Function(_UploadProfile value) uploadProfile,
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
@@ -1198,6 +1430,7 @@ class _$_Resend implements _Resend {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -1213,6 +1446,7 @@ class _$_Resend implements _Resend {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -1299,6 +1533,7 @@ class _$_SendCode implements _SendCode {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Login login) login,
+    required TResult Function(String path) uploadProfile,
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
@@ -1314,6 +1549,7 @@ class _$_SendCode implements _SendCode {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -1329,6 +1565,7 @@ class _$_SendCode implements _SendCode {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -1348,6 +1585,7 @@ class _$_SendCode implements _SendCode {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
+    required TResult Function(_UploadProfile value) uploadProfile,
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
@@ -1363,6 +1601,7 @@ class _$_SendCode implements _SendCode {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -1378,6 +1617,7 @@ class _$_SendCode implements _SendCode {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -1475,6 +1715,7 @@ class _$_VerifyCode implements _VerifyCode {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Login login) login,
+    required TResult Function(String path) uploadProfile,
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
@@ -1490,6 +1731,7 @@ class _$_VerifyCode implements _VerifyCode {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -1505,6 +1747,7 @@ class _$_VerifyCode implements _VerifyCode {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -1524,6 +1767,7 @@ class _$_VerifyCode implements _VerifyCode {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
+    required TResult Function(_UploadProfile value) uploadProfile,
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
@@ -1539,6 +1783,7 @@ class _$_VerifyCode implements _VerifyCode {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -1554,6 +1799,7 @@ class _$_VerifyCode implements _VerifyCode {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -1646,6 +1892,7 @@ class _$_NewPassword implements _NewPassword {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Login login) login,
+    required TResult Function(String path) uploadProfile,
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
@@ -1661,6 +1908,7 @@ class _$_NewPassword implements _NewPassword {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -1676,6 +1924,7 @@ class _$_NewPassword implements _NewPassword {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -1695,6 +1944,7 @@ class _$_NewPassword implements _NewPassword {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
+    required TResult Function(_UploadProfile value) uploadProfile,
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
@@ -1710,6 +1960,7 @@ class _$_NewPassword implements _NewPassword {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -1725,6 +1976,7 @@ class _$_NewPassword implements _NewPassword {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -1821,6 +2073,7 @@ class _$_AddToGame implements _AddToGame {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Login login) login,
+    required TResult Function(String path) uploadProfile,
     required TResult Function(SignUp login) signUp,
     required TResult Function(ForgotPassword email) forgotPassword,
     required TResult Function(ForgotPassword email) resend,
@@ -1836,6 +2089,7 @@ class _$_AddToGame implements _AddToGame {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -1851,6 +2105,7 @@ class _$_AddToGame implements _AddToGame {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Login login)? login,
+    TResult Function(String path)? uploadProfile,
     TResult Function(SignUp login)? signUp,
     TResult Function(ForgotPassword email)? forgotPassword,
     TResult Function(ForgotPassword email)? resend,
@@ -1870,6 +2125,7 @@ class _$_AddToGame implements _AddToGame {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
+    required TResult Function(_UploadProfile value) uploadProfile,
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_ForgotPassword value) forgotPassword,
     required TResult Function(_Resend value) resend,
@@ -1885,6 +2141,7 @@ class _$_AddToGame implements _AddToGame {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
@@ -1900,6 +2157,7 @@ class _$_AddToGame implements _AddToGame {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_UploadProfile value)? uploadProfile,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_ForgotPassword value)? forgotPassword,
     TResult Function(_Resend value)? resend,
